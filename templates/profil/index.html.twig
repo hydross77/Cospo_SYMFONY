@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+<a href="{{ path('edit_profil', {'id' : app.user.id})}}">Modifier mon profil</a><br>
+<a href="{{ path('edit_register', {'id' : app.user.id})}}">Modifier mon compte</a><br>
+<a href="{{ path('delete_profil', {'id' : app.user.id})}}">Supprimer mon profil</a><br>
+   {{ app.user.pseudo }}<br>
+   {{ app.user.sex }}<br>
+   {{ app.user.birthday | date('d/m/Y') }}<br>
+   <img src="{{ asset('uploads/photoprofil/' ~ app.user.pictureProfil) }}"/><br>
+    {# {{dump(app.user.pictureProfil)}} #}
+
+    {% for sport in app.user.sport %}
+        {{ sport.titleSport }} <br>
+    {% endfor %}
+
+    <br>
+    <a href="#">Ajouter des photos à mon profil</a><br>
+
+{% endblock %}

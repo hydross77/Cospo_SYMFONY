@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le profil{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    {{ form_start(editProfilForm) }}
+        <h1>Modifier votre profil</h1>
+        {{ form_row(editProfilForm.bio) }}
+        {{ form_row(editProfilForm.picture_profil) }}
+
+        {{ form_row(editProfilForm.sport) }}
+        {{ form_row(editProfilForm.sex) }}
+        {{ form_row(editProfilForm.pseudo) }}
+        {{ form_row(editProfilForm.submit) }}
+    {{ form_end(editProfilForm) }}
+
+{% endblock %}

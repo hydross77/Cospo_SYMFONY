@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -51,8 +52,16 @@ class RegistrationFormType extends AbstractType
                 'attr' => [
                     'placeholder' => 'Entrez votre nom ici',
                 ],
+
             ])
-            ->add('email')
+            ->add('email', EmailType::class, [
+                'required' => true,
+                'label' => 'Votre adresse email',
+                'help' => 'Votre adresse email reste invisible aux autres utilisateurs.',
+                'attr' => [
+                    'placeholder' => 'Entrez votre adresse email ici',
+                ],
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -72,7 +81,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Ton mot de passe doit contenir au moins 8 caractères',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
