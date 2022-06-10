@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Event;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Form\EditProfilType;
 use App\Form\EditRegisterType;
 use App\Form\RegistrationFormType;
@@ -19,10 +22,14 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/{id}", name="app_profil")
      */
-    public function index(User $user)
+    public function index(ManagerRegistry $doctrine, Request $request, User $user): Response
     {
+
+
+        $events = $doctrine->getRepository(Event::class)->findBy(["id" => $this->getUser()->getId()], ['date_event' => 'DESC']);
         return $this->render('profil/index.html.twig', [
             'user' => $user,
+            'events' => $events
         ]);;
     }
 

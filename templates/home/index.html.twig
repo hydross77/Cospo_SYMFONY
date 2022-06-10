@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HAccueil{% endblock %}
+
+{% block body %}
+
+    {{ form_start( formEvent ) }}
+    {{ form_widget( formEvent ) }}
+    <button type="submit" class="btn">Enregistrer</button>
+    {{ form_end( formEvent ) }}
+
+{% for event in events %}
+{{ event.titleEvent }}<br>
+{{ event.dateEvent | date('d/m/Y à h:i') }}<br>
+{{ event.nbPlaces }}<br>
+{{ event.contentEvent }}<br>
+
+{{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
+
+{% endfor %}
+
+{% endblock %}

@@ -35,19 +35,9 @@ class Event
     private $content_event;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="datetime")
      */
     private $date_event;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $heure_start;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date_end;
 
     /**
      * @ORM\Column(type="string", length=10)
@@ -150,29 +140,6 @@ class Event
         return $this;
     }
 
-    public function getHeureStart(): ?\DateTimeInterface
-    {
-        return $this->heure_start;
-    }
-
-    public function setHeureStart(\DateTimeInterface $heure_start): self
-    {
-        $this->heure_start = $heure_start;
-
-        return $this;
-    }
-
-    public function getDateEnd(): ?\DateTimeInterface
-    {
-        return $this->date_end;
-    }
-
-    public function setDateEnd(\DateTimeInterface $date_end): self
-    {
-        $this->date_end = $date_end;
-
-        return $this;
-    }
 
     public function getCp(): ?string
     {

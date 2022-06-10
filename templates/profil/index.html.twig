@@ -18,6 +18,20 @@
     {% endfor %}
 
     <br>
+    Mes événements
+
+    {% for event in events %}
+    {{ event.titleEvent }}<br>
+    {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
+    {{ event.nbPlaces }}<br>
+    {{ event.contentEvent }}<br>
+
+    {{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
+    <a href ="{{ path('app_comment', {'id' : event.id})}}">Commenter</a>
+
+{% endfor %}    
+
+    <br>
     <a href="#">Ajouter des photos à mon profil</a><br>
 
 {% endblock %}
