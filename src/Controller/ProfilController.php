@@ -22,15 +22,13 @@ class ProfilController extends AbstractController
     /**
      * @Route("/profil/{id}", name="app_profil")
      */
-    public function index(ManagerRegistry $doctrine, Request $request, User $user): Response
+    public function index(User $user): Response
     {
-
-
-        $events = $doctrine->getRepository(Event::class)->findBy(["id" => $this->getUser()->getId()], ['date_event' => 'DESC']);
+        $event = $user->getEvents();
         return $this->render('profil/index.html.twig', [
             'user' => $user,
-            'events' => $events
-        ]);;
+            'events' => $event
+        ]);
     }
 
     /**

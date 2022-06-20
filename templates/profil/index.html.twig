@@ -18,8 +18,7 @@
     {% endfor %}
 
     <br>
-    Mes événements
-
+    Mes événements<br>
     {% for event in events %}
     {{ event.titleEvent }}<br>
     {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
@@ -28,7 +27,7 @@
 
     {{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
     <a href ="{{ path('app_comment', {'id' : event.id})}}">Commenter</a>
-
+<br><br>
 {% endfor %}    
 
     <br>

@@ -2,16 +2,21 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\Event;
+use App\Entity\Comment;
+use App\Form\CommentType;
+use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CommentController extends AbstractController
 {
     /**
      * @Route("/comment", name="app_comment")
      */
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine, Request $request, Event $event = null, Comment $comment = null): Response
     {
         $entityManager = $doctrine->getManager();
         $form = $this->createForm(CommentType::class, $comment);

@@ -10,6 +10,7 @@
     {{ form_end( formEvent ) }}
 
 {% for event in events %}
+{{ event.user.pseudo }}<br>
 {{ event.titleEvent }}<br>
 {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
 {{ event.nbPlaces }}<br>
@@ -18,5 +19,12 @@
 {{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
 
 {% endfor %}
+
+{# {% if session.stagiaires | length > 0 %}
+    {% for stagiaire in session.stagiaires %}
+        <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.nom }} {{stagiaire.prenom}}</a></td>
+        <td><a href="{{ path('delete_stagiaire_session', {'idSession' : session.id , 'idStagiaire' : stagiaire.id})}}"><div class="rouge"><i class="fa-solid fa-user-minus"></i></div></a></td>
+    </tr>
+    {% endfor %} #}
 
 {% endblock %}

@@ -42,5 +42,33 @@ class HomeController extends AbstractController
             'events' => $events
 
         ]);
+        // }
+        // /**
+        //  * @Route("/home/unsubscribe/{idSession}/{idStagiaire}", name="delete_stagiaire_session")
+        //  * 
+        //  * @ParamConverter("session", options={"mapping" = {"idSession" : "id"}})
+        //  * @ParamConverter("stagiaire", options={"mapping" = {"idStagiaire" : "id"}})
+        //  */
+        // public function unsubscribe(ManagerRegistry $doctrine, User $user, Event $event)
+        // {
+        //     $entityManager = $doctrine->getManager();
+        //     $session->removeStagiaire($stagiaire);
+        //     $entityManager->persist($session);
+        //     $entityManager->flush();
+        //     return $this->redirectToRoute('home/index.html.twig', ['id' => $session->getId()]);
+        // }
+        // /**
+        //  * @Route("/session/participate/{idSession}/{idStagiaire}", name="programmer_session")
+        //  * 
+        //  * @ParamConverter("session", options={"mapping": {"idSession" : "id"}})
+        //  * @ParamConverter("stagiaire", options={"mapping": {"idStagiaire" : "id"}})
+        //  */
+        // public function participate(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire)
+        // {
+        //     if ($session->getPlaceRestante() > 0) {
+        //         $session->addStagiaire($stagiaire);
+        //         $doctrine->getManager()->flush();
+        //         return $this->redirectToRoute('home/index.html.twig', ['id' => $session->getId()]);
+        //     }
     }
 }
