@@ -32,10 +32,10 @@ class CommentController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_profil', ["id" => $this->getUser()->getId()]);
+            return $this->redirectToRoute('show_event', ["id" => $this->getEvent()->getId()]);
         }
 
-        return $this->render('comment/index.html.twig', [
+        return $this->render('home/show.html.twig', [
             'formComment' => $form->createView(),
         ]);
     }

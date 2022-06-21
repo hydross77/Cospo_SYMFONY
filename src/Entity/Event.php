@@ -116,6 +116,15 @@ class Event
         return $this;
     }
 
+    public function getNbPlacesRestantes()
+    {
+        return $this->nb_places - count($this->participants);
+    }
+    public function getPlaceRestante()
+    {
+        return $this->getNbPlaces() - $this->getNbPlacesRestantes();
+    }
+
     public function getContentEvent(): ?string
     {
         return $this->content_event;

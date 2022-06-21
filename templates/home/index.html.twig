@@ -18,13 +18,15 @@
 
 {{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
 
-{% endfor %}
+{% if event.nbPlacesRestantes != 0 %}
+<a href="{{ path('participate_event', {'idEvent' : event.id })}}">Participer</a> ({{ event.participants | length }}) 
+{% else %}
+   Complet
+{% endif %}
+<a href="{{ path('show_event', {'id': event.id}) }}">Commenter</a>
 
-{# {% if session.stagiaires | length > 0 %}
-    {% for stagiaire in session.stagiaires %}
-        <td><a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}">{{ stagiaire.nom }} {{stagiaire.prenom}}</a></td>
-        <td><a href="{{ path('delete_stagiaire_session', {'idSession' : session.id , 'idStagiaire' : stagiaire.id})}}"><div class="rouge"><i class="fa-solid fa-user-minus"></i></div></a></td>
-    </tr>
-    {% endfor %} #}
+<br><br>
+
+{% endfor %}
 
 {% endblock %}
