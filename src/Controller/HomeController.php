@@ -17,7 +17,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class HomeController extends AbstractController
 {
     /**
-     * @Route("/home", name="app_home")
+     * @Route("/", name="app_home")
      */
     public function index(ManagerRegistry $doctrine, Request $request, Event $event = null): Response
     {
@@ -82,10 +82,24 @@ class HomeController extends AbstractController
      */
     public function participate(ManagerRegistry $doctrine, Event $event)
     {
-        if ($event->getPlaceRestante() > 0) {
+        if ($event->getNbPlaces() > 0) {
             $event->addParticipant($this->getUser());
             $doctrine->getManager()->flush();
-            return $this->redirectToRoute('app_home');
         }
+        return $this->redirectToRoute('app_home');
+    }
+
+    /**
+     * @Route("/home/unsubscribe/{idEvent}", name="unsubscribe")
+     * 
+     * @ParamConverter("event", options={"mapping" = {"idEvent" : "id"}})
+     */
+    public function unsubscribe(ManagerRegistry $doctrine, Event $event)
+    {
+        $entityManager = $doctrine->getManager();
+        $event->removeParticipant($this->getUser());
+        $entityManager->persist($event);
+        $entityManager->flush();
+        return $this->redirectToRoute('show_event', ['id' => $event->getId()]);
     }
 }
