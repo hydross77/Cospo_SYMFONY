@@ -26,7 +26,7 @@
     {{ event.contentEvent }}<br>
 
     {{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
-    <a href ="{{ path('app_comment', {'id' : event.id})}}">Commenter</a>
+    <a href="{{ path('show_event', {'id': event.id}) }}">Détails</a>
 <br><br>
 {% endfor %}    
 
