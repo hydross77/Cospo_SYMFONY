@@ -27,6 +27,10 @@ class HomeController extends AbstractController
         $form = $this->createForm(EventType::class, $event);
         $form->handleRequest($request);
 
+        $futurevents = $doctrine->getRepository(Event::class)->FuturEvent();
+        $pastevents = $doctrine->getRepository(Event::class)->PastEvent();
+        $presentevents = $doctrine->getRepository(Event::class)->PresentEvent();
+
         if ($form->isSubmitted() && $form->isValid()) {
 
             $event = $form->getData();
@@ -42,7 +46,10 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             'formEvent' => $form->createView(),
-            'events' => $events
+            'events' => $events,
+            'futurevents' => $futurevents,
+            'pastevents' => $pastevents,
+            'presentevents' => $presentevents
 
         ]);
     }

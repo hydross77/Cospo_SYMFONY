@@ -4,6 +4,8 @@
 
 {% block body %}
 
+{# VOIR MON PROFIL EN TANT QUE PAS MOI #}
+
 <a href="{{ path('edit_profil', {'id' : app.user.id})}}">Modifier mon profil</a><br>
 <a href="{{ path('edit_register', {'id' : app.user.id})}}">Modifier mon compte</a><br>
 <a href="{{ path('delete_profil', {'id' : app.user.id})}}">Supprimer mon profil</a><br>

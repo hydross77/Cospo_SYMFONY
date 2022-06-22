@@ -41,7 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, unique=true)
      */
     private $pseudo;
 
@@ -119,8 +119,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->pictures = new ArrayCollection();
         $this->post = new ArrayCollection();
         $this->events = new ArrayCollection();
-        $this->follow = new ArrayCollection();
-        $this->follower = new ArrayCollection();
+        $this->follow = new ArrayCollection(); //ce que je suis
+        $this->follower = new ArrayCollection(); //ce qui me suive
         $this->participate = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }

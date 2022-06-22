@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ user.pseudo }}{% endblock %}
+
+{% block body %}
+
+   {{ user.pseudo }}<br>
+   {{ user.sex }}<br>
+   {{ user.birthday | date('d/m/Y') }}<br>
+   <img src="{{ asset('uploads/photoprofil/' ~ user.pictureProfil) }}"/><br>
+    {# {{dump(user.pictureProfil)}} #}
+
+    {% for sport in user.sport %}
+        {{ sport.titleSport }} <br>
+    {% endfor %}
+
+    <br>
+    Evénements<br>
+    {% for event in events %}
+    {{ event.titleEvent }}<br>
+    {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
+    {{ event.nbPlaces }}<br>
+    {{ event.contentEvent }}<br>
+
+    {{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
+    <a href="{{ path('show_event', {'id': event.id}) }}">Détails</a>
+<br><br>
+{% endfor %} 
+
+S'abonner à {{ user.pseudo }}
+Se désabonner
+
+    <br>
+    <a href="#">Ajouter des photos à mon profil</a><br>
+
+{% endblock %}

@@ -1,32 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}HAccueil{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
 
-    {{ form_start( formEvent ) }}
-    {{ form_widget( formEvent ) }}
-    <button type="submit" class="btn">Enregistrer</button>
-    {{ form_end( formEvent ) }}
+	{% if app.user %}
+        {{ form_start( formEvent ) }}
+        {{ form_widget( formEvent ) }}
+        <button type="submit" class="btn">Enregistrer</button>
+        {{ form_end( formEvent ) }}
+	{% else %}
+    Pour crée un événement ou y participer, connectez-vous ou inscrivez-vous
+	{% endif %}
+
+    <br>
 
 {% for event in events %}
-{{ event.user.pseudo }}<br>
+<a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
 {{ event.titleEvent }}<br>
 {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
 {{ event.nbPlaces }}<br>
 {{ event.contentEvent }}<br>
 
-{{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
+    {% if app.user %}
+        {{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
+    {% endif %}
 
-{% if event.nbPlacesRestantes != 0 %}
-<a href="{{ path('participate_event', {'idEvent' : event.id })}}">Participer</a> ({{ event.participants | length }}) 
-{% else %}
-   Complet
-{% endif %}
-<a href="{{ path('show_event', {'id': event.id}) }}">Détails</a>
+    {% if app.user %}
+        {% if event.nbPlacesRestantes != 0 %}
+        <a href="{{ path('participate_event', {'idEvent' : event.id })}}">Participer</a> ({{ event.participants | length }}) 
+        {% else %}
+        Complet
+        {% endif %}
+        <a href="{{ path('show_event', {'id': event.id}) }}">Détails</a>
+    {% endif %}
+    {# SINON mettre un bouton participer et details grisé si il est pas connecter #}
 
 <br><br>
 
+{% endfor %}
+
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+
+{% for event in futurevents %}
+<a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
+{{ event.titleEvent }}<br>
+{{ event.dateEvent | date('d/m/Y à h:i') }}<br>
+{{ event.nbPlaces }}<br>
+{{ event.contentEvent }}<br>
+{% endfor %}
+
+<hr>
+
+{% for event in presentevents %}
+<a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
+{{ event.titleEvent }}<br>
+{{ event.dateEvent | date('d/m/Y à h:i') }}<br>
+{{ event.nbPlaces }}<br>
+{{ event.contentEvent }}<br>
+{% endfor %}
+
+<hr>
+
+{% for event in pastevents %}
+<a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
+{{ event.titleEvent }}<br>
+{{ event.dateEvent | date('d/m/Y à h:i') }}<br>
+{{ event.nbPlaces }}<br>
+{{ event.contentEvent }}<br>
 {% endfor %}
 
 {% endblock %}

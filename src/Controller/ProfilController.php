@@ -16,6 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ProfilController extends AbstractController
 {
@@ -26,6 +27,20 @@ class ProfilController extends AbstractController
     {
         $event = $user->getEvents();
         return $this->render('profil/index.html.twig', [
+            'user' => $user,
+            'events' => $event
+        ]);
+    }
+
+    /**
+     * @Route("/{pseudo}", name="show_profil")
+     * 
+     * @ParamConverter("user", options={"mapping": {"pseudo" : "pseudo"}})
+     */
+    public function show(Event $event, User $user): Response
+    {
+        $event = $user->getEvents();
+        return $this->render('profil/show.html.twig', [
             'user' => $user,
             'events' => $event
         ]);
