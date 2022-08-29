@@ -16,7 +16,11 @@
     <br>
 
 {% for event in events %}
+{% if event.user is null %}
+Profil supprimé
+{% else %}
 <a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
+{% endif %}
 {{ event.titleEvent }}<br>
 {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
 {{ event.nbPlaces }}<br>
@@ -40,21 +44,24 @@
 
 {% endfor %}
 
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 
-{% for event in futurevents %}
+{# {% for event in futurevents %}
 <a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
 {{ event.titleEvent }}<br>
 {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
 {{ event.nbPlaces }}<br>
 {{ event.contentEvent }}<br>
-{% endfor %}
+{% endfor %} #}
 
 <hr>
 
 {% for event in presentevents %}
+{% if event.user is null %}
+Profil supprimé
+{% else %}
 <a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
+{% endif %}
 {{ event.titleEvent }}<br>
 {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
 {{ event.nbPlaces }}<br>
@@ -63,12 +70,12 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 
 <hr>
 
-{% for event in pastevents %}
+{# {% for event in pastevents %}
 <a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
 {{ event.titleEvent }}<br>
 {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
 {{ event.nbPlaces }}<br>
 {{ event.contentEvent }}<br>
-{% endfor %}
+{% endfor %} #}
 
 {% endblock %}

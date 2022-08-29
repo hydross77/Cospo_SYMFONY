@@ -2,21 +2,18 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Entity\Event;
-use App\Entity\Comment;
-use App\Form\CommentType;
+use App\Entity\User;
 use App\Form\EditProfilType;
 use App\Form\EditRegisterType;
-use App\Form\RegistrationFormType;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ProfilController extends AbstractController
 {
@@ -26,23 +23,25 @@ class ProfilController extends AbstractController
     public function index(User $user): Response
     {
         $event = $user->getEvents();
+
         return $this->render('profil/index.html.twig', [
             'user' => $user,
-            'events' => $event
+            'events' => $event,
         ]);
     }
 
     /**
-     * @Route("/{pseudo}", name="show_profil")
-     * 
+     * @Route("/profil!/view/{pseudo}", name="show_profil")
+     *
      * @ParamConverter("user", options={"mapping": {"pseudo" : "pseudo"}})
      */
     public function show(Event $event, User $user): Response
     {
         $event = $user->getEvents();
+
         return $this->render('profil/show.html.twig', [
             'user' => $user,
-            'events' => $event
+            'events' => $event,
         ]);
     }
 
@@ -57,14 +56,12 @@ class ProfilController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $pictureProfil = $form->get('picture_profil')->getData();
 
             if ($pictureProfil) {
-
                 $originalFilename = pathinfo($pictureProfil->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureProfil->guessExtension();
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$pictureProfil->guessExtension();
 
                 try {
                     $pictureProfil->move(
@@ -80,17 +77,18 @@ class ProfilController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_profil', ["id" => $this->getUser()->getId()]);
+            return $this->redirectToRoute('app_profil', ['id' => $this->getUser()->getId()]);
         }
 
         return $this->render('profil/edit_profil.html.twig', [
-            'editProfilForm' => $form->createView()
+            'editProfilForm' => $form->createView(),
         ]);
 
         if (!$user) {
             $user = new User();
+
             return $this->render('registration/register.html.twig', [
-                'registrationForm' => $form->createView()
+                'registrationForm' => $form->createView(),
             ]);
         }
     }
@@ -100,31 +98,31 @@ class ProfilController extends AbstractController
      */
     public function editRegister(ManagerRegistry $doctrine, User $user = null, Request $request): Response
     {
-
         $entityManager = $doctrine->getManager();
         $form = $this->createForm(EditRegisterType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $user = $form->getData();
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_profil', ["id" => $this->getUser()->getId()]);
+            return $this->redirectToRoute('app_profil', ['id' => $this->getUser()->getId()]);
         }
 
         return $this->render('profil/edit_register.html.twig', [
-            'editRegisterForm' => $form->createView()
+            'editRegisterForm' => $form->createView(),
         ]);
 
         if (!$user) {
             $user = new User();
+
             return $this->render('registration/register.html.twig', [
-                'registrationForm' => $form->createView()
+                'registrationForm' => $form->createView(),
             ]);
         }
     }
+
     /**
      * @Route("/profil/delete/{id}", name="delete_profil")
      */
@@ -133,6 +131,7 @@ class ProfilController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($user);
         $entityManager->flush();
-        return $this->redirectToRoute("app_accueil");
+
+        return $this->redirectToRoute('app_accueil');
     }
 }
