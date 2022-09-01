@@ -1,0 +1,219 @@
+body{
+    background-color: rgb(235, 235, 235);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin : 0;
+}
+
+.wrapper{
+    margin-left : 150px;
+    margin-right: 150px;
+}
+
+a:link {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+a:visited {
+    color: #ffffff;
+}
+
+  a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+  a:active {
+    color: orange;
+}
+
+.rouge{
+    color: red;
+    font-size: 20px;
+}
+
+.orange{
+    color: #f0a730;
+    font-size: 20px;
+}
+/* --- NAVBAR --- */
+
+nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    background-color: #000000b0;
+    max-width: 100%;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #f0a730;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  nav ul {
+    display: flex;
+    list-style: none;
+    gap: 1rem;
+    text-decoration: none;
+  }
+
+  header nav h1{
+    font-family :Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.registerHover{
+    background-color: rgba(255, 166, 0, 0.811);
+    padding: 10px;
+    border-radius: 2px;
+}
+
+.registerHover:hover{
+    background-color: rgba(255, 183, 50, 0.913);
+    padding: 10px;
+    border-radius: 2px;
+}
+
+.loginHover{
+    padding: 8px;
+    border: orange 2px solid;
+    border-radius: 2px;
+}
+
+.loginHover:hover{
+    background-color: rgba(255, 183, 50, 0.913);
+}
+
+/* --- FIN NAVBAR --- */
+
+
+/* --- VIDEO PAGE D'ACCUEIL --- */
+
+#videoHome{
+    position: relative;
+    height: 700px;
+    max-width: 100%;
+    object-fit: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+
+}
+
+h1{
+    color: white;
+}
+
+#lecteur{
+    background: #37373700;
+    color: white;
+    font-style: bold;
+    border : none;
+    border-radius: 2px;
+    font-size: 13px;
+    font-size: 30px;
+
+}
+
+h5{
+    padding-top: 20px;
+    color: white;
+}
+
+.registergreen{
+    background-color: rgba(0, 203, 0, 0.582);
+    padding : 10px;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.registergreen:hover{
+    background-color: rgba(0, 203, 0, 0.884);
+}
+
+.playandstop{
+    position: absolute;
+    bottom: 50px;
+    right: 5px;
+}
+
+.hello{
+    padding-top: 50px;
+    color: white;
+    font-size: 20px;
+    display: flex;
+    gap : 5px;
+}
+
+.pseudo{
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+/* --- FIN VIDEO PAGE D'ACCUEIL --- */
+
+.cover  {
+    position: absolute;
+    top: 250px;
+    left: 300px;
+    padding: 20px 50px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+  
+  .flex-form input[type="submit"] {
+    background: #f0a730;
+    border: 1px solid #f0a730;
+    color: #fff;
+    padding: 0 30px;
+    cursor: pointer;
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    transition: all 0.2s;
+  }
+  
+  .flex-form input[type="submit"]:hover {
+    background: #f0a63095;
+    border: 1px solid #f0a730;
+  }
+  
+  .flex-form {
+    display: -webkit-box;
+    display: flex;
+    z-index: 10;
+    position: relative;
+    width: 500px;
+    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .flex-form > * {
+    border: 0;
+    padding: 0 0 0 10px;
+    background: #fff;
+    line-height: 50px;
+    font-size: 1rem;
+    border-radius: 0;
+    outline: 0;
+    -webkit-appearance: none;
+  }
+  
+  input[type="search"] {
+    flex-basis: 500px;
+  }
+  
+
+
+
+

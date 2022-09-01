@@ -132,6 +132,6 @@ class ProfilController extends AbstractController
         $entityManager->remove($user);
         $entityManager->flush();
 
-        return $this->redirectToRoute('app_accueil');
+        return $this->redirectToRoute('app_home');
     }
 }

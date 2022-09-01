@@ -4,12 +4,12 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Length;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class EditRegisterType extends AbstractType
 {
@@ -17,30 +17,32 @@ class EditRegisterType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class, [
-                'required' => true,
-                'label' => 'Votre adresse email',
+                'required' => false,
+                'label' => 'Email',
                 'attr' => [
                     'placeholder' => 'Changer votre adresse e-mail ici',
-                ]
+                ],
             ])
 
-            ->add('password', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
                 'mapped' => false,
-                'attr' => ['autocomplete' => 'new-password'],
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
+                'first_options' => ['label' => 'Nouveau mot de passe : ', 'attr' => ['class' => 'input-full'], 'constraints' => [
+                    new Regex([
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                        'match' => true,
+                        'message' => 'Le mot de passe doit contenir : minimum 8 caractère, un nombre, une minuscule, une majuscule et un caractère spécial',
                     ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Ton mot de passe doit contenir au moins 8 caractères',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
+                ]],
+
+                'second_options' => ['label' => 'Répéter le nouveau mot de passe : ', 'attr' => ['class' => 'input-full'], 'constraints' => [
+                    new Regex([
+                        'pattern' => '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+                        'match' => true,
+                        'message' => 'Le mot de passe doit contenir : minimum 8 caractère, un nombre, une minuscule, une majuscule et un caractère spécial',
                     ]),
-                ],
-            ]);
+                ]],
+                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -2,17 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
-use App\Entity\Event;
 use App\Entity\Comment;
-use App\Form\EventType;
+use App\Entity\Event;
+use App\Entity\User;
 use App\Form\CommentType;
+use App\Form\EventType;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class HomeController extends AbstractController
 {
@@ -32,7 +32,6 @@ class HomeController extends AbstractController
         $presentevents = $doctrine->getRepository(Event::class)->PresentEvent();
 
         if ($form->isSubmitted() && $form->isValid()) {
-
             $event = $form->getData();
             // recupère l'objet user
             $user = $this->getUser();
@@ -49,10 +48,10 @@ class HomeController extends AbstractController
             'events' => $events,
             'futurevents' => $futurevents,
             'pastevents' => $pastevents,
-            'presentevents' => $presentevents
-
+            'presentevents' => $presentevents,
         ]);
     }
+
     /**
      * @Route("/home/{id}", name="show_event")
      */
@@ -62,9 +61,7 @@ class HomeController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $comment = $form->getData();
             $now = new \DateTime();
             $event->addComment($comment);
@@ -84,7 +81,7 @@ class HomeController extends AbstractController
 
     /**
      * @Route("/home/participate/{idEvent}", name="participate_event")
-     * 
+     *
      * @ParamConverter("event", options={"mapping": {"idEvent" : "id"}})
      */
     public function participate(ManagerRegistry $doctrine, Event $event)
@@ -93,12 +90,13 @@ class HomeController extends AbstractController
             $event->addParticipant($this->getUser());
             $doctrine->getManager()->flush();
         }
+
         return $this->redirectToRoute('app_home');
     }
 
     /**
      * @Route("/home/unsubscribe/{idEvent}", name="unsubscribe")
-     * 
+     *
      * @ParamConverter("event", options={"mapping" = {"idEvent" : "id"}})
      */
     public function unsubscribe(ManagerRegistry $doctrine, Event $event)
@@ -107,6 +105,7 @@ class HomeController extends AbstractController
         $event->removeParticipant($this->getUser());
         $entityManager->persist($event);
         $entityManager->flush();
+
         return $this->redirectToRoute('show_event', ['id' => $event->getId()]);
     }
 }

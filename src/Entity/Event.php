@@ -6,6 +6,7 @@ use App\Repository\EventRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 
 /**
  * @ORM\Entity(repositoryClass=EventRepository::class)
@@ -56,6 +57,7 @@ class Event
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="events")
+     * @JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $user;
 
@@ -84,8 +86,6 @@ class Event
         $this->participants = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
-
-
 
     public function getId(): ?int
     {
@@ -120,6 +120,7 @@ class Event
     {
         return $this->nb_places - count($this->participants);
     }
+
     public function getPlaceRestante()
     {
         return $this->getNbPlaces() - $this->getNbPlacesRestantes();
@@ -148,7 +149,6 @@ class Event
 
         return $this;
     }
-
 
     public function getCp(): ?string
     {

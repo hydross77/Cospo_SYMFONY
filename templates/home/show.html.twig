@@ -37,10 +37,13 @@ PARTICIPANT :
 
 {% if event.comments | length > 0 %}
     {% for comment in event.comments %}
+    {% if comment.users is null %}
+    Profil supprimé
+    {% else %}
     {{ comment.users.pseudo }}<br>
+    {% endif %}
     {{ comment.contentComment }}<br>
     {{comment.createComment | date('d/m/Y') }}<br>
-       
     {% endfor %}
 
 {% endif %}

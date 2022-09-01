@@ -2,6 +2,38 @@
 
 {% block title %}Accueil{% endblock %}
 
+{% block video %}
+
+    <div class ="bodyAccueil">
+            <video id="videoHome" alt="video sport"  autoplay loop muted width="100%">
+                <source type="video/mp4" src="{{ asset('img/videoHome.mp4') }}"> 
+            </video> 
+    </div>
+
+    <div class="cover">
+            <h1>Trouve un événement sportif près de chez toi !</h1>
+                <form  class="flex-form">
+                    <input type="search" placeholder="Barre de recherche multifiltre">
+                    <br>
+                    <input type="submit" value="Recherche">
+                </form>
+                <br>
+
+                {% if app.user %}
+                    <div class="hello">Bonjour<div class="pseudo"> {{ app.user.pseudo }}</div>, prêt.e pour te depenser ? Allons-y ! <i class="fa-solid fa-face-smile"></i></div>
+                {% else %}
+                    <h5>Pour crée un événement sportif <div class="registergreen"><a href="{{ path('app_register')}}" title="Inscription">Inscrivez-vous</a></div></h5>
+                {% endif %}
+                <br>
+    </div>
+
+    <div class="playandstop">
+        <button id="lecteur">II</button>
+    </div>
+    
+
+{% endblock %}
+
 {% block body %}
 
 	{% if app.user %}
@@ -9,8 +41,6 @@
         {{ form_widget( formEvent ) }}
         <button type="submit" class="btn">Enregistrer</button>
         {{ form_end( formEvent ) }}
-	{% else %}
-    Pour crée un événement ou y participer, connectez-vous ou inscrivez-vous
 	{% endif %}
 
     <br>
