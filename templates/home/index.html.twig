@@ -36,12 +36,22 @@
 
 {% block body %}
 
+<div id="bouton" onclick="bascule('formEvent');">Crée un événement</div> 
+<div id="formEvent">
 	{% if app.user %}
-        {{ form_start( formEvent ) }}
-        {{ form_widget( formEvent ) }}
-        <button type="submit" class="btn">Enregistrer</button>
+        {{ form_start( formEvent, {'attr': {'class': 'formEventCustom'}} ) }}
+        {{ form_row( formEvent.title_event ) }}
+        {{ form_row( formEvent.nb_places ) }}
+        {{ form_row( formEvent.content_event ) }}
+        {{ form_row( formEvent.date_event ) }}
+        {{ form_row( formEvent.adresse ) }}
+        {{ form_row( formEvent.cp ) }}
+        {{ form_row( formEvent.ville ) }}
+        <button type="submit" class="btnForm">Publier</button>
         {{ form_end( formEvent ) }}
 	{% endif %}
+</div>
+
 
     <br>
 

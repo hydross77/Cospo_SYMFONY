@@ -36,6 +36,23 @@ a:visited {
     color: #f0a730;
     font-size: 20px;
 }
+    
+
+#formEvent { 
+    display: none;
+} 
+
+#bouton {
+    position: absolute;
+    right: 150px;
+    background-color: rgba(0, 164, 0, 0.671);
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    cursor:pointer;
+    color:white;
+    font-size: 20px;
+} 
 /* --- NAVBAR --- */
 
 nav {
