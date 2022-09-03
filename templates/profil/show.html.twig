@@ -4,33 +4,47 @@
 
 {% block body %}
 
-   {{ user.pseudo }}<br>
-   {{ user.sex }}<br>
-   {{ user.birthday | date('d/m/Y') }}<br>
-   <img src="{{ asset('uploads/photoprofil/' ~ user.pictureProfil) }}"/><br>
-    {# {{dump(user.pictureProfil)}} #}
+    <div class="profile-body">
+        <div class="photo">
+            <img src="{{ asset('uploads/photoprofil/' ~ user.pictureProfil) }}" class="image--cover">
+        </div>
+        <div class="profile">
+            <div class="info"> 
+                {{ user.pseudo }} ({{ user.sex }}) / {{ user.birthday | date('d/m/Y') }} / <i class="fas fa-map-marker-alt"></i> VILLE 
+            </div>
 
-    {% for sport in user.sport %}
-        {{ sport.titleSport }} <br>
-    {% endfor %}
+                <h6> BIOGRAPHIE </h6>
+                    <div class="content">{{ user.bio}}</div>
+        
+                <h6>Mes Sports</h6>
+                    <div class="content">
+                        {% for sport in user.sport %}
+                            {{ sport.titleSport }} <br>
+                        {% endfor %}
+                    </div>
+            
+            
+                <h6>Mes Evenements</h6>
 
-    <br>
-    Evénements<br>
-    {% for event in events %}
-    {{ event.titleEvent }}<br>
-    {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
-    {{ event.nbPlaces }}<br>
-    {{ event.contentEvent }}<br>
+                    <div class="container">
+                    {% for event in events %}
+                        <div class="row">
+                            <div class="col">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ event.titleEvent }}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{ event.dateEvent | date('d/m/Y à h:i') }}<br></h6>
+                                            <p class="card-text">{{ event.contentEvent }}<br></p>
+                                            <a href="#" class="card-link">{{ event.ville }}</a>
+                                            <a href="{{ path('show_event', {'id': event.id}) }} class="card-link" ">Détails</a>
+                                        </div>
+                                    </div> 
+                                    {% endfor %}
+                            </div>
 
-    {{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
-    <a href="{{ path('show_event', {'id': event.id}) }}">Détails</a>
-<br><br>
-{% endfor %} 
-
-S'abonner à {{ user.pseudo }}
-Se désabonner
-
-    <br>
-    <a href="#">Ajouter des photos à mon profil</a><br>
+                        </div>
+                    </div>
+        </div>
+    </div>
 
 {% endblock %}

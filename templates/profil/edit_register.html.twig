@@ -12,4 +12,6 @@
     {{ form_row(editRegisterForm.password ) }}
     <button type="submit" class="btn">Enregistrer</button>
     {{ form_end(editRegisterForm) }}
+
+    <a href="{{ path('delete_profil', {'id' : app.user.id})}}">Supprimer mon profil</a><br>
 {% endblock %}

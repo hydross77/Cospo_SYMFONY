@@ -1,4 +1,6 @@
 
+/* FUNCTION PLAY AND PAUSE POUR LA VIDEO D'ACCUEIL */
+
 function modifyAction(el) {
   let x = document.getElementById("videoHome");
   console.log(el);
@@ -14,6 +16,7 @@ function modifyAction(el) {
 const el = document.querySelector("#lecteur");
 el.addEventListener("click", function(){modifyAction(el)}, false);
 
+/* FUNCTION POUR AFFICHER LE FORMULAIRE D'EVENEMENT */
 
 function bascule(id) 
 { 
@@ -21,3 +24,6 @@ function bascule(id)
 			document.getElementById(id).style.display = "block"; 
 	else	document.getElementById(id).style.display = "none"; 
 } 
+
+/* FUNCTION POUR l'EVE */
+

@@ -1,12 +1,15 @@
+
 body{
-    background-color: rgb(235, 235, 235);
+    background: rgba(255, 166, 0, 0.301);
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin : 0;
+    margin-top: 100px;
 }
 
 .wrapper{
+    margin-top: 150px;
     margin-left : 150px;
     margin-right: 150px;
+    margin-bottom: 30px;
 }
 
 a:link {
@@ -27,8 +30,13 @@ a:visited {
     color: orange;
 }
 
-.rouge{
+.red{
     color: red;
+    font-size: 20px;
+}
+
+.white{
+    color: rgb(255, 255, 255);
     font-size: 20px;
 }
 
@@ -231,6 +239,124 @@ h5{
   }
   
 
+
+/* --------- PROFIL SHOW --------- */
+
+/*PROFIL*/
+
+
+
+/* FIN PROFIL*/
+
+/* EVENEMENT PROFIL */
+
+.profile-body{
+    margin-top: 80px;
+}
+
+.editHover{
+    background-color: rgba(255, 166, 0, 0.811);
+    width: 150px;
+    padding: 10px;
+    border-radius: 2px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.editHover:hover{
+    background-color: rgba(255, 183, 50, 0.913);
+    padding: 10px;
+    border-radius: 2px;
+}
+
+.profile {
+margin-top: -45px;
+margin-left: auto;
+margin-right: auto;
+border-radius: 15px;
+background-color: rgba(221, 221, 221, 0.29);
+padding: 20px;
+z-index: 0;
+box-shadow: 10px 13px 24px -5px rgba (0,0,0,0.81);
+-webkit-box-shadow: 10px 13px 24px -5px rgba(0, 0, 0, 0.301);
+-moz-box-shadow: 10px 13px 24px -5px rgba(0, 0, 0, 0.372);
+}
+
+.info{
+    text-align: center;
+}
+
+.content{
+    margin-top: 20px;
+    margin-left: 100px;
+    margin-right: 100px;
+    border: 1px rgb(151, 151, 151) solid;
+    padding: 20px;
+}
+
+h6 {
+    text-transform: uppercase;
+    text-align: right;
+    margin-right: 100px;
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.photo {
+    margin: 25px;
+
+}
+
+.image--cover {
+    width: 170px;
+    height: 170px;
+    border: #fff 3px solid;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: auto;
+    margin-top: -40px;    
+}
+
+#rating-stars {
+    margin: 4px;
+}
+
+#rating-stars .stars {
+    display: inline-flex;
+  }
+  #rarate-input {
+    pointer-events: none;
+  }
+  #rating-stars .rate-input {
+    position: absolute;
+    left: -9999px;
+  }
+  #rating-stars label {
+    cursor: pointer;
+    padding: 1px;
+    font-size: 20pt;
+  }
+  #rating-stars .star-icon {
+    color: orange;
+  }
+
+  #rating-stars .rate-input:checked ~ .star-label .star-icon {
+    color: #999;
+  }
+  #rating-stars .stars:hover .star-label .star-icon {
+    color: orange;
+  }
+  #rating-stars .rate-input:hover ~ .star-label .star-icon {
+    color: #999;
+  }
+
+/* FIN EVENEMENT PROFIL */
+
+/* --------- FIN PROFIL SHOW --------- */
 
 
 

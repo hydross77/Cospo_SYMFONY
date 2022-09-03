@@ -4,35 +4,51 @@
 
 {% block body %}
 
-{# VOIR MON PROFIL EN TANT QUE PAS MOI #}
+<div class="editHover">
+    <a href="{{ path('edit_profil', {'id' : app.user.id})}}">Modifier profil</a><br>
+</div>
 
-<a href="{{ path('edit_profil', {'id' : app.user.id})}}">Modifier mon profil</a><br>
-<a href="{{ path('edit_register', {'id' : app.user.id})}}">Modifier mon compte</a><br>
-<a href="{{ path('delete_profil', {'id' : app.user.id})}}">Supprimer mon profil</a><br>
-   {{ app.user.pseudo }}<br>
-   {{ app.user.sex }}<br>
-   {{ app.user.birthday | date('d/m/Y') }}<br>
-   <img src="{{ asset('uploads/photoprofil/' ~ app.user.pictureProfil) }}"/><br>
-    {# {{dump(app.user.pictureProfil)}} #}
+<div class="profile-body">
+        <div class="photo">
+            <img src="{{ asset('uploads/photoprofil/' ~ user.pictureProfil) }}" class="image--cover">
+        </div>
+        <div class="profile">
+            <div class="info"> 
+                {{ user.pseudo }} ({{ user.sex }}) / {{ user.birthday | date('d/m/Y') }} / <i class="fas fa-map-marker-alt"></i> VILLE 
+            </div>
 
-    {% for sport in app.user.sport %}
-        {{ sport.titleSport }} <br>
-    {% endfor %}
+                <h6> BIOGRAPHIE </h6>
+                    <div class="content">{{ user.bio}}</div>
+        
+                <h6>Mes Sports</h6>
+                    <div class="content">
+                        {% for sport in user.sport %}
+                            {{ sport.titleSport }} <br>
+                        {% endfor %}
+                    </div>
+            
+            
+                <h6>Mes Evenements</h6>
 
-    <br>
-    Mes événements<br>
-    {% for event in events %}
-    {{ event.titleEvent }}<br>
-    {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
-    {{ event.nbPlaces }}<br>
-    {{ event.contentEvent }}<br>
+                    <div class="container">
+                    {% for event in events %}
+                        <div class="row">
+                            <div class="col">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ event.titleEvent }}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{ event.dateEvent | date('d/m/Y à h:i') }}<br></h6>
+                                            <p class="card-text">{{ event.contentEvent }}<br></p>
+                                            <a href="#" class="card-link">{{ event.ville }}</a>
+                                            <a href="{{ path('show_event', {'id': event.id}) }} class="card-link" ">Détails</a>
+                                        </div>
+                                    </div> 
+                                    {% endfor %}
+                            </div>
 
-    {{ event.adresse }} à {{ event.ville }} {{ event.cp }}<br>
-    <a href="{{ path('show_event', {'id': event.id}) }}">Détails</a>
-<br><br>
-{% endfor %}    
-
-    <br>
-    <a href="#">Ajouter des photos à mon profil</a><br>
+                        </div>
+                    </div>
+        </div>
+    </div>
 
 {% endblock %}
