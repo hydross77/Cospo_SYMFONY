@@ -40,6 +40,10 @@ class Sport
         $this->events = new ArrayCollection();
     }
 
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
 
     public function getTitleSport(): ?string
     {
@@ -108,5 +112,10 @@ class Sport
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->title_sport;
     }
 }
