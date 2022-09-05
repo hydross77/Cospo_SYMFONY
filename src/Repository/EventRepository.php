@@ -2,13 +2,12 @@
 
 namespace App\Repository;
 
-use DateTime;
-use App\Entity\User;
 use App\Entity\Event;
 use App\Entity\Level;
 use App\Entity\Sport;
-use Doctrine\Persistence\ManagerRegistry;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @extends ServiceEntityRepository<Event>
@@ -26,24 +25,26 @@ class EventRepository extends ServiceEntityRepository
     }
 
     /**
-     * Récupère les événement en lien avec une recherche
+     * Récupère les événement en lien avec une recherche.
+     *
      * @return Event[]
      */
     public function findSearch(array $parameters)
     {
         $qb = $this->createQueryBuilder('E');
 
+        $result = $qb->addSelect('E.title_event, E.nb_places, E.content_event, E.date_event, E.cp, E.ville, E.adresse');
+
         if ($parameters['q'] !== null) {
             $result = $qb->addSelect('U.pseudo')
-                ->join(User::class, 'U', 'WITH', 'U.id = E.user')
+                ->leftJoin(User::class, 'U', 'WITH', 'U.id = E.user')
                 ->andWhere('U.pseudo = :pseudo')
                 ->setParameter('pseudo', $parameters['q']);
         }
 
         if ($parameters['ville'] !== null) {
-            $result = $qb->addSelect('V.ville')
-                ->join(Ville::class, 'V', 'WITH', 'V.id = E.ville')
-                ->andWhere('V.ville = :ville')
+            $result = $qb->addSelect('E.ville')
+                ->andWhere('E.ville = :ville')
                 ->setParameter('ville', $parameters['ville']);
         }
 
@@ -53,21 +54,20 @@ class EventRepository extends ServiceEntityRepository
             foreach ($sp as $sport) {
                 array_push($sports, $sport->getId());
             }
-            $result = $qb->addSelect('S.sport')
-                ->join(Sport::class, 'S', 'WITH', 'S.id = E.sport')
-                ->andWhere('S.id IN (\'' . implode("','", $sports) . '\')')
-                ->setParameter('sport', $parameters['sport']);
+            $result = $qb->addSelect('S.title_sport')
+                ->leftJoin(Sport::class, 'S', 'WITH', 'S.id = E.sport')
+                ->andWhere('S.id IN (\''.implode("','", $sports).'\')');
         }
 
         if ($parameters['level'] !== null) {
             $levels = [];
-            foreach ($parameters['level'] as $level) {
+            $lv = $parameters['level']->toArray();
+            foreach ($lv as $level) {
                 array_push($levels, $level->getId());
             }
-            $result = $qb->addSelect('L.level')
-                ->join(Level::class, 'L', 'WITH', 'L.id = E.level')
-                ->andWhere('L.id IN (\'' . implode("','", $levels) . '\')')
-                ->setParameter('level', $parameters['level']);
+            $result = $qb->addSelect('L.title_level')
+                ->leftJoin(Level::class, 'L', 'WITH', 'L.id = E.level')
+                ->andWhere('L.id IN (\''.implode("','", $levels).'\')');
         }
 
         $result = $qb->getQuery()
@@ -99,7 +99,8 @@ class EventRepository extends ServiceEntityRepository
      */
     public function FuturEvent(): array
     {
-        $now = new DateTime();
+        $now = new \DateTime();
+
         return $this->createQueryBuilder('e')
             ->andWhere('e.date_event > :val')
             ->setParameter('val', $now)
@@ -113,7 +114,8 @@ class EventRepository extends ServiceEntityRepository
      */
     public function PastEvent(): array
     {
-        $now = new DateTime();
+        $now = new \DateTime();
+
         return $this->createQueryBuilder('e')
             ->andWhere('e.date_event < :val')
             ->setParameter('val', $now)
@@ -127,7 +129,8 @@ class EventRepository extends ServiceEntityRepository
      */
     public function PresentEvent(): array
     {
-        $now = new DateTime();
+        $now = new \DateTime();
+
         return $this->createQueryBuilder('e')
             ->Where('e.date_event = :val')
             ->setParameter('val', $now)
@@ -145,6 +148,4 @@ class EventRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-
-
 }
