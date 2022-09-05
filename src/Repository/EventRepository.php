@@ -33,41 +33,40 @@ class EventRepository extends ServiceEntityRepository
     {
         $qb = $this->createQueryBuilder('E');
 
-        $result = $qb->addSelect('E.title_event, E.nb_places, E.content_event, E.date_event, E.cp, E.ville, E.adresse');
+        $result = $qb->addSelect('E.title_event, E.nb_places, E.content_event, E.date_event, E.cp, E.ville, E.adresse')
+                    ->addSelect('U.pseudo')
+                    ->join(User::class, 'U', 'WITH', 'U.id = E.user')
+                    ->addSelect('S.title_sport')
+                    ->join(Sport::class, 'S', 'WITH', 'S.id = E.sport')
+                    ->addSelect('L.title_level')
+                    ->join(Level::class, 'L', 'WITH', 'L.id = E.level');
 
         if ($parameters['q'] !== null) {
-            $result = $qb->addSelect('U.pseudo')
-                ->leftJoin(User::class, 'U', 'WITH', 'U.id = E.user')
-                ->andWhere('U.pseudo = :pseudo')
+            $result = $qb->andWhere('U.pseudo = :pseudo')
                 ->setParameter('pseudo', $parameters['q']);
         }
 
-        if ($parameters['ville'] !== null) {
-            $result = $qb->addSelect('E.ville')
-                ->andWhere('E.ville = :ville')
-                ->setParameter('ville', $parameters['ville']);
-        }
-
-        if ($parameters['sport'] !== null) {
+        if (!empty($parameters['sport']->toArray())) {
             $sports = [];
             $sp = $parameters['sport']->toArray();
             foreach ($sp as $sport) {
                 array_push($sports, $sport->getId());
             }
-            $result = $qb->addSelect('S.title_sport')
-                ->leftJoin(Sport::class, 'S', 'WITH', 'S.id = E.sport')
-                ->andWhere('S.id IN (\''.implode("','", $sports).'\')');
+            $result = $qb->andWhere('S.id IN (\''.implode("','", $sports).'\')');
         }
 
-        if ($parameters['level'] !== null) {
+        if (!empty($parameters['level']->toArray())) {
             $levels = [];
             $lv = $parameters['level']->toArray();
             foreach ($lv as $level) {
                 array_push($levels, $level->getId());
             }
-            $result = $qb->addSelect('L.title_level')
-                ->leftJoin(Level::class, 'L', 'WITH', 'L.id = E.level')
-                ->andWhere('L.id IN (\''.implode("','", $levels).'\')');
+            $result = $qb->andWhere('L.id IN (\''.implode("','", $levels).'\')');
+        }
+
+        if ($parameters['ville'] !== null) {
+            $result = $qb->andWhere('E.ville = :ville')
+                ->setParameter('ville', $parameters['ville']);
         }
 
         $result = $qb->getQuery()
