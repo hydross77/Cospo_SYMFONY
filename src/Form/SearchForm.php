@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 // l'extension permet de faire savoir a Symfony que la class est un formulaire
 class SearchForm extends AbstractType
@@ -49,7 +50,8 @@ class SearchForm extends AbstractType
                 'multiple' => true,
                 'choice_label' => 'title_level',
                 'choice_value' => 'id',
-            ]);
+            ])
+            ->add('submit', SubmitType::class);
     }
 
     //configuration du formulaire

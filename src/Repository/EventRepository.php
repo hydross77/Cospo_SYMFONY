@@ -32,12 +32,12 @@ class EventRepository extends ServiceEntityRepository
     public function findSearch(array $parameters) //parameters est le tableau
     {
         $qb = $this->createQueryBuilder('E');
-        // on prend le formulaire qu'on lie à 'E' : 'EVENT'
+        // fait une requête sur l'entité 'E' : 'EVENT'
 
         $result = $qb->addSelect('E.title_event, E.nb_places, E.content_event, E.date_event, E.cp, E.ville, E.adresse')
-            // on recupere ce qu'on à besoin dans la base de données
+            // on sélectionne les colonnes de la table Event qu'on as besoin
             ->addSelect('U.pseudo')
-            // on selectionne le pseudo dans user pour le joindre :
+            // on selectionne la colonne pseudo de la table User :
             ->join(User::class, 'U', 'WITH', 'U.id = E.user')
             // on le joint a l'id de la table User
             ->addSelect('S.title_sport')
@@ -47,17 +47,17 @@ class EventRepository extends ServiceEntityRepository
 
         if ($parameters['q'] !== null) {
             // si le pseudo est différent de null une fois submit, on le cherche içi :
-            $result = $qb->andWhere('U.pseudo = :pseudo')
-                ->setParameter('pseudo', $parameters['q']);
+            $result = $qb->andWhere('U.pseudo LIKE :pseudo')
+                ->setParameter('pseudo', "%{$parameters['q']}%");
             // lie 'q' du tableau $parameter au pseudo de la table user // bindParamPDO
         }
 
         if (!empty($parameters['sport']->toArray())) {
             // si l'utiliser selectionne une ou des options, on le transforme en tableau ->toArray() des id selectionnés
             $sports = []; // tableau vide
-            $sp = $parameters['sport']->toArray(); // on recupère le tableau des id selectionnés
-            foreach ($sp as $sport) { // on met les options selectionné dans le tableau vide de sport[]
-                array_push($sports, $sport->getId()); //empile une ou plusieurs options à la fin d'un tableau
+            $sp = $parameters['sport']->toArray(); // on recupère les entités sélectionner qui est un arrayCollection
+            foreach ($sp as $sport) { // on boucle le tableau des entités sélectionnées
+                array_push($sports, $sport->getId()); // on push dans le tableau les ids des entités sélectionnées
             }
             $result = $qb->andWhere('S.id IN (\'' . implode("','", $sports) . '\')'); // resultat des ID implode en string
         }
