@@ -57,7 +57,7 @@ class EventRepository extends ServiceEntityRepository
             $sports = []; // tableau vide
             $sp = $parameters['sport']->toArray(); // on recupère le tableau des id selectionnés
             foreach ($sp as $sport) { // on met les options selectionné dans le tableau vide de sport[]
-                array_push($sports, $sport->getId()); //complète le tableau des id
+                array_push($sports, $sport->getId()); //empile une ou plusieurs options à la fin d'un tableau
             }
             $result = $qb->andWhere('S.id IN (\'' . implode("','", $sports) . '\')'); // resultat des ID implode en string
         }
