@@ -29,51 +29,57 @@ class EventRepository extends ServiceEntityRepository
      * Récupère les événement en lien avec une recherche
      * @return Event[]
      */
-    public function findSearch(array $parameters)
+    public function findSearch(array $parameters) //parameters est le tableau
     {
         $qb = $this->createQueryBuilder('E');
+        // on prend le formulaire qu'on lie à 'E' : 'EVENT'
+
+        $result = $qb->addSelect('E.title_event, E.nb_places, E.content_event, E.date_event, E.cp, E.ville, E.adresse')
+            // on recupere ce qu'on à besoin dans la base de données
+            ->addSelect('U.pseudo')
+            // on selectionne le pseudo dans user pour le joindre :
+            ->join(User::class, 'U', 'WITH', 'U.id = E.user')
+            // on le joint a l'id de la table User
+            ->addSelect('S.title_sport')
+            ->join(Sport::class, 'S', 'WITH', 'S.id = E.sport')
+            ->addSelect('L.title_level')
+            ->join(Level::class, 'L', 'WITH', 'L.id = E.level');
 
         if ($parameters['q'] !== null) {
-            $result = $qb->addSelect('U.pseudo')
-                ->join(User::class, 'U', 'WITH', 'U.id = E.user')
-                ->andWhere('U.pseudo = :pseudo')
+            // si le pseudo est différent de null une fois submit, on le cherche içi :
+            $result = $qb->andWhere('U.pseudo = :pseudo')
                 ->setParameter('pseudo', $parameters['q']);
+            // lie 'q' du tableau $parameter au pseudo de la table user // bindParamPDO
+        }
+
+        if (!empty($parameters['sport']->toArray())) {
+            // si l'utiliser selectionne une ou des options, on le transforme en tableau ->toArray() des id selectionnés
+            $sports = []; // tableau vide
+            $sp = $parameters['sport']->toArray(); // on recupère le tableau des id selectionnés
+            foreach ($sp as $sport) { // on met les options selectionné dans le tableau vide de sport[]
+                array_push($sports, $sport->getId()); //complète le tableau des id
+            }
+            $result = $qb->andWhere('S.id IN (\'' . implode("','", $sports) . '\')'); // resultat des ID implode en string
+        }
+
+        if (!empty($parameters['level']->toArray())) {
+            $levels = [];
+            $lv = $parameters['level']->toArray();
+            foreach ($lv as $level) {
+                array_push($levels, $level->getId());
+            }
+            $result = $qb->andWhere('L.id IN (\'' . implode("','", $levels) . '\')');
         }
 
         if ($parameters['ville'] !== null) {
-            $result = $qb->addSelect('V.ville')
-                ->join(Ville::class, 'V', 'WITH', 'V.id = E.ville')
-                ->andWhere('V.ville = :ville')
+            $result = $qb->andWhere('E.ville = :ville')
                 ->setParameter('ville', $parameters['ville']);
         }
 
-        if ($parameters['sport'] !== null) {
-            $sports = [];
-            $sp = $parameters['sport']->toArray();
-            foreach ($sp as $sport) {
-                array_push($sports, $sport->getId());
-            }
-            $result = $qb->addSelect('S.sport')
-                ->join(Sport::class, 'S', 'WITH', 'S.id = E.sport')
-                ->andWhere('S.id IN (\'' . implode("','", $sports) . '\')')
-                ->setParameter('sport', $parameters['sport']);
-        }
-
-        if ($parameters['level'] !== null) {
-            $levels = [];
-            foreach ($parameters['level'] as $level) {
-                array_push($levels, $level->getId());
-            }
-            $result = $qb->addSelect('L.level')
-                ->join(Level::class, 'L', 'WITH', 'L.id = E.level')
-                ->andWhere('L.id IN (\'' . implode("','", $levels) . '\')')
-                ->setParameter('level', $parameters['level']);
-        }
-
         $result = $qb->getQuery()
-            ->getResult();
+            ->getResult(); // requete bdd
 
-        return $result;
+        return $result; //retourne le tableau des résultats
     }
 
     public function add(Event $entity, bool $flush = false): void

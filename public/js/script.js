@@ -25,5 +25,4 @@ function bascule(id)
 	else	document.getElementById(id).style.display = "none"; 
 } 
 
-/* FUNCTION POUR l'EVE */
 

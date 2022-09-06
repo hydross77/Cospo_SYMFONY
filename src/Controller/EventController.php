@@ -17,17 +17,21 @@ class EventController extends AbstractController
     public function index(EventRepository $repository, Request $request): Response
     {
         $form = $this->createForm(SearchForm::class, null);
+        // crée le formulaire configuré dans le dossier FORM
         $form->handleRequest($request);
+        // traite les données du formulaire
+
 
         if ($form->isSubmitted() && $form->isValid()) {
-            dump($form->getData());
+            // si le formulaire est envoyé et validé alors :
             $events = $repository->findSearch($form->getData());
-            dump($events);
+            // on passe le formulaire a la fonction du repository qui est un tableau classic : EventRepository.php
         }
 
         return $this->render('event/index.html.twig', [
             'events' => isset($events) ? $events : null,
             'form' => $form->createView()
+            //affiche le formulaire
         ]);
     }
 }
