@@ -37,9 +37,7 @@ class RegistrationFormType extends AbstractType
                 'choices' => [
                     'Femme' => 'Femme',
                     'Homme' => 'Homme',
-                    'Non defini' => 'Non defini',
-                    'Non binaire' => 'Non binaire',
-                    'Binaire' => 'Binaire',
+                    'Autre' => 'Autre',
                 ],
             ])
             ->add('birthday', BirthdayType::class, [
@@ -58,7 +56,8 @@ class RegistrationFormType extends AbstractType
                         'min' => 6,
                         'minMessage' => 'Le pseudo doit contenir entre 6 et 30 caractères',
                         'max' => 30,
-                    ]), ],
+                    ]),
+                ],
             ])
             ->add('email', EmailType::class, [
                 'required' => true,
@@ -95,7 +94,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Le mot de passe doit contenir : minimum 8 caractère, un nombre, une minuscule, une majuscule et un caractère spécial',
                     ]),
                 ]],
-                ]);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

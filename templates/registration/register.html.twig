@@ -1,16 +1,15 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}Inscription{% endblock %}
 
 {% block body %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
-
+    <div class="container-fluid">
     {{ form_start(registrationForm) }}
-    <h1>Inscription</h1>
+    <h2 class="titleRegistre">Inscription</h2>
     <h5>1. Quel sport voulez-vous pratiquer ou pratiquez-vous ?</h5>
     {{ form_row(registrationForm.sport) }}
     <h5>2. Pour bien vous correspondre nous avons besoin d'informations</h5>
@@ -26,4 +25,5 @@
 
     <button type="submit" class="btn">Register</button>
     {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}

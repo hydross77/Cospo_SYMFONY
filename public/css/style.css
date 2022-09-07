@@ -1,120 +1,182 @@
-
 body{
-    background: rgba(255, 166, 0, 0.301);
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: 100px;
+    background: rgb(255, 244, 224);
+    font-family:'Barlow', 'Segoe UI', sans-serif;
 }
 
 .wrapper{
-    margin-top: 150px;
+    margin-top: 30px;
     margin-left : 150px;
     margin-right: 150px;
     margin-bottom: 30px;
 }
-
-a:link {
-    color: rgb(255, 255, 255);
-    text-decoration: none;
-}
-
-a:visited {
-    color: #ffffff;
-}
-
-  a:hover {
-    color: #ffffff;
-    text-decoration: none;
-}
-
-  a:active {
-    color: orange;
-}
-
-.red{
-    color: red;
-    font-size: 20px;
-}
-
-.white{
-    color: rgb(255, 255, 255);
-    font-size: 20px;
-}
-
-.orange{
-    color: #f0a730;
-    font-size: 20px;
-}
     
-
-#formEvent { 
-    display: none;
-} 
-
-#bouton {
-    position: absolute;
-    right: 150px;
-    background-color: rgba(0, 164, 0, 0.671);
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
-    cursor:pointer;
-    color:white;
-    font-size: 20px;
-} 
 /* --- NAVBAR --- */
 
+@media screen and (min-width: 768px){
+  nav #mySidenav{
+    display: none;
+  }
+}
+
+@media screen and (max-width: 768px){
+
+  /* Sidenav menu */
+.sidenav {
+  height: 100%;
+  width: 250px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: -250px;
+  background-color: #110c00;
+  padding-top: 60px;
+  transition: right 0.5s ease;
+}
+
+/* Sidenav menu lien */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: orange;
+}
+
+.sidenav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Active class */
+.sidenav.active {
+  right: 0;
+}
+
+/* Fermer le btn */
+.sidenav .close {
+  position: absolute;
+  top: 0;
+  left: 25px;
+  font-size: 36px;
+}
+
+/* Icône burger */
+.burger-icon span {
+  display: block;
+  width: 35px;
+  height: 5px;
+  background-color: orange;
+  margin: 6px 0;
+}
+
+}
+
+@media screen and (max-width: 768px){
+  .mynav{
+    display: none;
+  }
+}
+
 nav {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background-color: #000000b0;
-    max-width: 100%;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: #f0a730;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+  background-color: #000000d6;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
 
-  nav ul {
-    display: flex;
-    list-style: none;
-    gap: 1rem;
-    text-decoration: none;
-  }
+nav h1{
+  font-family :Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
 
-  header nav h1{
-    font-family :Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+nav .mynav ul {
+  display: flex;
+  position: absolute;
+  right: 30px;
+  list-style: none;
+  gap: 1rem;
+  text-decoration: none;
 }
 
 .registerHover{
-    background-color: rgba(255, 166, 0, 0.811);
-    padding: 10px;
-    border-radius: 2px;
+  background-color: rgba(255, 166, 0, 0.811);
+  padding: 10px;
+  border-radius: 2px;
 }
 
 .registerHover:hover{
-    background-color: rgba(255, 183, 50, 0.913);
-    padding: 10px;
-    border-radius: 2px;
+  background-color: rgba(255, 183, 50, 0.913);
+  padding: 10px;
+  border-radius: 2px;
 }
 
 .loginHover{
-    padding: 8px;
-    border: orange 2px solid;
-    border-radius: 2px;
+  padding: 8px;
+  border: orange 2px solid;
+  border-radius: 2px;
 }
 
 .loginHover:hover{
-    background-color: rgba(255, 183, 50, 0.913);
+  background-color: rgba(255, 183, 50, 0.913);
+}
+
+.red{
+  /* j'utilise "!important" car la couleur de mes liens prend le dessus */
+  color: red!important;
+  font-size: 20px!important;
+}
+
+.white{
+  /* j'utilise "!important" car la couleur de mes liens prend le dessus */
+  color: white;
+  font-size: 20px!important;
+}
+
+.orange{
+  /* j'utilise "!important" car la couleur de mes liens prend le dessus */
+  color: #f0a730!important;
+  font-size: 20px!important;
+}
+
+nav a:link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+nav a:visited {
+  color: #ffffff;
+}
+
+nav a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+nav a:active {
+  color: orange;
 }
 
 /* --- FIN NAVBAR --- */
 
+#formEvent { 
+  display: none;
+} 
+
+#bouton {
+  position: absolute;
+  right: 150px;
+  background-color: rgba(0, 164, 0, 0.671);
+  text-align: center;
+  padding: 10px;
+  border-radius: 5px;
+  cursor:pointer;
+  color:white;
+  font-size: 20px;
+} 
 
 /* --- VIDEO PAGE D'ACCUEIL --- */
 
@@ -144,11 +206,6 @@ h1{
     font-size: 13px;
     font-size: 30px;
 
-}
-
-h5{
-    padding-top: 20px;
-    color: white;
 }
 
 .registergreen{
@@ -358,5 +415,25 @@ h6 {
 
 /* --------- FIN PROFIL SHOW --------- */
 
+/* --- CSS POUR L'INSCRIPTION --- */
+
+.inscription{
+  display: block;
+  margin: 200px;
+  background-color: rgba(255, 255, 255, 0.637);
+  padding: 50px;
+  border-radius: 20px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+h5{
+  
+}
+
+/* --- FIN CSS POUR L'INSCRIPTION --- */
 
 
