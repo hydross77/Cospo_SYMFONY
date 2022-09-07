@@ -8,10 +8,11 @@
     {% endfor %}
 
     {{ form_start(editRegisterForm) }}
-    {{ form_row(editRegisterForm.email) }}
-    {{ form_row(editRegisterForm.password ) }}
-    <button type="submit" class="btn">Enregistrer</button>
+        {{ form_row(editRegisterForm.email) }}
+        {{ form_row(editRegisterForm.password ) }}
+        <button type="submit" class="btn btn-lg btn-dark">Enregistrer</button>
     {{ form_end(editRegisterForm) }}
-
-    <a href="{{ path('delete_profil', {'id' : app.user.id})}}">Supprimer mon profil</a><br>
+    <br>
+    
+    <button type="submit" class="btn btn-lg btn-danger"><a href="{{ path('delete_profil', {'id' : app.user.id})}}">Supprimer mon profil</a></button>
 {% endblock %}

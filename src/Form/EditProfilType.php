@@ -21,9 +21,12 @@ class EditProfilType extends AbstractType
     {
         $builder
 
-            ->add('bio')
+            ->add('bio', TextType::class, [
+                'required' => false,
+                'label' => 'Changer la biographie',
+            ])
             ->add('picture_profil', FileType::class, [
-                'label' => 'Photo de profil',
+                'label' => 'Changer la photo profil',
                 'mapped' => false,
                 'required' => false,
                 // 'constraints' => [
@@ -40,27 +43,11 @@ class EditProfilType extends AbstractType
 
             ->add('sport', EntityType::class, [
                 'class' => Sport::class,
+                'label' => 'Vous pouvez cocher de nouveaux sports ou en retirer!',
                 'choice_label' => 'title_sport',
                 'multiple' => true,
                 'expanded' => true,
-            ])
-            ->add('sex', ChoiceType::class, [
-                'required' => true,
-                'label' => 'Etes-vous un homme ou une femme?',
-                'choices' => [
-                    'Femme' => 'Femme',
-                    'Homme' => 'Homme',
-                    'Non defini' => 'Non defini',
-                    'Non binaire' => 'Non binaire',
-                    'Binaire' => 'Binaire',
-                ],
-            ])
-            ->add('pseudo', TextType::class, [
-                'required' => false,
-                'label' => 'Changer votre pseudo',
-
-            ])
-            ->add('submit', SubmitType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

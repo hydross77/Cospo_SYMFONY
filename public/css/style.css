@@ -9,6 +9,39 @@ body{
     margin-right: 150px;
     margin-bottom: 30px;
 }
+
+@media screen and (max-width: 768px){
+
+  .wrapper{
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+
+}
+
+/* --- FULL --- */
+
+a:link {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+
+a:visited {
+  color: #ffffff;
+}
+
+a:hover {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+a:active {
+  color: rgb(255, 255, 255);
+}
+
+/* --- FIN FULL -- */
+
+
     
 /* --- NAVBAR --- */
 
@@ -77,8 +110,23 @@ body{
 }
 
 @media screen and (max-width: 768px){
+
   .mynav{
     display: none;
+  }
+
+  .mynav li .user{
+    display: none;
+  }
+
+  .registerHover{
+    padding: 3px;
+    font-size: 12px;
+  }
+
+  .loginHover{
+    padding: 8px;
+    font-size: 12px;
   }
 }
 

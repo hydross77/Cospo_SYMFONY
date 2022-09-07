@@ -18,9 +18,9 @@ class EditRegisterType extends AbstractType
         $builder
             ->add('email', EmailType::class, [
                 'required' => false,
-                'label' => 'Email',
+                'label' => 'Veuillez renseigner votre nouvelle adresse e-mail',
                 'attr' => [
-                    'placeholder' => 'Changer votre adresse e-mail ici',
+                    'placeholder' => 'cospo@cospo.com',
                 ],
             ])
 
@@ -42,7 +42,7 @@ class EditRegisterType extends AbstractType
                         'message' => 'Le mot de passe doit contenir : minimum 8 caractère, un nombre, une minuscule, une majuscule et un caractère spécial',
                     ]),
                 ]],
-                ]);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

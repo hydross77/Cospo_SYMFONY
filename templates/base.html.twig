@@ -17,22 +17,23 @@
 		<nav>
 			<h1><a href="{{ path('app_home')}}" title="COSPO">COSPO</a></h1>
 				<!-- NAVBAR -->
-				{% if app.user %}
 					<div class="mynav">
 						<ul>
-							<li><a href="{{ path('app_home', {'id': app.user.id }) }}" title="Evenement" class="orange"><i class="fa-sharp fa-solid fa-house"></i></a>
-							<li><a href="{{ path('app_profil', {'id': app.user.id }) }}" title="Profil" class="white"><i class="fa-solid fa-user"></i></a></li>
-							<li><a href="{{ path('edit_register', {'id' : app.user.id})}}" title="Compte" class="white"><i class="fa-solid fa-gear"></i></a></li>
-							<li><a href="{{ path('app_logout')}}" title="Deconnexion" class="red"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
+				{% if app.user %}
+							<li class ="user"><a href="{{ path('app_home', {'id': app.user.id }) }}" title="Evenement" class="orange"><i class="fa-sharp fa-solid fa-house"></i></a>
+							<li class ="user"><a href="{{ path('app_profil', {'id': app.user.id }) }}" title="Profil" class="white"><i class="fa-solid fa-user"></i></a></li>
+							<li class ="user"><a href="{{ path('edit_register', {'id' : app.user.id})}}" title="Compte" class="white"><i class="fa-solid fa-gear"></i></a></li>
+							<li class ="user"><a href="{{ path('app_logout')}}" title="Deconnexion" class="red"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
 						{% else %}
 							<li><a href="{{ path('app_register')}}" title="Inscription" class="registerHover">Inscription</a></li>
 							<li><a href="{{ path('app_login')}}" title="Connexion" class="loginHover">Connexion</a></li>
-						{% endif %}
+				{% endif %}
 						</ul>
 					</div>
 				<!-- FIN NAVBAR -->
 
 				<!-- MENU BURGER -->
+				{% if app.user %}
 					<div id="mySidenav" class="sidenav">
   					<a id="closeBtn" href="#" class="close">×</a>
   						<ul>
@@ -50,6 +51,7 @@
 							<span></span>
 						</span>
 					</a>
+				{% endif %}
 				<!-- FIN MENU BURGER -->
 		</nav>
   	</header>
