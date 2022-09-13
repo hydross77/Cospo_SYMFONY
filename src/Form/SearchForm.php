@@ -23,22 +23,22 @@ class SearchForm extends AbstractType
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Recherche par pseudo'
+                    'placeholder' => 'Pseudo...'
                 ]
             ])
             ->add('ville', TextType::class, [
                 'label' => false,
                 'required' => false,
                 'attr' => [
-                    'placeholder' => 'Recherche par ville'
+                    'placeholder' => 'Ville...'
                 ]
             ])
             ->add('sport', EntityType::class, [
                 'label' => false,
                 'required' => false,
                 'class' => Sport::class,
-                'expanded' => true,
-                'multiple' => true,
+                'expanded' => false,
+                'multiple' => false,
                 'choice_label' => 'title_sport',
                 'choice_value' => 'id',
             ])
@@ -46,12 +46,11 @@ class SearchForm extends AbstractType
                 'label' => false,
                 'required' => false,
                 'class' => Level::class,
-                'expanded' => true,
-                'multiple' => true,
+                'expanded' => false,
+                'multiple' => false,
                 'choice_label' => 'title_level',
                 'choice_value' => 'id',
-            ])
-            ->add('submit', SubmitType::class);
+            ]);
     }
 
     //configuration du formulaire

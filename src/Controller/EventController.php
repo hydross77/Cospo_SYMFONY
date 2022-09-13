@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class EventController extends AbstractController
 {
     /**
-     * @Route("/event", name="app_event")
+     * @Route("/", name="app_home")
      */
     public function index(EventRepository $repository, Request $request): Response
     {
@@ -28,7 +28,7 @@ class EventController extends AbstractController
             // on passe le formulaire a la fonction du repository qui est un tableau classic : EventRepository.php
         }
 
-        return $this->render('event/index.html.twig', [
+        return $this->render('home/index.html.twig', [
             'events' => isset($events) ? $events : null,
             'form' => $form->createView()
             //affiche le formulaire

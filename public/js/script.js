@@ -42,6 +42,19 @@ function bascule(id)
 } 
 /* FIN AFFICHER LE FORMULAIRE D'EVENEMENT */
 
+/* BOUTON REMONTER TOUT EN HAUT */
+const btn = document.querySelector('.btnHigh');
+
+btn.addEventListener('click', () => {
+
+    window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth"
+    })
+})
+/* FIN BOUTON REMONTER TOUT EN HAUT */
+
 
 
 

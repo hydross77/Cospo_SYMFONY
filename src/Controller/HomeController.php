@@ -2,37 +2,51 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
-use App\Entity\Event;
 use App\Entity\User;
-use App\Form\CommentType;
+use App\Entity\Event;
+use App\Entity\Comment;
 use App\Form\EventType;
+use App\Form\SearchForm;
+use App\Form\CommentType;
+use App\Repository\EventRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="app_home")
      */
-    public function index(ManagerRegistry $doctrine, Request $request, Event $event = null): Response
+    public function index(ManagerRegistry $doctrine, EventRepository $repository, Request $request, Event $event = null): Response
     {
+        $form = $this->createForm(SearchForm::class, null);
+        // crée le formulaire configuré dans le dossier FORM
+        $form->handleRequest($request);
+        // traite les données du formulaire
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // si le formulaire est envoyé et validé alors :
+            $events = $repository->findSearch($form->getData());
+            // on passe le formulaire a la fonction du repository qui est un tableau classic : EventRepository.php
+        };
+
         $events = $doctrine->getRepository(Event::class)->findBy([], ['date_event' => 'DESC']);
 
         $entityManager = $doctrine->getManager();
-        $form = $this->createForm(EventType::class, $event);
-        $form->handleRequest($request);
+        $formEvent = $this->createform(EventType::class, $event);
+        $formEvent->handleRequest($request);
 
-        $futurevents = $doctrine->getRepository(Event::class)->FuturEvent();
-        $pastevents = $doctrine->getRepository(Event::class)->PastEvent();
-        $presentevents = $doctrine->getRepository(Event::class)->PresentEvent();
+        // $futurevents = $doctrine->getRepository(Event::class)->FuturEvent();
+        // $pastevents = $doctrine->getRepository(Event::class)->PastEvent();
+        // $presentevents = $doctrine->getRepository(Event::class)->PresentEvent();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $event = $form->getData();
+        if ($formEvent->isSubmitted() && $formEvent->isValid()) {
+            $event = $formEvent->getData();
             // recupère l'objet user
             $user = $this->getUser();
             // bdd
@@ -44,11 +58,22 @@ class HomeController extends AbstractController
         }
 
         return $this->render('home/index.html.twig', [
-            'formEvent' => $form->createView(),
-            'events' => $events,
-            'futurevents' => $futurevents,
-            'pastevents' => $pastevents,
-            'presentevents' => $presentevents,
+            // 'futurevents' => $futurevents,
+            // 'pastevents' => $pastevents,
+            // 'presentevents' => $presentevents,
+            'events' => isset($events) ? $events : null,
+            'formEvent' => $formEvent->createView(),
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/condition-generale-utilisation", name="app_cgu")
+     */
+    public function cgu(): Response
+    {
+        return $this->render('home/cgu.html.twig', [
+            'titre' => ' - Condition générale d\'utilisation',
         ]);
     }
 

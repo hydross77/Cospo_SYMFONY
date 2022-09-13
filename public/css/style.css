@@ -1,22 +1,36 @@
 body{
-    background: rgb(255, 244, 224);
     font-family:'Barlow', 'Segoe UI', sans-serif;
+    background-color: rgb(247, 247, 247);
 }
 
 .wrapper{
     margin-top: 30px;
     margin-left : 150px;
     margin-right: 150px;
-    margin-bottom: 30px;
 }
 
 @media screen and (max-width: 768px){
 
   .wrapper{
-    margin-left: 30px;
-    margin-right: 30px;
+    margin-left: 40px;
+    margin-right: 40px;
   }
 
+}
+
+.btnHigh {
+  height: 80px;
+  width: 80px;
+  color: rgb(40, 40, 40);
+  font-size: 25px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: -20px;
+  bottom: 20px;
+  cursor: pointer;
 }
 
 /* --- FULL --- */
@@ -52,6 +66,17 @@ a:active {
 }
 
 @media screen and (max-width: 768px){
+
+
+  .registerHover{
+    padding: 3px;
+    font-size: 12px;
+  }
+
+  .loginHover{
+    padding: 8px;
+    font-size: 12px;
+  }
 
   /* Sidenav menu */
 .sidenav {
@@ -109,27 +134,6 @@ a:active {
 
 }
 
-@media screen and (max-width: 768px){
-
-  .mynav{
-    display: none;
-  }
-
-  .mynav li .user{
-    display: none;
-  }
-
-  .registerHover{
-    padding: 3px;
-    font-size: 12px;
-  }
-
-  .loginHover{
-    padding: 8px;
-    font-size: 12px;
-  }
-}
-
 nav {
   background-color: #000000d6;
   display: flex;
@@ -137,8 +141,12 @@ nav {
   padding: 20px;
 }
 
-nav h1{
+nav h1 {
   font-family :Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.violet{
+  color: #c330f0;
 }
 
 nav .mynav ul {
@@ -148,6 +156,13 @@ nav .mynav ul {
   list-style: none;
   gap: 1rem;
   text-decoration: none;
+}
+
+@media screen and (max-width: 768px){
+  
+  nav .mynav ul{
+    display: none;
+  }
 }
 
 .registerHover{
@@ -210,6 +225,164 @@ nav a:active {
 
 /* --- FIN NAVBAR --- */
 
+/* --- SECTION HOME 1 --- */
+
+@media screen and (max-width: 930px){
+
+  #videoHome{
+    display: none;
+  }
+
+  .cover{
+    background: radial-gradient(circle, rgba(251,204,63,1) 0%, rgba(201,70,252,1) 100%);
+  }
+}
+
+@media screen and (min-width: 930px){
+
+  .cover  {
+    position: absolute; /* postulat de départ */
+    top: 50%; left: 50%; /* à 50%/50% du parent référent */
+    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
+    padding: 20px 50px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    align-items: center;
+  }
+
+  .cover h2{
+    color: white;
+  }
+
+}
+
+#videoHome{
+    position: relative;
+    height: 650px;
+    max-width: 100%;
+    object-fit: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+
+}
+
+.playandstop{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#lecteur{
+    background: #37373700;
+    color: white;
+    font-size: 100px;
+    font-style: bold;
+    border : none;
+    border-radius: 2px;
+    font-size: 13px;
+    font-size: 30px;
+
+}
+
+.cover  {
+  padding: 20px 50px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  align-items: center;
+}
+
+.customSearch{
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.24);
+  border: white 1px solid;
+  padding: 7px;
+  height: 55px;
+  border-radius: 3px;
+  gap: 2px;
+  margin-top: -30px;
+}
+
+.btnSearch{
+  color: white;
+  background-color: #f0a630;
+  border: none;
+  height: 38px;
+}
+
+.btnSearch:hover{
+  background-color: #fdb541;
+}
+
+@media screen and (max-width: 930px){
+
+    .cover  {
+      padding: 10px 30px;
+      height: 130px;
+      max-width: 100%;
+    }
+
+    .customSearch{
+      max-width: 100%;
+    }
+
+    .btnSearch{
+      color: white;
+      background-color: #fdb541;
+      border: none;
+      height: 38px;
+    }
+
+    .registergreen{
+      border: white 1px solid;
+      margin-left: 20%;
+      margin-right: 20%;
+      margin-top: 10px;
+    
+    }
+
+  .registergreen{
+      background-color: #c330f0;
+      padding : 10px;
+      text-align: center;
+      border-radius: 3px;
+      margin-top: 10px;
+  }
+
+  .registergreen:hover{
+      background-color: #c330f0;
+  }
+
+  .hello{
+      display: none;
+  }
+
+  .pseudo{
+      font-style: italic;
+      text-transform: uppercase;
+      color: white;
+  }
+
+  .cover h2{
+    color: white;
+    font-size: 15px;
+  }
+}
+
+/* --- FIN SECTION HOME 1 --- */
+  
 #formEvent { 
   display: none;
 } 
@@ -224,132 +397,176 @@ nav a:active {
   cursor:pointer;
   color:white;
   font-size: 20px;
-} 
+}
 
-/* --- VIDEO PAGE D'ACCUEIL --- */
+/* --------- CARD EVENT ---------- */
 
-#videoHome{
-    position: relative;
-    height: 700px;
-    max-width: 100%;
-    object-fit: cover;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 0;
+.cardEvent{
+  background-color: rgb(252, 252, 252);
+  width:80vw;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 10px 13px 24px -5px rgba (0,0,0,0.81);
+  -webkit-box-shadow: 10px 13px 24px -5px rgba(0, 0, 0, 0.301);
+  -moz-box-shadow: 10px 13px 24px -5px rgba(0, 0, 0, 0.372);
+}
+
+.cardDelete{
+  color: red;
+  font-style: italic;
+  font-size: 15px;
+}
+
+.cardTitle{
+  display: flex;
+  gap: 3px;
+}
+
+.cardPseudo{
+  background-color: #c330f0;
+  text-transform:capitalize;
+  padding: 5px;
+  border-radius: 3px;
 
 }
 
-h1{
-    color: white;
+.cardPseudo:hover{
+  background-color: #cc57f0;
 }
 
-#lecteur{
-    background: #37373700;
-    color: white;
-    font-style: bold;
-    border : none;
-    border-radius: 2px;
-    font-size: 13px;
-    font-size: 30px;
-
+.cardSport{
+  background-color: orange;
+  color: white;
+  text-transform:capitalize;
+  padding: 5px;
+  border-radius: 3px;
 }
 
-.registergreen{
-    background-color: rgba(0, 203, 0, 0.582);
-    padding : 10px;
-    text-align: center;
-    border-radius: 3px;
+.cardPlaces{
+  background-color: rgb(0, 184, 0);
+  padding: 5px;
+  border-radius: 3px;
+  color: white;
 }
 
-.registergreen:hover{
-    background-color: rgba(0, 203, 0, 0.884);
+.cardFooter{
+  text-align: right;
 }
 
-.playandstop{
-    position: absolute;
-    bottom: 50px;
-    right: 5px;
+.cardComplete{
+  color: red;
+  font-style: italic;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+  
+
+.cardParticipate{
+  background-color: orange;
+  padding: 5px;
+  border-radius: 3px;
+  color: white;
 }
 
-.hello{
-    padding-top: 50px;
-    color: white;
-    font-size: 20px;
-    display: flex;
-    gap : 5px;
+.cardParticipate:hover{
+  background-color: rgb(255, 182, 46);
 }
 
-.pseudo{
+.cardDetail{
+  background-color: rgb(185, 185, 185);
+  padding: 5px;
+  border-radius: 3px;
+  color: white;
+}
+
+.cardDetail:hover{
+  background-color: rgb(223, 223, 223);
+}
+
+.cardParticipateOk{
+  color: rgb(0, 206, 0);
+  font-style: italic;
+  font-size: 15px;
+  margin-bottom: 5px;
+}
+
+.cardVille{
+  display: flex;
+  margin-top: 5px;
+  text-transform:capitalize;
+}
+
+.cardBody{
+  border: 1px solid rgb(154, 154, 154);
+  margin-bottom: 10px;
+  display: table;
+  width:50vw;
+  margin: 0 auto;
+}
+
+.cardDateEvent{
+  background-color: rgba(255, 166, 0, 0.831);
+  padding: 5px;
+  text-align: right;
+  color: white;
+  font-size: large;
+}
+
+.cardTitleBody{
+  text-align: left;
+  margin-left: 100px;
+  font-style: italic;
+  font-size: 20px;
+  text-transform: capitalize;
+}
+
+.cardContent{
+  text-align: justify;
+  margin-left: 100px;
+  margin-right: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+@media screen and (max-width: 930px){
+
+  .cardEvent{
+    width:80vw;
+  }
+
+  .cardTitleBody{
+    margin-left: 10px;
     font-style: italic;
-    text-transform: uppercase;
+    font-size: 20px;
+    text-transform: capitalize;
+  }
+  
+  .cardContent{
+    text-align: justify;
+    font-size: 15px;
+    margin: 10px;
+  }
+
+  .cardDateEvent{
+    background-color: rgba(255, 166, 0, 0.831);
+    padding: 5px;
+    text-align: right;
+    color: white;
+    font-size: 15px;
+  }
+
+  .cardBody{
+    border: 1px solid rgb(154, 154, 154);
+    margin-bottom: 10px;
+    display: table;
+    width:70vw;
+    margin: 0 auto;
+  }
 }
 
-/* --- FIN VIDEO PAGE D'ACCUEIL --- */
-
-.cover  {
-    position: absolute;
-    top: 250px;
-    left: 300px;
-    padding: 20px 50px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
-  }
-  
-  .flex-form input[type="submit"] {
-    background: #f0a730;
-    border: 1px solid #f0a730;
-    color: #fff;
-    padding: 0 30px;
-    cursor: pointer;
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    transition: all 0.2s;
-  }
-  
-  .flex-form input[type="submit"]:hover {
-    background: #f0a63095;
-    border: 1px solid #f0a730;
-  }
-  
-  .flex-form {
-    display: -webkit-box;
-    display: flex;
-    z-index: 10;
-    position: relative;
-    width: 500px;
-    box-shadow: 4px 8px 16px rgba(0, 0, 0, 0.3);
-  }
-  
-  .flex-form > * {
-    border: 0;
-    padding: 0 0 0 10px;
-    background: #fff;
-    line-height: 50px;
-    font-size: 1rem;
-    border-radius: 0;
-    outline: 0;
-    -webkit-appearance: none;
-  }
-  
-  input[type="search"] {
-    flex-basis: 500px;
-  }
-  
-
+/* --------- FIN CARD EVENT ---------- */
 
 /* --------- PROFIL SHOW --------- */
-
-/*PROFIL*/
-
-
 
 /* FIN PROFIL*/
 
@@ -483,5 +700,75 @@ h5{
 }
 
 /* --- FIN CSS POUR L'INSCRIPTION --- */
+
+
+/* --- FOOTER --- */
+
+.footerContainer{
+  background-color: rgba(0, 0, 0, 0.749);
+  text-align: center;
+  color: white;
+  height: 205px;
+  margin-bottom: 0;
+
+  bottom: 0;
+  width: 100%;
+}
+
+footer .logo{
+  font-family :Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-size: 30px;
+  background-color: rgba(0, 0, 0, 0.543);
+  margin-bottom: 10px;
+}
+
+
+#listFooter ul li{
+  list-style-type: none;
+  text-decoration: none;
+
+}
+#listFooter ul li a{
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.reseau{
+  margin-bottom: 10px;
+}
+.reseau a{
+  text-decoration: none;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 950px){
+  .footerContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 150px;
+    padding: 10px;
+  }
+
+  footer .logo{
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+/*  CGU  */
+
+.cgu{
+  text-align:justify;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.cgu a{
+  color: rgb(0, 115, 255);
+}
+
+/*  FIN CGU  */
+
+/* --- FIN FOOTER --- */
 
 
