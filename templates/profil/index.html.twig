@@ -32,8 +32,6 @@
 
                     <div class="container">
                     {% for event in events %}
-                        <div class="row">
-                            <div class="col">
                                     <div class="card" style="width: 18rem;">
                                         <div class="card-body">
                                             <h5 class="card-title">{{ event.titleEvent }}</h5>
@@ -45,10 +43,8 @@
                                     </div> 
                                     {% endfor %}
                             </div>
-
-                        </div>
-                    </div>
         </div>
     </div>
+    <br>
 
 {% endblock %}

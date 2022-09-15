@@ -18,12 +18,9 @@
     {{ form_row(registrationForm.pseudo) }}
     <h5>3. Presque terminé. Comment voulez-vous vous connecter?</h5>
     {{ form_row(registrationForm.email) }}
-    {{ form_row(registrationForm.password, {
-        label: 'Password'
-    }) }}
+    {{ form_row(registrationForm.password) }}
     {{ form_row(registrationForm.agreeTerms) }}
-
-    <button type="submit" class="btn">Register</button>
+    <button type="submit" class="btnRegister">S'inscrire</button>
     {{ form_end(registrationForm) }}
     </div>
 {% endblock %}

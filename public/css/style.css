@@ -3,8 +3,7 @@ body{
     background-color: rgb(247, 247, 247);
 }
 
-.wrapper{
-    margin-top: 30px;
+body .wrapper{
     margin-left : 150px;
     margin-right: 150px;
 }
@@ -160,7 +159,7 @@ nav .mynav ul {
 
 @media screen and (max-width: 768px){
   
-  nav .mynav ul{
+  nav .mynav ul .user{
     display: none;
   }
 }
@@ -234,7 +233,12 @@ nav a:active {
   }
 
   .cover{
-    background: radial-gradient(circle, rgba(251,204,63,1) 0%, rgba(201,70,252,1) 100%);
+    background: radial-gradient(circle, rgb(255, 224, 170) 0%, 
+    rgb(252, 185, 70) 100%);
+  }
+
+  .cover h5{
+    display: none;
   }
 }
 
@@ -245,19 +249,31 @@ nav a:active {
     top: 50%; left: 50%; /* à 50%/50% du parent référent */
     transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
     padding: 20px 50px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    flex-direction: column;
-    -webkit-box-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    align-items: center;
+    width: 800px;
   }
 
   .cover h2{
     color: white;
   }
+
+  .cover h5{
+    color: white;
+    text-align: center;
+  }
+
+  .registergreen{
+    background-color: #c330f0;
+    padding : 10px;
+    text-align: center;
+    border-radius: 3px;
+    margin-top: 10px;
+    margin-left : 200px;
+    margin-right: 200px;
+}
+
+.registergreen:hover{
+    background-color: #db63ff;
+}
 
 }
 
@@ -292,18 +308,6 @@ nav a:active {
 
 }
 
-.cover  {
-  padding: 20px 50px;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  flex-direction: column;
-  -webkit-box-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  align-items: center;
-}
-
 .customSearch{
   display: flex;
   background-color: rgba(255, 255, 255, 0.24);
@@ -324,6 +328,17 @@ nav a:active {
 
 .btnSearch:hover{
   background-color: #fdb541;
+}
+
+.hello{
+  color:white;
+  display: flex;
+}
+
+.pseudo{
+  font-style: italic;
+  text-transform: uppercase;
+  color: white;
 }
 
 @media screen and (max-width: 930px){
@@ -353,26 +368,8 @@ nav a:active {
     
     }
 
-  .registergreen{
-      background-color: #c330f0;
-      padding : 10px;
-      text-align: center;
-      border-radius: 3px;
-      margin-top: 10px;
-  }
-
-  .registergreen:hover{
-      background-color: #c330f0;
-  }
-
   .hello{
       display: none;
-  }
-
-  .pseudo{
-      font-style: italic;
-      text-transform: uppercase;
-      color: white;
   }
 
   .cover h2{
@@ -388,22 +385,44 @@ nav a:active {
 } 
 
 #bouton {
-  position: absolute;
-  right: 150px;
-  background-color: rgba(0, 164, 0, 0.671);
-  text-align: center;
-  padding: 10px;
-  border-radius: 5px;
-  cursor:pointer;
-  color:white;
-  font-size: 20px;
+  display: block;
+  flex-direction: left;
+  background-color: orange;
+  width: 150px;
+  padding: 5px;
+  color: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#bouton:hover{
+  background-color: violet;
+}
+
+@media screen and (max-width: 930px){
+
+  #bouton  {
+    font-size: 15px;
+    margin-top : 10px;
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+}
+
+@media screen and (max-width: 470px){
+
+  #bouton  {
+    margin-left: 50px;
+    margin-right: 50px;
+  }
 }
 
 /* --------- CARD EVENT ---------- */
 
 .cardEvent{
   background-color: rgb(252, 252, 252);
-  width:80vw;
+  display : block;
+  width: auto;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 10px 13px 24px -5px rgba (0,0,0,0.81);
@@ -419,6 +438,7 @@ nav a:active {
 
 .cardTitle{
   display: flex;
+  flex-wrap: wrap;
   gap: 3px;
 }
 
@@ -496,27 +516,16 @@ nav a:active {
   text-transform:capitalize;
 }
 
-.cardBody{
-  border: 1px solid rgb(154, 154, 154);
-  margin-bottom: 10px;
-  display: table;
-  width:50vw;
-  margin: 0 auto;
-}
-
 .cardDateEvent{
-  background-color: rgba(255, 166, 0, 0.831);
   padding: 5px;
   text-align: right;
-  color: white;
+  color: black;
   font-size: large;
 }
 
 .cardTitleBody{
-  text-align: left;
-  margin-left: 100px;
-  font-style: italic;
-  font-size: 20px;
+  border: 1px solid black;
+  padding: 5px;
   text-transform: capitalize;
 }
 
@@ -547,13 +556,7 @@ nav a:active {
     margin: 10px;
   }
 
-  .cardDateEvent{
-    background-color: rgba(255, 166, 0, 0.831);
-    padding: 5px;
-    text-align: right;
-    color: white;
-    font-size: 15px;
-  }
+
 
   .cardBody{
     border: 1px solid rgb(154, 154, 154);
@@ -571,6 +574,14 @@ nav a:active {
 /* FIN PROFIL*/
 
 /* EVENEMENT PROFIL */
+
+.container{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+  justify-content: center;
+  gap: 6px;
+}
 
 .profile-body{
     margin-top: 80px;
@@ -690,6 +701,22 @@ h6 {
   border-radius: 20px;
 }
 
+.btnRegister{
+  background-color: orange;
+  border: none;
+  padding: 5px;
+  border-radius: 3px;
+  color: white;
+}
+
+.btnRegister:hover{
+  background-color: rgb(255, 190, 68);
+}
+
+a .cguRegister{
+  color: black!important;
+}
+
 h2 {
   text-align: center;
   margin-bottom: 50px;
@@ -709,9 +736,7 @@ h5{
   text-align: center;
   color: white;
   height: 205px;
-  margin-bottom: 0;
-
-  bottom: 0;
+  position:absolute;
   width: 100%;
 }
 

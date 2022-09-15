@@ -34,26 +34,29 @@
 {% block body %}
 <div class="btnHigh"><i class="fa-solid fa-arrow-up"></i></div>
 
-<div id="bouton" onclick="bascule('formEvent');">Crée un événement</div> 
-<div id="formEvent">
-	{% if app.user %}
-        {{ form_start( formEvent, {'attr': {'class': 'formEventCustom'}} ) }}
-        {{ form_row( formEvent.title_event ) }}
-        {{ form_row( formEvent.nb_places ) }}
-        {{ form_row( formEvent.content_event ) }}
-        {{ form_row( formEvent.date_event ) }}
-        {{ form_row( formEvent.adresse ) }}
-        {{ form_row( formEvent.cp ) }}
-        {{ form_row( formEvent.ville ) }}
-        {{ form_row( formEvent.sport ) }}
-        {{ form_row( formEvent.level ) }}
-        <button type="submit" class="btnForm">Publier</button>
-        {{ form_end( formEvent ) }}
-	{% endif %}
+{% if app.user %}
+    <div id="bouton" onclick="bascule('formEvent');">Crée un événement</div> 
+    <div id="formEvent">
+        {% if app.user %}
+            {{ form_start( formEvent, {'attr': {'class': 'formEventCustom'}} ) }}
+            {{ form_row( formEvent.title_event ) }}
+            {{ form_row( formEvent.nb_places ) }}
+            {{ form_row( formEvent.content_event ) }}
+            {{ form_row( formEvent.date_event ) }}
+            {{ form_row( formEvent.adresse ) }}
+            {{ form_row( formEvent.cp ) }}
+            {{ form_row( formEvent.ville ) }}
+            {{ form_row( formEvent.sport ) }}
+            {{ form_row( formEvent.level ) }}
+            <button type="submit" class="btnForm">Publier</button>
+            {{ form_end( formEvent ) }}
+        {% endif %}
+{% endif %}
 </div>
 
 
     <br>
+    
 
 {% for event in events %}
 {% include 'event/_card.html.twig' with {event: event} only %}
