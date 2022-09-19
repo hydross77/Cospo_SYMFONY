@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 // l'extension permet de faire savoir a Symfony que la class est un formulaire
@@ -50,6 +51,11 @@ class SearchForm extends AbstractType
                 'multiple' => false,
                 'choice_label' => 'title_level',
                 'choice_value' => 'id',
+            ])
+            ->add('date', DateType::class, [
+                'label' => false,
+                'widget' => 'single_text',
+                'required' => false,
             ]);
     }
 

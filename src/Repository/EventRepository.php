@@ -51,13 +51,17 @@ class EventRepository extends ServiceEntityRepository
         }
 
         if ($parameters['level'] !== null) {
-            $result = $qb->andWhere('L.id = :level')    
+            $result = $qb->andWhere('L.id = :level')
                 ->setParameter('level', $parameters['level']);
         }
 
         if ($parameters['ville'] !== null) {
             $result = $qb->andWhere('E.ville = :ville')
                 ->setParameter('ville', $parameters['ville']);
+        }
+        if ($parameters['date'] !== null) {
+            $result = $qb->andWhere('DATE_FORMAT(E.date_event, "%Y-%m-%d") = :date')
+                ->setParameter('date', $parameters['date']);
         }
 
         $result = $qb->getQuery()
