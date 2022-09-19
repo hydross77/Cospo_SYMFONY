@@ -11,9 +11,7 @@
 
         <div class="cover">
             <h2>Trouve un événement sportif près de chez toi !</h2>
-                <form class="customSearch">
-                    {% include 'home/_filter.html.twig' with {form: searchEvent} only %}
-                </form>
+                {% include 'home/_filter.html.twig' with {form: searchEvent} only %}
                 <br>
                 {% if app.user %}
                     <div class="hello">Bonjour<div class="pseudo"> {{ app.user.pseudo }}</div>, prêt.e pour te depenser ? Allons-y ! <i class="fa-solid fa-face-smile"></i></div>
@@ -56,7 +54,6 @@
 {% endif %}
 </div> #}
     
-
     {% for event in events %}
         {% include 'home/_card.html.twig' with {event: event} only %}
     {% endfor %}

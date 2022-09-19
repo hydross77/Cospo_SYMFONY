@@ -34,15 +34,8 @@ class EventRepository extends ServiceEntityRepository
         $qb = $this->createQueryBuilder('E');
         // fait une requête sur l'entité 'E' : 'EVENT'
 
-        $result = $qb->addSelect('E.title_event, E.nb_places, E.content_event, E.date_event, E.cp, E.ville, E.adresse')
-            // on sélectionne les colonnes de la table Event qu'on as besoin
-            ->addSelect('U.pseudo')
-            // on selectionne la colonne pseudo de la table User :
-            ->join(User::class, 'U', 'WITH', 'U.id = E.user')
-            // on le joint a l'id de la table User
-            ->addSelect('S.title_sport')
+        $result = $qb->join(User::class, 'U', 'WITH', 'U.id = E.user')
             ->join(Sport::class, 'S', 'WITH', 'S.id = E.sport')
-            ->addSelect('L.title_level')
             ->join(Level::class, 'L', 'WITH', 'L.id = E.level');
 
         if ($parameters['q'] !== null) {
@@ -52,24 +45,14 @@ class EventRepository extends ServiceEntityRepository
             // lie 'q' du tableau $parameter au pseudo de la table user // bindParamPDO
         }
 
-        if (!empty($parameters['sport']->toArray())) {
-            // si l'utiliser selectionne une ou des options, on le transforme en tableau ->toArray() des id selectionnés
-            $sports = []; // tableau vide
-            $sp = $parameters['sport']->toArray(); // on recupère les entités sélectionner qui est un arrayCollection
-            foreach ($sp as $sport) { // on boucle le tableau des entités sélectionnées
-                array_push($sports, $sport->getId()); // on push dans le tableau les ids des entités sélectionnées
-            }
-            $result = $qb->andWhere('S.id IN (\'' . implode("','", $sports) . '\')'); // resultat des ID implode en string
+        if ($parameters['sport'] !== null) {
+            $result = $qb->andWhere('S.id = :sport')
+                ->setParameter('sport', $parameters['sport']);
         }
 
-        if (!empty($parameters['level']->toArray())) {
-            //pareil IF de sport
-            $levels = [];
-            $lv = $parameters['level']->toArray();
-            foreach ($lv as $level) {
-                array_push($levels, $level->getId());
-            }
-            $result = $qb->andWhere('L.id IN (\'' . implode("','", $levels) . '\')');
+        if ($parameters['level'] !== null) {
+            $result = $qb->andWhere('L.id = :level')    
+                ->setParameter('level', $parameters['level']);
         }
 
         if ($parameters['ville'] !== null) {
