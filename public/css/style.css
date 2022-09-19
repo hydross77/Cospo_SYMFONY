@@ -380,7 +380,7 @@ nav a:active {
 
 /* --- FIN SECTION HOME 1 --- */
   
-#formEvent { 
+#createEvent { 
   display: none;
 } 
 
@@ -722,9 +722,7 @@ h2 {
   margin-bottom: 50px;
 }
 
-h5{
-  
-}
+
 
 /* --- FIN CSS POUR L'INSCRIPTION --- */
 

@@ -21,49 +21,49 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="app_home")
      */
-    public function index(ManagerRegistry $doctrine, EventRepository $repository, Request $request, Event $event = null): Response
+    public function index(EventRepository $repository, Request $request): Response
     {
-        $form = $this->createForm(SearchForm::class, null);
+        $searchEvent = $this->createForm(SearchForm::class, null);
         // crée le formulaire configuré dans le dossier FORM
-        $form->handleRequest($request);
+        $searchEvent->handleRequest($request);
         // traite les données du formulaire
 
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($searchEvent->isSubmitted() && $searchEvent->isValid()) {
             // si le formulaire est envoyé et validé alors :
-            $events = $repository->findSearch($form->getData());
+            $events = $repository->findSearch($searchEvent->getData());
             // on passe le formulaire a la fonction du repository qui est un tableau classic : EventRepository.php
         };
 
-        $events = $doctrine->getRepository(Event::class)->findBy([], ['date_event' => 'DESC']);
+        // $events = $doctrine->getRepository(Event::class)->findBy([], ['date_event' => 'DESC']);
 
-        $entityManager = $doctrine->getManager();
-        $formEvent = $this->createform(EventType::class, $event);
-        $formEvent->handleRequest($request);
+        // $entityManager = $doctrine->getManager();
+        // $createEvent = $this->createform(EventType::class, $event);
+        // $createEvent->handleRequest($request);
 
         // $futurevents = $doctrine->getRepository(Event::class)->FuturEvent();
         // $pastevents = $doctrine->getRepository(Event::class)->PastEvent();
         // $presentevents = $doctrine->getRepository(Event::class)->PresentEvent();
 
-        if ($formEvent->isSubmitted() && $formEvent->isValid()) {
-            $event = $formEvent->getData();
-            // recupère l'objet user
-            $user = $this->getUser();
-            // bdd
-            $event->setUser($user);
-            $entityManager->persist($event);
-            $entityManager->flush();
+        // if ($createEvent->isSubmitted() && $createEvent->isValid()) {
+        //     $event = $createEvent->getData();
+        //     // recupère l'objet user
+        //     $user = $this->getUser();
+        //     // bdd
+        //     $event->setUser($user);
+        //     $entityManager->persist($event);
+        //     $entityManager->flush();
 
-            return $this->redirectToRoute('app_home');
-        }
+        // return $this->redirectToRoute('app_home');
+        // }
 
         return $this->render('home/index.html.twig', [
             // 'futurevents' => $futurevents,
             // 'pastevents' => $pastevents,
             // 'presentevents' => $presentevents,
+            // 'createEvent' => $createEvent->createView(),
             'events' => isset($events) ? $events : null,
-            'formEvent' => $formEvent->createView(),
-            'form' => $form->createView()
+            'searchEvent' => $searchEvent->createView()
         ]);
     }
 
@@ -111,12 +111,12 @@ class HomeController extends AbstractController
      */
     public function participate(ManagerRegistry $doctrine, Event $event)
     {
-        if ($event->getNbPlaces() > 0) {
-            $event->addParticipant($this->getUser());
-            $doctrine->getManager()->flush();
+        if ($event->getNbPlaces() > 0) { // si il reste de la place
+            $event->addParticipant($this->getUser()); // ajout d'un user
+            $doctrine->getManager()->flush(); // bdd
         }
 
-        return $this->redirectToRoute('app_home');
+        return $this->redirectToRoute('app_home'); // redirection vers la page d'accueil 
     }
 
     /**

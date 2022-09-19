@@ -12,7 +12,7 @@
         <div class="cover">
             <h2>Trouve un événement sportif près de chez toi !</h2>
                 <form class="customSearch">
-                    {% include 'event/_filter.html.twig' with {form: form} only %}
+                    {% include 'home/_filter.html.twig' with {form: searchEvent} only %}
                 </form>
                 <br>
                 {% if app.user %}
@@ -34,33 +34,32 @@
 {% block body %}
 <div class="btnHigh"><i class="fa-solid fa-arrow-up"></i></div>
 
-{% if app.user %}
-    <div id="bouton" onclick="bascule('formEvent');">Crée un événement</div> 
-    <div id="formEvent">
+<!-- --------- CREE UN EVENEMENT ---------- -->
+
+{# {% if app.user %}
+    <div id="bouton" onclick="bascule('createEvent');">Crée un événement</div> 
+    <div id="createEvent">
         {% if app.user %}
-            {{ form_start( formEvent, {'attr': {'class': 'formEventCustom'}} ) }}
-            {{ form_row( formEvent.title_event ) }}
-            {{ form_row( formEvent.nb_places ) }}
-            {{ form_row( formEvent.content_event ) }}
-            {{ form_row( formEvent.date_event ) }}
-            {{ form_row( formEvent.adresse ) }}
-            {{ form_row( formEvent.cp ) }}
-            {{ form_row( formEvent.ville ) }}
-            {{ form_row( formEvent.sport ) }}
-            {{ form_row( formEvent.level ) }}
+            {{ form_start( createEvent, {'attr': {'class': 'createEventCustom'}} ) }}
+            {{ form_row( createEvent.title_event ) }}
+            {{ form_row( createEvent.nb_places ) }}
+            {{ form_row( createEvent.content_event ) }}
+            {{ form_row( createEvent.date_event ) }}
+            {{ form_row( createEvent.adresse ) }}
+            {{ form_row( createEvent.cp ) }}
+            {{ form_row( createEvent.ville ) }}
+            {{ form_row( createEvent.sport ) }}
+            {{ form_row( createEvent.level ) }}
             <button type="submit" class="btnForm">Publier</button>
-            {{ form_end( formEvent ) }}
+            {{ form_end( createEvent ) }}
         {% endif %}
 {% endif %}
-</div>
-
-
-    <br>
+</div> #}
     
 
-{% for event in events %}
-{% include 'event/_card.html.twig' with {event: event} only %}
-{% endfor %}
+    {% for event in events %}
+        {% include 'home/_card.html.twig' with {event: event} only %}
+    {% endfor %}
 
 
 
