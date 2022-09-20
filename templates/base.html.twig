@@ -68,6 +68,9 @@
 					<div class="mynav">
 						<ul>
 				{% if app.user %}
+					{% if is_granted("ROLE_ADMIN") %}
+						<li class ="gestion"><a href="{{ path('admin_utilisateurs') }}">Gestion</a></li>
+					{% endif %}
 							<li class ="user"><a href="{{ path('app_home', {'id': app.user.id }) }}" title="Evenement" class="orange"><i class="fa-sharp fa-solid fa-house"></i></a>
 							<li class ="user"><a href="{{ path('app_profil', {'id': app.user.id }) }}" title="Profil" class="white"><i class="fa-solid fa-user"></i></a></li>
 							<li class ="user"><a href="{{ path('edit_register', {'id' : app.user.id})}}" title="Compte" class="white"><i class="fa-solid fa-gear"></i></a></li>

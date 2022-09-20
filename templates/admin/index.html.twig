@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des utilisateurs{% endblock %}
+
+{% block body %}
+    <h1>Liste des utilisateurs</h1>
+
+        {# On boucle sur les utilisateurs #}
+        <table class="table table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Pseudo</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Rôle</th>
+                    <th scope="col">Evenements</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {# On boucle sur les utilisateurs #}
+                {% for user in users %}
+                    <tr>
+                        <th scope="row">{{ user.pseudo }}</th>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {# On boucle sur les rôles #}
+                            {% for role in user.roles %}
+                                {% if role == "ROLE_USER" %}
+                                    Utilisateur
+                                {% elseif role == "ROLE_ADMIN" %}
+                                    Admin
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td><a href="{{ path('admin_events', {'id': user.id }) }}">{{ user.events | length }}</a></td>
+                        <td><a href="{{ path('admin_delete_utilisateur', {'id': user.id}) }}"><div class="red"><i class="fa-solid fa-user-minus"></i></div></a></td>
+                    </tr>
+
+                {% else %}
+                    <p>Aucun utilisateur inscrit</p>
+                {% endfor %}
+            </tbody>
+        </table>
+
+{% endblock %}

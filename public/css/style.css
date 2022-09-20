@@ -794,4 +794,13 @@ footer .logo{
 
 /* --- FIN FOOTER --- */
 
+/* --------------- ADMIN --------------- */
+
+  .gestion{
+    background-color: violet;
+    padding: 5px;
+    border-radius: 3px;
+  }
+
+/* --------------- FIN ADMIN --------------- */
 
