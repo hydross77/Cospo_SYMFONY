@@ -60,8 +60,8 @@ class EventRepository extends ServiceEntityRepository
                 ->setParameter('ville', $parameters['ville']);
         }
         if ($parameters['date'] !== null) {
-            $result = $qb->andWhere("DATE_FORMAT(E.date_event, '%d-%m-%Y') = :date")
-                ->setParameter('date', $parameters['date']);
+            $result = $qb->andWhere("DATE_FORMAT(E.date_event, '%Y-%m-%d') = :date")
+                ->setParameter('date', $parameters['date']->format('Y-m-d'));
         }
         dump($parameters['date']);
 
