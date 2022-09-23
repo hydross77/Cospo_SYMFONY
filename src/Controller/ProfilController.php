@@ -2,35 +2,56 @@
 
 namespace App\Controller;
 
-use App\Entity\Event;
 use App\Entity\User;
+use App\Entity\Event;
 use App\Form\EditProfilType;
 use App\Form\EditRegisterType;
+use App\Repository\EventRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class ProfilController extends AbstractController
 {
     /**
      * @Route("/profil/{id}", name="app_profil")
      */
-    public function index(User $user): Response
+    public function index(User $user, EventRepository $ef, EventRepository $ep, EventRepository $en): Response
     {
-        $event = $user->getEvents();
+        $eventFutur = $ef->FuturEvent();
+        $eventPast = $ep->PastEvent();
+        $eventNow = $en->NowEvent();
+        $event = $user->getParticipate();
 
         return $this->render('profil/index.html.twig', [
             'user' => $user,
+            'events' => $event,
+            'eventNow' => $eventNow,
+            'eventFutur' => $eventFutur,
+            'eventPast' => $eventPast,
+        ]);
+    }
+
+    /**
+     * Les évènements de l'utilisateur connecté
+     * @Route("/profil/event/{id}", name="create_event")
+     */
+    public function createEvent(User $user): Response
+    {
+        $event = $user->getEvents();
+
+        return $this->render('profil/user_event.html.twig', [
             'events' => $event,
         ]);
     }
 
     /**
+     * Le profil d'un utilisateur lambda
      * @Route("/profil!/view/{pseudo}", name="show_profil")
      *
      * @ParamConverter("user", options={"mapping": {"pseudo" : "pseudo"}})
@@ -46,6 +67,7 @@ class ProfilController extends AbstractController
     }
 
     /**
+     * Modifier le profil (bio, pseudo etc..)
      * @Route("/profil/editProfil/{id}", name="edit_profil")
      */
     public function editProfil(ManagerRegistry $doctrine, User $user, Request $request, SluggerInterface $slugger): Response
@@ -61,7 +83,7 @@ class ProfilController extends AbstractController
             if ($pictureProfil) {
                 $originalFilename = pathinfo($pictureProfil->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$pictureProfil->guessExtension();
+                $newFilename = $safeFilename . '-' . uniqid() . '.' . $pictureProfil->guessExtension();
 
                 try {
                     $pictureProfil->move(
@@ -94,6 +116,7 @@ class ProfilController extends AbstractController
     }
 
     /**
+     * Modifier le compte (mail, mot de passe)
      * @Route("/profil/editRegister/{id}", name="edit_register")
      */
     public function editRegister(ManagerRegistry $doctrine, User $user = null, Request $request): Response
@@ -124,6 +147,7 @@ class ProfilController extends AbstractController
     }
 
     /**
+     * supprimer un profil
      * @Route("/profil/delete/{id}", name="delete_profil")
      */
     public function delete(ManagerRegistry $doctrine, User $user)

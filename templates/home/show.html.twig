@@ -37,13 +37,18 @@ PARTICIPANT :
 
 {% if event.comments | length > 0 %}
     {% for comment in event.comments %}
-    {% if comment.users is null %}
-    Profil supprimé
-    {% else %}
-    {{ comment.users.pseudo }}<br>
-    {% endif %}
-    {{ comment.contentComment }}<br>
-    {{comment.createComment | date('d/m/Y') }}<br>
+        {% if comment.users is null %}
+            Profil supprimé
+        {% else %}
+            {{ comment.users.pseudo }}<br>
+        {% endif %}
+
+        {% if app.user.id == comment.users.id %}
+        <a href="{{ path('delete_comment', {'idEvent' : event.id , 'idComment' : comment.id})}}"><div class="red">Supprimer mon commentaire</div></a>
+        {% endif %}
+
+        {{ comment.contentComment }}<br>
+        {{comment.createComment | date('d/m/Y') }}<br>
     {% endfor %}
 
 {% endif %}

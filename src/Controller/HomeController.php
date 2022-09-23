@@ -19,6 +19,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 class HomeController extends AbstractController
 {
     /**
+     * barre de recherche multi filtre
      * @Route("/", name="app_home")
      */
     public function index(EventRepository $repository, Request $request): Response
@@ -78,6 +79,39 @@ class HomeController extends AbstractController
     }
 
     /**
+     * s'inscrire à un évènement
+     * @Route("/home/participate/{idEvent}", name="participate_event")
+     *
+     * @ParamConverter("event", options={"mapping": {"idEvent" : "id"}})
+     */
+    public function participate(ManagerRegistry $doctrine, Event $event)
+    {
+        if ($event->getNbPlaces() > 0) { // si il reste de la place
+            $event->addParticipant($this->getUser()); // ajout d'un user
+            $doctrine->getManager()->flush(); // bdd
+        }
+
+        return $this->redirectToRoute('app_home'); // redirection vers la page d'accueil 
+    }
+
+    /**
+     * se désinscrire d'un evenement
+     * @Route("/home/unsubscribe/{idEvent}", name="unsubscribe")
+     *
+     * @ParamConverter("event", options={"mapping" = {"idEvent" : "id"}})
+     */
+    public function unsubscribe(ManagerRegistry $doctrine, Event $event)
+    {
+        $entityManager = $doctrine->getManager();
+        $event->removeParticipant($this->getUser());
+        $entityManager->persist($event);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('show_event', ['id' => $event->getId()]);
+    }
+
+    /**
+     * ajout d'un commentaire à un évnènement 
      * @Route("/home/{id}", name="show_event")
      */
     public function show(ManagerRegistry $doctrine, Request $request, Event $event, Comment $comment = null): Response
@@ -105,32 +139,19 @@ class HomeController extends AbstractController
     }
 
     /**
-     * @Route("/home/participate/{idEvent}", name="participate_event")
-     *
-     * @ParamConverter("event", options={"mapping": {"idEvent" : "id"}})
-     */
-    public function participate(ManagerRegistry $doctrine, Event $event)
-    {
-        if ($event->getNbPlaces() > 0) { // si il reste de la place
-            $event->addParticipant($this->getUser()); // ajout d'un user
-            $doctrine->getManager()->flush(); // bdd
-        }
-
-        return $this->redirectToRoute('app_home'); // redirection vers la page d'accueil 
-    }
-
-    /**
-     * @Route("/home/unsubscribe/{idEvent}", name="unsubscribe")
-     *
+     * Supprimer un commentaire
+     * @Route("/home/deleteComment/{idEvent}/{idComment}", name="delete_comment")
+     * 
      * @ParamConverter("event", options={"mapping" = {"idEvent" : "id"}})
+     * @ParamConverter("comment", options={"mapping" = {"idComment" : "id"}})
      */
-    public function unsubscribe(ManagerRegistry $doctrine, Event $event)
+    public function deleteComment(ManagerRegistry $doctrine, Comment $comment, Event $event)
     {
         $entityManager = $doctrine->getManager();
-        $event->removeParticipant($this->getUser());
+        $event->removeComment($comment);
+
         $entityManager->persist($event);
         $entityManager->flush();
-
         return $this->redirectToRoute('show_event', ['id' => $event->getId()]);
     }
 }

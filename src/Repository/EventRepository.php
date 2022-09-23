@@ -96,8 +96,8 @@ class EventRepository extends ServiceEntityRepository
     {
         $now = new DateTime();
         return $this->createQueryBuilder('e')
-            ->andWhere('e.date_event > :val')
-            ->setParameter('val', $now)
+            ->andWhere("DATE_FORMAT(e.date_event, '%Y-%m-%d') > :val")
+            ->setParameter('val', $now->format('Y-m-d'))
             ->orderBy('e.date_event', 'ASC')
             ->getQuery()
             ->getResult();
@@ -110,8 +110,8 @@ class EventRepository extends ServiceEntityRepository
     {
         $now = new DateTime();
         return $this->createQueryBuilder('e')
-            ->andWhere('e.date_event < :val')
-            ->setParameter('val', $now)
+            ->andWhere("DATE_FORMAT(e.date_event, '%Y-%m-%d') < :val")
+            ->setParameter('val', $now->format('Y-m-d'))
             ->orderBy('e.date_event', 'ASC')
             ->getQuery()
             ->getResult();
@@ -120,12 +120,12 @@ class EventRepository extends ServiceEntityRepository
     /**
      * @return Event[] Returns an array of Event objects
      */
-    public function PresentEvent(): array
+    public function NowEvent(): array
     {
         $now = new DateTime();
         return $this->createQueryBuilder('e')
-            ->Where('e.date_event = :val')
-            ->setParameter('val', $now)
+            ->andWhere("DATE_FORMAT(e.date_event, '%Y-%m-%d') = :val")
+            ->setParameter('val', $now->format('Y-m-d'))
             ->orderBy('e.date_event', 'ASC')
             ->getQuery()
             ->getResult();

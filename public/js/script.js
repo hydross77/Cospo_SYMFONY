@@ -1,4 +1,3 @@
-
 /* BURGER MENU */
 var sidenav = document.getElementById("mySidenav");
 var openBtn = document.getElementById("openBtn");
