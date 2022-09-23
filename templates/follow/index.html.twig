@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Mes abonnements {% endblock %}
+
+{% block body %}
+
+    {% for f in follow %}
+        {{ f.pseudo }}
+        <a href="{{ path('delete_follow', {'id': f.id }) }}" class="card-link">Se désabonner</a>
+    {% endfor %}
+
+
+{% endblock %}

@@ -27,6 +27,7 @@ class ProfilController extends AbstractController
         $eventPast = $ep->PastEvent();
         $eventNow = $en->NowEvent();
         $event = $user->getParticipate();
+        $follow = $user->getFollow();
 
         return $this->render('profil/index.html.twig', [
             'user' => $user,
@@ -34,6 +35,7 @@ class ProfilController extends AbstractController
             'eventNow' => $eventNow,
             'eventFutur' => $eventFutur,
             'eventPast' => $eventPast,
+            'follow' => $follow,
         ]);
     }
 
@@ -49,6 +51,21 @@ class ProfilController extends AbstractController
             'events' => $event,
         ]);
     }
+
+    /**
+     * supprimer son évènement
+     * @Route("/profil/delete/event/{id}", name="delete_event")
+     */
+    public function deleteEvent(ManagerRegistry $doctrine, Event $event)
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($event);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('create_event', ['id' => $this->getUser()->getId()]);
+    }
+
+
 
     /**
      * Le profil d'un utilisateur lambda
@@ -157,5 +174,19 @@ class ProfilController extends AbstractController
         $entityManager->flush();
 
         return $this->redirectToRoute('app_home');
+    }
+
+    /**
+     * s'abonner à un utilisateur
+     * @Route("/profil/follow/{idUser}", name="user_follow")
+     *
+     * @ParamConverter("user", options={"mapping": {"idUser" : "id"}})
+     */
+    public function follow(ManagerRegistry $doctrine, User $user)
+    {
+        $user->addFollow($this->getUser()); // ajout d'un user
+        $doctrine->getManager()->flush(); // bdd
+
+        return $this->redirectToRoute('show_profil', ['id' => $this->getUser()->getPseudo()]);
     }
 }

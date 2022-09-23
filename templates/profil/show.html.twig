@@ -4,6 +4,8 @@
 
 {% block body %}
 
+    <a href="{{ path('user_follow', {'idUser' : user.id})}}">S'abonner</a><br>
+
     <div class="profile-body">
         <div class="photo">
             <img src="{{ asset('uploads/photoprofil/' ~ user.pictureProfil) }}" class="image--cover">
@@ -24,7 +26,7 @@
                     </div>
             
             
-                <h6>Mes Evenements</h6>
+                <h6>Ces Evenements</h6>
 
                     <div class="container">
                     {% for event in events %}

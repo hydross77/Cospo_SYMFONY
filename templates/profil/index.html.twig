@@ -7,9 +7,12 @@
 <div class="editHover">
     <a href="{{ path('edit_profil', {'id' : app.user.id})}}">Modifier profil</a><br>
 </div>
+
 <div class="showEventUser">
     <a href="{{ path('create_event', {'id': app.user.id}) }}">Mes évènements créés</a><br>
 </div>
+
+<a href ="{{ path('app_follow', {'id': app.user.id}) }}">Mes abonnements</a> ({{ user.follow | length }})
 
 <div class="profile-body">
         <div class="photo">
