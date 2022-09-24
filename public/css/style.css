@@ -1,11 +1,17 @@
 body{
     font-family:'Barlow', 'Segoe UI', sans-serif;
     background-color: rgb(247, 247, 247);
+    position: relative;
+    min-height: 100vh;
 }
 
 body .wrapper{
     margin-left : 150px;
     margin-right: 150px;
+}
+
+.footer-margin{
+  height: 300px;
 }
 
 @media screen and (max-width: 768px){
@@ -244,12 +250,19 @@ nav a:active {
 
 @media screen and (min-width: 930px){
 
+  .home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   .cover  {
     position: absolute; /* postulat de départ */
-    top: 50%; left: 50%; /* à 50%/50% du parent référent */
-    transform: translate(-50%, -50%); /* décalage de 50% de sa propre taille */
-    padding: 20px 50px;
-    width: 800px;
+    /* top: 50%;  */
+    margin: auto;
+    /* transform: translate(-50%, -50%); décalage de 50% de sa propre taille */
+    /* padding: 20px 50px;  */
+    /* width: 800px; */
   }
 
   .cover h2{
@@ -379,6 +392,32 @@ nav a:active {
 }
 
 /* --- FIN SECTION HOME 1 --- */
+
+
+/* --- SECTION HOME 2 --- */
+
+  .home-section-2{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    justify-content: space-between;
+  }
+
+  .home-section-2 div{
+    width: 300px;
+    text-align: justify;
+  }
+
+/* --- FIN SECTION HOME 2 --- */
+
+.first-section{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-bottom: 8rem;
+text-align: center;
+}
   
 #createEvent { 
   display: none;
@@ -735,6 +774,7 @@ h2 {
   color: white;
   height: 205px;
   position:absolute;
+  bottom: 0;
   width: 100%;
 }
 

@@ -57,39 +57,51 @@
     {% for event in events %}
         {% include 'home/_card.html.twig' with {event: event} only %}
     {% endfor %}
+    
+<section class="home-section-2">
+    <div>
+        <div>
+            <img src="">
+        </div>
+        <h2>Lorem</h2>
+        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500,</p>
+    </div>
+    <div>
+        <div>
+            <img src=""> 
+        </div>
+        <h2>Lorem</h2>
+        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500,</p>
+    </div>
+    <div>
+        <div>
+            <img src=""> 
+        </div>
+        <h2>Lorem</h2>
+        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500,</p>
+    </div>
+</section>
 
-
-
-{# {% for event in futurevents %}
-<a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
-{{ event.titleEvent }}<br>
-{{ event.dateEvent | date('d/m/Y à h:i') }}<br>
-{{ event.nbPlaces }}<br>
-{{ event.contentEvent }}<br>
-{% endfor %} #}
-
-
-
-{# {% for event in presentevents %}
-{% if event.user is null %}
-Profil supprimé
-{% else %}
-<a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
-{% endif %}
-{{ event.titleEvent }}<br>
-{{ event.dateEvent | date('d/m/Y à h:i') }}<br>
-{{ event.nbPlaces }}<br>
-{{ event.contentEvent }}<br>
-{% endfor %} #}
-
-
-
-{# {% for event in pastevents %}
-<a href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a><br>
-{{ event.titleEvent }}<br>
-{{ event.dateEvent | date('d/m/Y à h:i') }}<br>
-{{ event.nbPlaces }}<br>
-{{ event.contentEvent }}<br>
-{% endfor %} #}
+<section class="first-section side-margin">
+		<img class="img-kifuz img-grid" src="/assets/img1.png" alt="Images KifuzSamuz">
+		<article>
+			<h2 class="title-size orange">L'art du Fusing pour tous</h2>
+			<p class="text-size">Le but de l'Association KifuzSamuz
+				<br>
+				est de permettre à tous les publics
+				<br>
+				d’entrer dans la créativité
+				<br>
+				et de développer leur propre démarche de création
+				<br>
+				à travers des ateliers d'initiation
+				<br>
+				à l'Art du Fusing.
+			</p>
+			<a href="#">
+				<button class="button">Découvrir nos ateliers</button>
+			</a>
+		</article>
+	</section>
 
 {% endblock %}
