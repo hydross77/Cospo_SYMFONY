@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\MessageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\MessageRepository;
 
 /**
  * @ORM\Entity(repositoryClass=MessageRepository::class)
@@ -35,7 +35,7 @@ class Message
     /**
      * @ORM\Column(type="boolean")
      */
-    private $is_read;
+    private $is_read = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="sent")
@@ -48,6 +48,11 @@ class Message
      * @ORM\JoinColumn(nullable=false)
      */
     private $recipient;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
 
     public function getId(): ?int
     {
