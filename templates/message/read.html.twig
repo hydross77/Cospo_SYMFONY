@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Messagerie{% endblock %}
+
+{% block body %}
+
+<br>
+
+ <a href="{{path("app_message")}}" class="btn btn-secondary">Retour </a>
+
+	<section class="container">
+		<div class="row">
+			<div class="col-12">
+				<h3>Messagerie</h3>
+                <h4>{{ message.titleMessage }}</h4>
+                <p>Message de {{ message.sender.pseudo }}</p>
+                <p>Le {{ message.createdAt|date }}</p>
+                <div>{{ message.contentMessage }}</div>
+			</div>
+		</div>
+	</section>
+
+{% endblock %}
