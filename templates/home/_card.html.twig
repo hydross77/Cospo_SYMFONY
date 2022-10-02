@@ -1,35 +1,38 @@
-<div class ="cardEvent">
+<div class ="cardFull">
 
     {% if event.user is null %}
-        <div class="cardDelete">Profil supprimé</div>
+        <div class="profilDelete">Profil supprimé</div>
     {% else %}
+
         <div class ="cardTitle">
             <a class="cardPseudo" href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a>
             <div class ="cardSport">{{ event.sport.titleSport }}</div>
             <div class ="cardPlaces">{{ event.nbPlacesRestantes }} Places restantes</div> 
             <div class="cardDateEvent"><i class="fa-solid fa-calendar"></i> {{ event.dateEvent | date('d/m/Y') }}</div>
         </div>
+
         <div class="cardVille">
             <div class="red"><i class="fa-solid fa-location-dot"></i>&nbsp;</div> {{ event.ville }}, {{ event.cp }}
         </div>
-    {% endif %}
-    <br>
- 
 
+    {% endif %}
+ 
         <div class="cardFooter">
             {% if app.user %}
                 {% if event.nbPlacesRestantes != 0 %}
                     {% if app.user in event.participants %}
-                    <div class="cardParticipateOk">Vous participez a cet événement</div>
+                        <div class="cardParticipateOk">Vous participez a cet événement</div>
                     {% else %}
-                <a class ="cardParticipate" href="{{ path('participate_event', {'idEvent' : event.id })}}">Participer</a>
-                {% endif %}
-                <a class="cardDetail" href="{{ path('show_event', {'id': event.id}) }}">Détail</a>
+                        <a class ="cardParticipate" href="{{ path('participate_event', {'idEvent' : event.id })}}">Participer</a>
+                    {% endif %}
+                    <a class="cardDetail" href="{{ path('show_event', {'id': event.id}) }}">Détail</a>
                 {% else %}
                 <div class="cardComplete">Événement complet</div>
-                                    {% if app.user in event.participants %}
-                    <a class="cardDetail" href="{{ path('show_event', {'id': event.id}) }}">Détail</a>
+                
+                    {% if app.user in event.participants %}
+                        <a class="cardDetail" href="{{ path('show_event', {'id': event.id}) }}">Détail</a>
                     {% endif %}
+
                 {% endif %}
                 {# Si l'utilisateur participe alors il peut accéder au détail donc l'adresse précise {{ event.adresse }} #}
             {% endif %}

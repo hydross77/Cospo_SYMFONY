@@ -54,52 +54,38 @@
 {% endif %}
 </div> #}
     
-    {% for event in events %}
-        {% include 'home/_card.html.twig' with {event: event} only %}
-    {% endfor %}
+    <div class ="eventsCard">
+        {% for event in events %}
+            {% include 'home/_card.html.twig' with {event: event} only %}
+        {% endfor %}
+    </div>
     
 <section class="home-section-2">
     <div>
-        <div>
-            <img src="">
-        </div>
-        <h2>Lorem</h2>
-        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500,</p>
+        <h2>Lorem ipsum</h2>
+            <img src="{{ asset('img/home1.png') }}" alt ="Cyclisme" class="pictureHome">
+        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500.</p>  
     </div>
     <div>
-        <div>
-            <img src=""> 
-        </div>
-        <h2>Lorem</h2>
-        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500,</p>
+        <h2>Lorem ipsum</h2>
+            <img src="{{ asset('img/home2.png') }}" alt="Natation" class="pictureHome">
+        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500.</p>
     </div>
     <div>
-        <div>
-            <img src=""> 
-        </div>
-        <h2>Lorem</h2>
-        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500,</p>
+        <h2>Lorem ipsum</h2>
+            <img src="{{ asset('img/home3.png') }}" alt="Escalade" class="pictureHome"> 
+        <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500.</p>
     </div>
 </section>
 
-<section class="first-section side-margin">
-		<img class="img-kifuz img-grid" src="/assets/img1.png" alt="Images KifuzSamuz">
+    <section class="home-section-3">
+		<img src="{{ asset('img/partage_sport.jpg') }}" alt="Sport" class="pictureHome3">
 		<article>
-			<h2 class="title-size orange">L'art du Fusing pour tous</h2>
-			<p class="text-size">Le but de l'Association KifuzSamuz
-				<br>
-				est de permettre à tous les publics
-				<br>
-				d’entrer dans la créativité
-				<br>
-				et de développer leur propre démarche de création
-				<br>
-				à travers des ateliers d'initiation
-				<br>
-				à l'Art du Fusing.
-			</p>
+			<h2>Partage ta passion</h2>
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
 			<a href="#">
-				<button class="button">Découvrir nos ateliers</button>
+				<button class="btnRegister">Crée un  évènement sportif</button>
 			</a>
 		</article>
 	</section>

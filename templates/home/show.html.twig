@@ -1,56 +1,52 @@
+{# CSS EVENT DETAIL #}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Evement{% endblock %}
 
 {% block body %}
 
-{# faire une notation etoile?? #}
+        {{event.titleEvent}}<br>
+        {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
+        {{event.contentEvent}}<br>
+        <p>Nombre de place : {{event.NbPlaces}}</p>
+        <p>Nombre de place disponible : {{event.NbPlacesRestantes}}</p>
 
+        PARTICIPANT :
+        {% for participant in event.participants %}
+            {{ participant.pseudo }} <br>
+        {% endfor %}
 
-
-{{event.titleEvent}}<br>
-{{ event.dateEvent | date('d/m/Y à h:i') }}<br>
-{{event.contentEvent}}<br>
-<p>Nombre de place : {{event.NbPlaces}}</p>
-<p>Nombre de place disponible : {{event.NbPlacesRestantes}}</p>
-
-PARTICIPANT :
-{% for participant in event.participants %}
-    {{ participant.pseudo }} <br>
-{% endfor %}
-
-{% if app.user in event.participants %}
-    Vous êtes inscrit à cet événement, désinscrivez vous içi.<br>
-<a href="{{ path('unsubscribe', {'idEvent' : event.id })}}"><i class="fa-solid fa-user-minus"></i></a>
-{% else %}
-    Vous pouvez vous inscrire à cet événement içi.<br>
-    <a href="{{ path('participate_event', {'idEvent' : event.id })}}">Inscription</a>
-{% endif %}
-
-
-
-
-    {{ form_start( formComment ) }}
-    {{ form_widget( formComment ) }}
-    <button type="submit" class="btn">Enregistrer</button>
-    {{ form_end( formComment ) }}
-
-{% if event.comments | length > 0 %}
-    {% for comment in event.comments %}
-        {% if comment.users is null %}
-            Profil supprimé
+        {% if app.user in event.participants %}
+            Vous êtes inscrit à cet événement, désinscrivez vous içi.<br>
+        <a href="{{ path('unsubscribe', {'idEvent' : event.id })}}"><i class="fa-solid fa-user-minus"></i></a>
         {% else %}
-            {{ comment.users.pseudo }}<br>
+            Vous pouvez vous inscrire à cet événement içi.<br>
+            <a href="{{ path('participate_event', {'idEvent' : event.id })}}">Inscription</a>
         {% endif %}
 
-        {% if app.user.id == comment.users.id %}
-        <a href="{{ path('delete_comment', {'idEvent' : event.id , 'idComment' : comment.id})}}"><div class="red">Supprimer mon commentaire</div></a>
+        {{ form_start( formComment ) }}
+        {{ form_widget( formComment ) }}
+        <button type="submit" class="btn">Enregistrer</button>
+        {{ form_end( formComment ) }}
+
+        {% if event.comments | length > 0 %}
+            {% for comment in event.comments %}
+                {% if comment.users is null %}
+                    Profil supprimé
+                {% else %}
+                    {{ comment.users.pseudo }}<br>
+                {% endif %}
+
+                {% if app.user.id == comment.users.id %}
+                    <a href="{{ path('delete_comment', {'idEvent' : event.id , 'idComment' : comment.id})}}"><div class="red">Supprimer mon commentaire</div></a>
+                {% endif %}
+
+                {{ comment.contentComment }}<br>
+                {{comment.createComment | date('d/m/Y') }}<br>
+            {% endfor %}
         {% endif %}
 
-        {{ comment.contentComment }}<br>
-        {{comment.createComment | date('d/m/Y') }}<br>
-    {% endfor %}
-
-{% endif %}
+</div>
 
 {% endblock %}

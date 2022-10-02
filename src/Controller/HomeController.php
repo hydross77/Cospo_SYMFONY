@@ -10,6 +10,7 @@ use App\Form\SearchForm;
 use App\Form\CommentType;
 use App\Repository\EventRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,7 +23,7 @@ class HomeController extends AbstractController
      * barre de recherche multi filtre
      * @Route("/", name="app_home")
      */
-    public function index(EventRepository $repository, Request $request): Response
+    public function index(EventRepository $repository, Request $request, PaginatorInterface $paginator): Response
     {
         $searchEvent = $this->createForm(SearchForm::class, null);
         // crée le formulaire configuré dans le dossier FORM
@@ -35,6 +36,7 @@ class HomeController extends AbstractController
             $events = $repository->findSearch($searchEvent->getData());
             // on passe le formulaire a la fonction du repository qui est un tableau classic : EventRepository.php
         };
+
 
         // $events = $doctrine->getRepository(Event::class)->findBy([], ['date_event' => 'DESC']);
 

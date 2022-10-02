@@ -402,14 +402,46 @@ nav a:active {
     max-width: 1200px;
     margin: auto;
     justify-content: space-between;
+    padding: 30px;
   }
 
   .home-section-2 div{
     width: 300px;
-    text-align: justify;
+    text-align: center;
+  }
+
+  .home-section-2 div:hover{
+    background-color: rgba(255, 166, 0, 0.196);
+    border-radius: 20px;
+  }
+
+  .pictureHome{
+    width: 150px;
+    margin-bottom: 30px;
   }
 
 /* --- FIN SECTION HOME 2 --- */
+
+/* --- SECTION HOME 3 --- */
+
+.home-section-3{
+  margin-top: 50px;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.096);
+  border-radius: 10px;
+}
+
+.home-section-3 article{
+  padding: 20px;
+  text-align: justify;
+}
+    
+.pictureHome3{
+ border-radius: 10px 0px 0px 10px;
+ 
+}
+
+/* --- FIN SECTION HOME 3 --- */
 
 .first-section{
   display: grid;
@@ -458,10 +490,17 @@ text-align: center;
 
 /* --------- CARD EVENT ---------- */
 
-.cardEvent{
+.eventsCard{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap : 10px;
+  margin-top: 20px;
+}
+
+.cardFull{
+  width: 100%;
   background-color: rgb(252, 252, 252);
-  display : block;
-  width: auto;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 10px 13px 24px -5px rgba (0,0,0,0.81);
@@ -576,37 +615,14 @@ text-align: center;
   margin-bottom: 10px;
 }
 
-@media screen and (max-width: 930px){
-
-  .cardEvent{
-    width:80vw;
-  }
-
-  .cardTitleBody{
-    margin-left: 10px;
-    font-style: italic;
-    font-size: 20px;
-    text-transform: capitalize;
-  }
-  
-  .cardContent{
-    text-align: justify;
-    font-size: 15px;
-    margin: 10px;
-  }
-
-
-
-  .cardBody{
-    border: 1px solid rgb(154, 154, 154);
-    margin-bottom: 10px;
-    display: table;
-    width:70vw;
-    margin: 0 auto;
-  }
-}
-
 /* --------- FIN CARD EVENT ---------- */
+
+/* --------- EVENT DETAIL --------- */
+
+
+
+
+/* --------- FIN EVENT DETAIL --------- */
 
 /* --------- PROFIL SHOW --------- */
 
