@@ -6,7 +6,7 @@
 
     {% for f in follow %}
         {{ f.pseudo }}
-        <a href="{{ path('delete_follow', {'id': f.id }) }}" class="card-link">Se désabonner</a>
+        <a href="{{ path('unfollow', {'idSource' : app.user.id , 'idTarget' : f.id}) }}" class="card-link">Se désabonner</a>
     {% endfor %}
 
 

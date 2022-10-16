@@ -10,13 +10,13 @@
         </video> 
 
         <div class="cover">
-            <h2>Trouve un événement sportif près de chez toi !</h2>
+            <h2>Trouve un événement <strong>sportif</strong> près de chez toi !</h2>
                 {% include 'home/_filter.html.twig' with {form: searchEvent} only %}
                 <br>
                 {% if app.user %}
                     <div class="hello">Bonjour<div class="pseudo"> {{ app.user.pseudo }}</div>, prêt.e pour te depenser ? Allons-y ! <i class="fa-solid fa-face-smile"></i></div>
                 {% else %}
-                    <h5>Pour participer à un événement sportif <div class="registergreen"><a href="{{ path('app_register')}}" title="Inscription">Inscrivez-vous</a></div></h5>
+                    <h5>Pour participer à un événement <strong>sportif</strong> <div class="registergreen"><a href="{{ path('app_register')}}" title="Inscription">Inscrivez-vous</a></div></h5>
                 {% endif %}
                 <br>
         </div>

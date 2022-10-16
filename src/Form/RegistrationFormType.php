@@ -70,7 +70,7 @@ class RegistrationFormType extends AbstractType
 
             ->add('agreeTerms', CheckboxType::class, [
                 //'label' => 'Accepter les <a href="{{ path(\'app_cgu\') }}" class="cguRegister">Condition générale d\'utilisation </a>',
-                'label' => 'Accepter les <a href="'.$options['cgu'].'" style="color:black;" class="cguRegister">Condition générale d\'utilisation </a>',
+                'label' => 'Accepter les <a href="' . $options['cgu'] . '" style="color:black;" class="cguRegister">Condition générale d\'utilisation </a>',
                 'label_html' => true,
                 'mapped' => false,
                 'constraints' => [
@@ -104,7 +104,7 @@ class RegistrationFormType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'cgu' => null, 
+            'cgu' => null,
         ]);
     }
 }
