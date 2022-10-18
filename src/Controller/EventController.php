@@ -2,36 +2,45 @@
 
 namespace App\Controller;
 
-use App\Form\SearchForm;
+
+use App\Entity\Event;
+use App\Form\EventType;
 use App\Repository\EventRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class EventController extends AbstractController
 {
     /**
-     * @Route("/event", name="app_event")
+     * Créer un évènement 
+     * @Route("/eventcreate", name="create")
      */
-    public function index(EventRepository $repository, Request $request): Response
+    public function create(ManagerRegistry $doctrine, Request $request, Event $event = null): Response
     {
-        $form = $this->createForm(SearchForm::class, null);
-        // crée le formulaire configuré dans le dossier FORM
-        $form->handleRequest($request);
-        // traite les données du formulaire
+        $event = new Event;
+        $entityManager = $doctrine->getManager();
+        $createEvent = $this->createform(EventType::class, $event);
+        $createEvent->handleRequest($request);
 
+        if ($createEvent->isSubmitted() && $createEvent->isValid()) {
+            $event = $createEvent->getData();
+            // recupère l'objet user
+            $user = $this->getUser();
+            // bdd
+            $event->setUser($user);
+            $entityManager->persist($event);
+            $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // si le formulaire est envoyé et validé alors :
-            $events = $repository->findSearch($form->getData());
-            // on passe le formulaire a la fonction du repository qui est un tableau classic : EventRepository.php
+            $this->addFlash("message", "Votre évènement est publié !");
+            return $this->redirectToRoute('app_profil', ['id' => $this->getUser()->getId()]);
         }
 
         return $this->render('event/index.html.twig', [
-            'events' => isset($events) ? $events : null,
-            'form' => $form->createView()
-            //affiche le formulaire
+            'createEvent' => $createEvent->createView(),
         ]);
     }
 }

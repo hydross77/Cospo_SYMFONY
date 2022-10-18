@@ -15,28 +15,68 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EventType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('title_event', TextType::class)
-            ->add('nb_places', NumberType::class)
-            ->add('content_event', TextType::class)
+            ->add('title_event', TextType::class, [
+                'required' => true,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Titre de l\'évènement..',
+                ],
+            ])
+            ->add('nb_places', NumberType::class, [
+                'required' => true,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Veuillez entrez le nombre de place en chiffre..',
+                ],
+            ])
+            ->add('content_event', TextareaType::class, [
+                'required' => true,
+                'label' => 'Description de l\'évènement',
+                'attr' => [
+                    'placeholder' => 'Exemple : Pour un cours de Yoga en plein air, n\'oubliez pas de ramener vos tapis ainsi qu\'une bouteille d\'eau',
+                ],
+            ])
             ->add('date_event', DateTimeType::class, [
+                'label' => 'Date et Heure de l\'évènement',
                 "widget" => "single_text"
             ])
-            ->add('cp', TextType::class)
-            ->add('ville', TextType::class)
-            ->add('adresse', TextType::class)
+            ->add('cp', TextType::class, [
+                'required' => true,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Code postal..',
+                ],
+            ])
+            ->add('ville', TextType::class, [
+                'required' => true,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Ville de l`\évènement..',
+                ],
+            ])
+            ->add('adresse', TextType::class, [
+                'required' => false,
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Adresse de l\'évènement..',
+                ],
+            ])
             ->add('level', EntityType::class, [
                 'class' => Level::class,
-                'choice_label' => 'title_level'
+                'choice_label' => 'title_level',
+                'label' => 'Veuillez indiquez le niveau requis',
             ])
             ->add('sport', EntityType::class, [
                 'class' => Sport::class,
-                'choice_label' => 'title_sport'
+                'choice_label' => 'title_sport',
+                'label' => 'Veuillez indiquez le sport de cet évènement',
             ]);
     }
 

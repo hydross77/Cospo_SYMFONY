@@ -1,54 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
-	<script src="/tarteaucitron/tarteaucitron.js"></script>
-
-        <script type="text/javascript">
-        tarteaucitron.init({
-    	  "privacyUrl": "politiquedeconfidentialite", /* Privacy policy url */
-          "bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
-
-    	  "hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
-    	  "cookieName": "tarteaucitron", /* Cookie name */
-    
-    	  "orientation": "middle", /* Banner position (top - bottom) */
-       
-          "groupServices": false, /* Group services by category */
-          "serviceDefaultState": "wait", /* Default state (true - wait - false) */
-                           
-    	  "showAlertSmall": false, /* Show the small banner on bottom right */
-    	  "cookieslist": false, /* Show the cookie list */
-                           
-          "closePopup": false, /* Show a close X on the banner */
-
-          "showIcon": true, /* Show cookie icon to manage cookies */
-          //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
-          "iconPosition": "BottomLeft", /* BottomRight, BottomLeft, TopRight and TopLeft */
-
-    	  "adblocker": false, /* Show a Warning if an adblocker is detected */
-                           
-          "DenyAllCta" : true, /* Show the deny all button */
-          "AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
-          "highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
-                           
-    	  "handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
-
-    	  "removeCredit": false, /* Remove credit link */
-    	  "moreInfoLink": true, /* Show more info link */
-
-          "useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
-          "useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
-
-    	  //"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
-                          
-          "readmoreLink": "", /* Change the default readmore link */
-
-          "mandatory": true, /* Show a message about mandatory cookies */
-          "mandatoryCta": true /* Show the disabled accept button when mandatory on */
-        });
-        </script>
-
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
 		<title>
@@ -64,7 +16,12 @@
 
 	<header>
 		<nav>
+			<div class="nav1">
 			<h1><a href="{{ path('app_home')}}" title="COSPO">COSPO</a></h1>
+			{% if app.user %}
+			<a href="{{ path('create')}}" class="createEvent"><i class="fa-solid fa-plus"></i> Créer un évènement</a>
+			{% endif %}
+			</div>
 				<!-- NAVBAR -->
 					<div class="mynav">
 						<ul>
@@ -90,11 +47,12 @@
 					<div id="mySidenav" class="sidenav">
   					<a id="closeBtn" href="#" class="close">×</a>
   						<ul>
-							<li><a href="{{ path('app_home', {'id': app.user.id }) }}" title="Accueil" class="orange">Accueil</i></a></li>
-							<li><a href="{{ path('app_profil', {'id': app.user.id }) }}" title="Profil" class="white">Profil</a></li>
-							<li class ="user"><a href="{{ path('app_message') }}" title="Messagerie" class="white">Messagerie</a>
-							<li><a href="{{ path('edit_register', {'id' : app.user.id})}}" title="Compte" class="white">Compte</a></li>
-							<li><a href="{{ path('app_logout')}}" title="Deconnexion" class="red">Déconnexion</a></li>
+							<li class ="white"><a href="{{ path('admin_utilisateurs') }}">Gestion</a></li>
+							<li><a href="{{ path('app_home', {'id': app.user.id }) }}" class="orange">Accueil</i></a></li>
+							<li><a href="{{ path('app_profil', {'id': app.user.id }) }}" class="white">Profil</a></li>
+							<li class ="user"><a href="{{ path('app_message') }}" class="white">Messagerie</a>
+							<li><a href="{{ path('edit_register', {'id' : app.user.id})}}" class="white">Compte</a></li>
+							<li><a href="{{ path('app_logout')}}" class="red">Déconnexion</a></li>
   						</ul>
 					</div>
 
@@ -113,41 +71,90 @@
 	<body>
 		{% for message in app.flashes("message") %}
 			<div class="alert alert-success alert-dismissible fade show" role="alert">
-			{{message}}
-			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				{{message}}
+				<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 			</div>
 		{% endfor %}
+
 		<div class="video">{% block video %}{% endblock %}</div>
 		<div class="wrapper">{% block body %}{% endblock %}</div>
 
 		<div class="footer-margin"></div>
-
-		 <footer>
-		 	<div class="footerContainer">
-                <div class="logo">
-                    <a href="{{ path('app_home')}}" title="COSPO">COSPO</a>
-                </div>
-                <div id="listFooter">
-                    <ul>
-                    	<li> <a href="" alt="Contact">Contact</a></li>
-                        <li> <a href="" alt="Mentions légales">Mentions légales</a></li>
-                        <li> <a href="{{ path('app_cgu') }}">Condition générale d'utilisation </a></li>  
-                    </ul>
-                </div>
-                <div class="reseau">
-                    <a target="_blank" href="https://www.facebook.com/" alt="Facebook"><i class="fa-brands fa-facebook"></i> Facebook</a>
-                </div>
-                <div id="copyright">
-                	© Cospo by Tiffany
-                </div>
-			</div>
-        </footer>
+			<footer>
+		 		<div class="footerContainer">
+                	<div class="logo">
+                    	<a href="{{ path('app_home')}}" title="COSPO">COSPO</a>
+                	</div>
+					<div id="listFooter">
+						<ul>
+							<li> <a href="" alt="Contact">Contact</a></li>
+							<li> <a href="" alt="Mentions légales">Mentions légales</a></li>
+							<li> <a href="{{ path('app_cgu') }}">Condition générale d'utilisation </a></li>  
+						</ul>
+					</div>
+					<div class="reseau">
+						<a target="_blank" href="https://www.facebook.com/" alt="Facebook"><i class="fa-brands fa-facebook"></i> Facebook</a>
+					</div>
+					<div id="copyright">
+						© Cospo by Tiffany
+					</div>
+				</div>
+        	</footer>
 
 		{% block javascripts %}{% endblock %}
+
+
+			<script src="/tarteaucitron/tarteaucitron.js"></script>
+
+			<script type="text/javascript">
+			tarteaucitron.init({
+			"privacyUrl": "politiquedeconfidentialite", /* Privacy policy url */
+			"bodyPosition": "bottom", /* or top to bring it as first element for accessibility */
+
+			"hashtag": "#tarteaucitron", /* Open the panel with this hashtag */
+			"cookieName": "tarteaucitron", /* Cookie name */
+		
+			"orientation": "middle", /* Banner position (top - bottom) */
+		
+			"groupServices": false, /* Group services by category */
+			"serviceDefaultState": "wait", /* Default state (true - wait - false) */
+							
+			"showAlertSmall": false, /* Show the small banner on bottom right */
+			"cookieslist": false, /* Show the cookie list */
+							
+			"closePopup": false, /* Show a close X on the banner */
+
+			"showIcon": true, /* Show cookie icon to manage cookies */
+			//"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+			"iconPosition": "BottomLeft", /* BottomRight, BottomLeft, TopRight and TopLeft */
+
+			"adblocker": false, /* Show a Warning if an adblocker is detected */
+							
+			"DenyAllCta" : true, /* Show the deny all button */
+			"AcceptAllCta" : true, /* Show the accept all button when highPrivacy on */
+			"highPrivacy": true, /* HIGHLY RECOMMANDED Disable auto consent */
+							
+			"handleBrowserDNTRequest": false, /* If Do Not Track == 1, disallow all */
+
+			"removeCredit": false, /* Remove credit link */
+			"moreInfoLink": true, /* Show more info link */
+
+			"useExternalCss": false, /* If false, the tarteaucitron.css file will be loaded */
+			"useExternalJs": false, /* If false, the tarteaucitron.js file will be loaded */
+
+			//"cookieDomain": ".my-multisite-domaine.fr", /* Shared cookie for multisite */
+							
+			"readmoreLink": "", /* Change the default readmore link */
+
+			"mandatory": true, /* Show a message about mandatory cookies */
+			"mandatoryCta": true /* Show the disabled accept button when mandatory on */
+			});
+			</script>
+
 			<script src="https://kit.fontawesome.com/81ab4e445e.js" crossorigin="anonymous"></script>
 			<script src="{{asset('js/script.js') }}"></script>
 			<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
 	</body>
 
 </html>
