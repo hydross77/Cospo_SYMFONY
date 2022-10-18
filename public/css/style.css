@@ -146,6 +146,20 @@ nav {
   padding: 20px;
 }
 
+nav .nav1{
+  display: flex;
+  gap: 15px;
+}
+
+.createEvent{
+  background-color: #fdb541;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  height: 45px;
+  color: white;
+}
+
 nav h1 {
   font-family :Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
@@ -168,6 +182,10 @@ nav .mynav ul {
   nav .mynav ul .user{
     display: none;
   }
+
+  nav .mynav ul .gestion{
+    display: none;
+  } 
 }
 
 .registerHover{
@@ -246,6 +264,16 @@ nav a:active {
   .cover h5{
     display: none;
   }
+
+  #lecteur{
+    display:none;
+  }
+
+  .wrapper{
+    margin-left: 30px!important;
+    margin-right: 30px!important;
+
+  }
 }
 
 @media screen and (min-width: 930px){
@@ -290,23 +318,10 @@ nav a:active {
 
 }
 
-#videoHome{
-    position: relative;
-    height: 650px;
-    max-width: 100%;
-    object-fit: cover;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    z-index: 0;
-
-}
-
 .playandstop{
   position: absolute;
-  bottom: 0;
-  right: 0;
+  top: 0;
+  justify-content: center;
 }
 
 #lecteur{
@@ -321,6 +336,19 @@ nav a:active {
 
 }
 
+#videoHome{
+    position: relative;
+    height: 650px;
+    max-width: 100%;
+    object-fit: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+
+}
+
 .customSearch{
   display: flex;
   background-color: rgba(255, 255, 255, 0.24);
@@ -331,6 +359,28 @@ nav a:active {
   gap: 2px;
   margin-top: -30px;
 }
+
+@media screen and (max-width: 730px){
+
+  .customSearch{
+    display: block;
+    justify-content: center;
+    align-items: center;
+    height: 320px;
+  }
+
+  .cover{
+    background: radial-gradient(circle, rgb(255, 224, 170) 0%, 
+    rgb(252, 185, 70) 100%)!important;
+    height: 400px!important;
+  
+  }
+
+  .btnSearch{
+    justify-content: center!important;
+  }
+}
+
 
 .btnSearch{
   color: white;
@@ -420,6 +470,13 @@ nav a:active {
     margin-bottom: 30px;
   }
 
+  @media screen and (max-width: 720px){
+
+    .home-section-2{
+      justify-content: center;
+    }
+  }
+
 /* --- FIN SECTION HOME 2 --- */
 
 /* --- SECTION HOME 3 --- */
@@ -440,6 +497,15 @@ nav a:active {
  border-radius: 10px 0px 0px 10px;
  
 }
+
+@media screen and (max-width: 930px){
+
+  .home-section-3  {
+    display:none;
+  }
+}
+
+
 
 /* --- FIN SECTION HOME 3 --- */
 
@@ -859,4 +925,25 @@ footer .logo{
   }
 
 /* --------------- FIN ADMIN --------------- */
+
+
+/* --------------- FORMULAIRE CREAT EVENT --------------- */
+
+.formulaireEvent{
+  background-color: rgb(255, 239, 193);
+  border-radius: 10px;
+  padding : 20px;
+  margin-top : 20px;
+  display: block;
+  justify-content: center;
+}
+/* --------------- FIN FORMULAIRE CREAT EVENT --------------- */
+
+/* --------------- FORMULAIRE COMPTE --------------- */
+
+.formRegister{
+  margin-top : 10px;
+}
+
+/* --------------- FIN FORMULAIRE COMPTE --------------- */
 

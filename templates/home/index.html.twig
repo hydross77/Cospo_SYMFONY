@@ -10,7 +10,10 @@
         </video> 
 
         <div class="cover">
-            <h2>Trouve un événement <strong>sportif</strong> près de chez toi !</h2>
+            <div class="playandstop">
+                <button id="lecteur">II</button>
+            </div>
+            <h2>Trouve un <strong>événement sportif</strong> près de chez toi !</h2>
                 {% include 'home/_filter.html.twig' with {form: searchEvent} only %}
                 <br>
                 {% if app.user %}
@@ -20,39 +23,13 @@
                 {% endif %}
                 <br>
         </div>
-
-        <div class="playandstop">
-            <button id="lecteur">II</button>
-        </div>
     </section>
-    
+
 
 {% endblock %}
 
 {% block body %}
 <div class="btnHigh"><i class="fa-solid fa-arrow-up"></i></div>
-
-<!-- --------- CREE UN EVENEMENT ---------- -->
-
-{# {% if app.user %}
-    <div id="bouton" onclick="bascule('createEvent');">Crée un événement</div> 
-    <div id="createEvent">
-        {% if app.user %}
-            {{ form_start( createEvent, {'attr': {'class': 'createEventCustom'}} ) }}
-            {{ form_row( createEvent.title_event ) }}
-            {{ form_row( createEvent.nb_places ) }}
-            {{ form_row( createEvent.content_event ) }}
-            {{ form_row( createEvent.date_event ) }}
-            {{ form_row( createEvent.adresse ) }}
-            {{ form_row( createEvent.cp ) }}
-            {{ form_row( createEvent.ville ) }}
-            {{ form_row( createEvent.sport ) }}
-            {{ form_row( createEvent.level ) }}
-            <button type="submit" class="btnForm">Publier</button>
-            {{ form_end( createEvent ) }}
-        {% endif %}
-{% endif %}
-</div> #}
     
     <div class ="eventsCard">
         {% for event in events %}
@@ -77,17 +54,5 @@
         <p>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500.</p>
     </div>
 </section>
-
-    <section class="home-section-3">
-		<img src="{{ asset('img/partage_sport.jpg') }}" alt="Sport" class="pictureHome3">
-		<article>
-			<h2>Partage ta passion</h2>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
-			<a href="#">
-				<button class="btnRegister">Crée un  évènement sportif</button>
-			</a>
-		</article>
-	</section>
 
 {% endblock %}
