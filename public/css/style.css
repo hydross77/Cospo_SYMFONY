@@ -947,3 +947,37 @@ footer .logo{
 
 /* --------------- FIN FORMULAIRE COMPTE --------------- */
 
+/* --------------- MESSAGERIE --------------- */
+
+@media screen and (max-width: 740px){
+  .messagerie{
+    display:none;
+  }
+}
+
+@media screen and (min-width: 740px){
+  .messagerieResponsiv{
+    display:none;
+  }
+}
+
+.messagerieResponsiv{
+  margin-top : 10px;
+}
+.message{
+  display: block;
+  gap: 10px;
+  background-color: #ffd56a30;
+  padding: 20px;
+  border: 1px rgb(181, 181, 181) solid;
+  margin-bottom: 3px;
+}
+
+.voirMessage{
+  background-color: #110c00;
+  padding: 8px;
+  float: right;
+  border-radius: 2px;
+}
+
+/* --------------- FIN MESSAGERIE --------------- */

@@ -16,10 +16,11 @@ class MessageController extends AbstractController
     /**
      * @Route("/message", name="app_message")
      */
-    public function index(): Response
+    public function index(ManagerRegistry $doctrine): Response
     {
+        // $received = $doctrine->getRepository(Message::class)->findBy(['created_at' => 'ASC']);
         return $this->render('message/index.html.twig', [
-            'controller_name' => 'MessageController',
+            // 'received' => $received,
         ]);
     }
 
@@ -52,9 +53,12 @@ class MessageController extends AbstractController
     /**
      * @Route("/received", name="received")
      */
-    public function received(): Response
+    public function received(ManagerRegistry $doctrine): Response
     {
-        return $this->render('message/index.html.twig');
+        $received = $doctrine->getRepository(Message::class)->findBy([], ['created_at' => 'ASC']);
+        return $this->render('message/index.html.twig', [
+            'received' => $received,
+        ]);
     }
 
     /**

@@ -3,6 +3,9 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width">
+		<meta name="Description" content="COSPO site pour rencontre autour d'un évènement sportif, inscrivez-vous et créer un évènement sportif pour que la communauté y participe et participer vous-même à des évènement sportifs tel que des randonnées, des cours de yoga...">
+		<link rel="icon" type="image/x-icon" href="/img/favicon.ico">
+		<meta name="language" content="fr">
 		<title>
 			{% block title %}Accueil{% endblock %}
 		</title>
@@ -48,7 +51,7 @@
   					<a id="closeBtn" href="#" class="close">×</a>
   						<ul>
 							<li class ="white"><a href="{{ path('admin_utilisateurs') }}">Gestion</a></li>
-							<li><a href="{{ path('app_home', {'id': app.user.id }) }}" class="orange">Accueil</i></a></li>
+							<li><a href="{{ path('app_home', {'id': app.user.id }) }}" class="orange">Accueil</a></li>
 							<li><a href="{{ path('app_profil', {'id': app.user.id }) }}" class="white">Profil</a></li>
 							<li class ="user"><a href="{{ path('app_message') }}" class="white">Messagerie</a>
 							<li><a href="{{ path('edit_register', {'id' : app.user.id})}}" class="white">Compte</a></li>
@@ -87,13 +90,13 @@
                 	</div>
 					<div id="listFooter">
 						<ul>
-							<li> <a href="" alt="Contact">Contact</a></li>
-							<li> <a href="" alt="Mentions légales">Mentions légales</a></li>
+							<li> <a href="#">Contact</a></li>
+							<li> <a href="#">Mentions légales</a></li>
 							<li> <a href="{{ path('app_cgu') }}">Condition générale d'utilisation </a></li>  
 						</ul>
 					</div>
 					<div class="reseau">
-						<a target="_blank" href="https://www.facebook.com/" alt="Facebook"><i class="fa-brands fa-facebook"></i> Facebook</a>
+						<a target="_blank" href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i> Facebook</a>
 					</div>
 					<div id="copyright">
 						© Cospo by Tiffany
