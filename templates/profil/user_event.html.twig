@@ -5,19 +5,18 @@
 
 {% block body %}
 
-                  <div class="container">
-                    {% for event in events %}
-                                    <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ event.titleEvent }}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{ event.dateEvent | date('d/m/Y à h:i') }}<br></h6>
-                                            <p class="card-text">{{ event.contentEvent }}<br></p>
-                                            <a href="#" class="card-link">{{ event.ville }}</a>
-                                            <a href="{{ path('show_event', {'id': event.id}) }} class="card-link" ">Détails</a>
-                                            <a href="{{ path('delete_event', {'id': event.id}) }}" class="card-link">SUPRR</a>
-                                        </div>
-                                    </div> 
-                                    {% endfor %}
-                            </div> 
+
+    <div class="event-create">
+        <h5><strong>Mes évènements</strong></h5>
+            {% for event in events %}
+                <div class ="userTitre"><strong>{{ event.titleEvent }}</strong></div>
+                <div class ="userSport"><em>{{ event.sport.titleSport }}</em></div>
+                <div class="userDateEvent"><i class="fa-solid fa-calendar"></i> {{ event.dateEvent | date('d/m/Y à h:i') }}</div>
+                <a href="{{ path('show_event', {'id': event.id}) }}"><button type="button" class="btn btn-warning">Détail</button></a>
+                <a href="{{ path('delete_event', {'id': event.id}) }}" class="card-link"><button type="button" class="btn btn-danger">Supprimer</button></a>
+        
+                <br><br>
+            {% endfor %}
+    </div>
 
 {% endblock %}

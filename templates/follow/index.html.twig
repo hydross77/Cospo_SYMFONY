@@ -4,10 +4,14 @@
 
 {% block body %}
 
-    {% for f in follow %}
+    <h3>Mes abonnements</h3>
+
+    <section class="followUser">
+        {% for f in follow %}
         {{ f.pseudo }}
-        <a href="{{ path('unfollow', {'idSource' : app.user.id , 'idTarget' : f.id}) }}" class="card-link">Se désabonner</a>
-    {% endfor %}
+            <button type="button" class="btn btn-danger">Se désabonner</button>
+        {% endfor %}
+    </section>
 
 
 {% endblock %}

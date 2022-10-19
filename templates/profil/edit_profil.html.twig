@@ -7,11 +7,14 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    {{ form_start(editProfilForm) }}
-        {{ form_row(editProfilForm.bio) }}
-        {{ form_row(editProfilForm.picture_profil) }}
-        {{ form_row(editProfilForm.sport) }}
-        <button type="submit" class="btn btn-lg btn-dark">Enregistrer</button>
-    {{ form_end(editProfilForm) }}
+        <div class="container-edit-profil"></div>
+
+        {{ form_start(editProfilForm) }}
+            {{ form_row(editProfilForm.bio) }}
+            {{ form_row(editProfilForm.picture_profil) }}
+            {{ form_row(editProfilForm.sport) }}
+            <button type="submit" class="btn btn-lg btn-dark">Enregistrer</button>
+        {{ form_end(editProfilForm) }}
+
 
 {% endblock %}

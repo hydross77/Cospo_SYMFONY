@@ -32,6 +32,7 @@ class FollowController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($user);
         $entityManager->flush();
+        $this->addFlash("message", "Tu t'es désabonné.");
 
         return $this->redirectToRoute('app_follow', ['id' => $this->getUser()->getId()]);
     }

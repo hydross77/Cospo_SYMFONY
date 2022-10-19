@@ -45,6 +45,7 @@ class AdminController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($user);
         $entityManager->flush();
+        $this->addFlash("message", "Utilisateur supprimé.");
 
         return $this->redirectToRoute('admin_utilisateurs');
     }
@@ -70,6 +71,7 @@ class AdminController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($event);
         $entityManager->flush();
+        $this->addFlash("message", "Evenement supprimé.");
         return $this->redirectToRoute("admin_events", ['id' => $event->getId()]);
     }
 }

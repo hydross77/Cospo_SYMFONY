@@ -91,6 +91,7 @@ class HomeController extends AbstractController
         if ($event->getNbPlaces() > 0) { // si il reste de la place
             $event->addParticipant($this->getUser()); // ajout d'un user
             $doctrine->getManager()->flush(); // bdd
+            $this->addFlash("message", "Inscription confirmé.");
         }
 
         return $this->redirectToRoute('app_home'); // redirection vers la page d'accueil 
@@ -108,6 +109,7 @@ class HomeController extends AbstractController
         $event->removeParticipant($this->getUser());
         $entityManager->persist($event);
         $entityManager->flush();
+        $this->addFlash("message", "Tu t'es désinscris à l'évènement.");
 
         return $this->redirectToRoute('show_event', ['id' => $event->getId()]);
     }
@@ -130,6 +132,7 @@ class HomeController extends AbstractController
             $comment->setCreateComment($now);
             $entityManager->persist($comment);
             $entityManager->flush();
+            $this->addFlash("message", "Commentaire ajouté.");
 
             return $this->redirectToRoute('show_event', ['id' => $event->getId()]);
         }
@@ -154,6 +157,7 @@ class HomeController extends AbstractController
 
         $entityManager->persist($event);
         $entityManager->flush();
+        $this->addFlash("message", "Commentaire supprimé avec succès.");
         return $this->redirectToRoute('show_event', ['id' => $event->getId()]);
     }
 }

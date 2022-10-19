@@ -35,7 +35,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            $this->addFlash("message", "Votre évènement est publié !");
+            $this->addFlash("message", "Votre évènement est créée !");
             return $this->redirectToRoute('app_profil', ['id' => $this->getUser()->getId()]);
         }
 

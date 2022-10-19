@@ -4,90 +4,65 @@
 
 {% block body %}
 
-<div class="editHover">
-    <a href="{{ path('edit_profil', {'id' : app.user.id})}}">Modifier profil</a><br>
-</div>
-
-<div class="showEventUser">
-    <a href="{{ path('create_event', {'id': app.user.id}) }}">Mes évènements créés</a><br>
-</div>
-
-<a href ="{{ path('app_follow', {'id': app.user.id}) }}">Mes abonnements</a> ({{ user.follow | length }})
-
-<div class="profile-body">
-        <div class="photo">
-            <img src="{{ asset('uploads/photoprofil/' ~ user.pictureProfil) }}" class="image--cover">
+        <div class="btnProfil">
+            <button type="button" class="btn btn-secondary"><a href="{{ path('edit_profil', {'id' : app.user.id})}}">Modifier profil</a></button>
+            <button type="button" class="btn btn-warning"><a href="{{ path('create_event', {'id': app.user.id}) }}">Mes évènements créés</a></button>
+            <button type="button" class="btn btn-primary">
+            <a href ="{{ path('app_follow', {'id': app.user.id}) }}">Mes abonnements</a> <span class="badge text-bg-secondary">({{ user.follow | length }})</span>
+            </button>
         </div>
-        <div class="profile">
-            <div class="info"> 
-                {{ user.pseudo }} ({{ user.sex }}) / {{ user.birthday | date('d/m/Y') }} / <i class="fas fa-map-marker-alt"></i> VILLE 
+
+        <section class="container-profil">
+            <div class="photo">
+                <img src="{{ asset('uploads/photoprofil/' ~ user.pictureProfil) }}" class="pictureProfil">
+                <div class="userPseudo">{{ user.pseudo }}</div>
             </div>
 
-                <h6> BIOGRAPHIE </h6>
-                    <div class="content">{{ user.bio}}</div>
-        
-                <h6>Mes Sports</h6>
-                    <div class="content">
-                        {% for sport in user.sport %}
-                            {{ sport.titleSport }} <br>
-                        {% endfor %}
-                    </div>
-            
-            
-                <h6>Evènements à venir</h6>
+            <div class="photo">
+                <h6><strong>Mes sports</strong></h6>
+                <ul>
+                {% for sport in user.sport %}
+                    <li>{{ sport.titleSport }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </section>
 
-                {% for ef in eventFutur %}
-                    
-                                                       <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ ef.titleEvent }}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{ ef.dateEvent | date('d/m/Y à h:i') }}<br></h6>
-                                            <p class="card-text">{{ ef.contentEvent }}<br></p>
-                                            <a href="#" class="card-link">{{ ef.ville }}</a>
-                                            <a href="{{ path('show_event', {'id': ef.id}) }} class="card-link" ">Détails</a>
-                                        </div>
-                                        <a class="cardDetail" href="{{ path('show_event', {'id': ef.id}) }}">Détail</a>
-                                    </div> 
-                                    {% endfor %}
-                            </div>
+        <h3>Les évènements sportifs</h3>
 
-                                      <h6>Evènements passés</h6>
+        <section class="container-profil-event">
+            <div class="event-now">
+                <h5><strong>Aujourd'hui</strong></h5>
+                    {% for en in eventNow %}
+                        <div class ="userTitre"><strong>{{ en.titleEvent }}</strong></div>
+                        <div class ="userSport"><em>{{ en.sport.titleSport }}</em></div>
+                        <div class="userDateEvent"><i class="fa-solid fa-calendar"></i> {{ en.dateEvent | date('d/m/Y à h:i') }}</div>
+                        <a class="userDetail" href="{{ path('show_event', {'id': en.id}) }}">Détail</a>
+                        <br><br>
+                    {% endfor %}
+            </div>  
 
-                {% for ep in eventPast %}
-                    
-                                                       <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ ep.titleEvent }}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{ ep.dateEvent | date('d/m/Y à h:i') }}<br></h6>
-                                            <p class="card-text">{{ ep.contentEvent }}<br></p>
-                                            <a href="#" class="card-link">{{ ep.ville }}</a>
-                                            <a href="{{ path('show_event', {'id': ep.id}) }} class="card-link" ">Détails</a>
-                                        </div>
-                                        <a class="cardDetail" href="{{ path('show_event', {'id': ep.id}) }}">Détail</a>
-                                    </div> 
-                                    {% endfor %}
-                            </div>     
+            <div class="event-now">
+                <h5><strong>A venir</strong></h5>
+                    {% for ef in eventFutur %}
+                        <div class ="userTitre"><strong>{{ ef.titleEvent }}</strong></div>
+                        <div class ="userSport"><em>{{ ef.sport.titleSport }}</em></div>
+                        <div class="userDateEvent"><i class="fa-solid fa-calendar"></i> {{ ef.dateEvent | date('d/m/Y à h:i') }}</div>
+                        <a class="userDetail" href="{{ path('show_event', {'id': ef.id}) }}">Détail</a>
+                        <br><br>
+                    {% endfor %}
+            </div>
 
-                                                                  <h6>Aujourd'hui</h6>
-
-                {% for en in eventNow %}
-                    
-                                                       <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ en.titleEvent }}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{ en.dateEvent | date('d/m/Y à h:i') }}<br></h6>
-                                            <p class="card-text">{{ en.contentEvent }}<br></p>
-                                            <a href="#" class="card-link">{{ en.ville }}</a>
-                                            <a href="{{ path('show_event', {'id': en.id}) }} class="card-link" ">Détails</a>
-                                        </div>
-                                        <a class="cardDetail" href="{{ path('show_event', {'id': en.id}) }}">Détail</a>
-                                    </div> 
-                                    {% endfor %}
-                            </div>   
-
-                
-        </div>
-    </div>
-    <br>
+            <div class="event-now">
+                <h5><strong>Passé</strong></h5>
+                    {% for ep in eventPast %}
+                        <div class ="userTitre"><strong>{{ ep.titleEvent }}</strong></div>
+                        <div class ="userSport"><em>{{ ep.sport.titleSport }}</em></div>
+                        <div class="userDateEvent"><i class="fa-solid fa-calendar"></i> {{ ep.dateEvent | date('d/m/Y à h:i') }}</div>
+                        <a class="userDetail" href="{{ path('show_event', {'id': ep.id}) }}">Détail</a>
+                        <br><br>
+                    {% endfor %}
+            </div>
+        </section>
 
 {% endblock %}

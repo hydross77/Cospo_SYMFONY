@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class EditProfilType extends AbstractType
 {
@@ -21,12 +22,12 @@ class EditProfilType extends AbstractType
     {
         $builder
 
-            ->add('bio', TextType::class, [
+            ->add('bio', TextareaType::class, [
                 'required' => false,
-                'label' => 'Changer la biographie',
+                'label' => 'Change ta biographie',
             ])
             ->add('picture_profil', FileType::class, [
-                'label' => 'Changer la photo profil',
+                'label' => 'Change ta photo profil',
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
