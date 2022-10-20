@@ -4,49 +4,44 @@
 
 {% block body %}
 
-    <a href="{{ path('user_follow', {'idUser' : user.id})}}">S'abonner</a><br>
+     <div class="btnProfil">
+            <button type="button" class="btn btn-primary"><a href="{{ path('user_follow', {'idUser' : user.id})}}">S'abonner</a></button>
+    </div>
 
-    <div class="profile-body">
-        <div class="photo">
-            <img src="{{ asset('uploads/photoprofil/' ~ user.pictureProfil) }}" class="image--cover">
-        </div>
-        <div class="profile">
-            <div class="info"> 
-                {{ user.pseudo }} ({{ user.sex }}) / {{ user.birthday | date('d/m/Y') }} / <i class="fas fa-map-marker-alt"></i> VILLE 
+
+        <section class="container-profil">
+            <div class="photo">
+                <img src="{{ asset('uploads/photoprofil/' ~ user.pictureProfil) }}" class="pictureProfil" alt="Photo de profil">
+                <div class="userPseudo">{{ user.pseudo }}</div>
             </div>
 
-                <h6> BIOGRAPHIE </h6>
-                    <div class="content">{{ user.bio}}</div>
-        
-                <h6>Mes Sports</h6>
-                    <div class="content">
-                        {% for sport in user.sport %}
-                            {{ sport.titleSport }} <br>
-                        {% endfor %}
-                    </div>
-            
-            
-                <h6>Ces Evenements</h6>
+            <div class="photo">
+                <h6><strong>Ces sports</strong></h6>
+                <ul>
+                {% for sport in user.sport %}
+                    <li>{{ sport.titleSport }}</li>
+                {% endfor %}
+                </ul>
+            </div>
 
-                    <div class="container">
+            <div class="photo">
+                <h6><strong>Biographie</strong></h6>
+                    <div class="userBIO">{{ user.bio}}</div>
+            </div>
+        </section>
+
+        <h3>Les évènements sportifs de {{ user.pseudo }}</h3>
+
+        <section class="container-profil-event">
+            <div class="event-now">
                     {% for event in events %}
-                        <div class="row">
-                            <div class="col">
-                                    <div class="card" style="width: 18rem;">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ event.titleEvent }}</h5>
-                                            <h6 class="card-subtitle mb-2 text-muted">{{ event.dateEvent | date('d/m/Y à h:i') }}<br></h6>
-                                            <p class="card-text">{{ event.contentEvent }}<br></p>
-                                            <a href="#" class="card-link">{{ event.ville }}</a>
-                                            <a href="{{ path('show_event', {'id': event.id}) }} class="card-link" ">Détails</a>
-                                        </div>
-                                    </div> 
-                                    {% endfor %}
-                            </div>
-
-                        </div>
-                    </div>
-        </div>
-    </div>
+                        <div class ="userTitre"><strong>{{ event.titleEvent }}</strong></div>
+                        <div class ="userSport"><em>{{ event.sport.titleSport }}</em></div>
+                        <div class="userDateEvent"><i class="fa-solid fa-calendar"></i> {{ event.dateEvent | date('d/m/Y à h:i') }}</div>
+                        <a class="userDetail" href="{{ path('show_event', {'id': event.id}) }}">Détail</a>
+                        <br><br>
+                    {% endfor %}
+            </div>  
+        </section>
 
 {% endblock %}
