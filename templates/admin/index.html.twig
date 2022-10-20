@@ -3,7 +3,10 @@
 {% block title %}Liste des utilisateurs{% endblock %}
 
 {% block body %}
+
     <h1>Liste des utilisateurs</h1>
+
+    <section class ="container-admin">
 
         {# On boucle sur les utilisateurs #}
         <table class="table table-dark">
@@ -41,5 +44,18 @@
                 {% endfor %}
             </tbody>
         </table>
+
+    </section>
+
+    <section class="container-admin-responsiv">
+     {% for user in users %}
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                <button type="button" class="btn btn-danger"><a href="{{ path('admin_delete_utilisateur', {'id': user.id}) }}"><div class="red"><i class="fa-solid fa-user-minus"></i></a></button>
+                <button type="button" class="btn btn-warning">{{ user.pseudo }}</button>
+                <button type="button" class="btn btn-success"><a href="{{ path('admin_events', {'id': user.id }) }}">Evenement : {{ user.events | length }}</a></button> 
+                <div class="space-lol"></div>
+    {% endfor %}
+            </div>
+    </section>
 
 {% endblock %}

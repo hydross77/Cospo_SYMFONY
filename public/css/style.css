@@ -900,6 +900,33 @@ footer .logo{
     border-radius: 3px;
   }
 
+  @media screen and (max-width: 650px){
+    .container-admin{
+      display: none;
+    }
+  }
+
+  @media screen and (min-width: 650px){
+    .container-admin-responsiv{
+      display: none;
+    }
+  }
+
+.btn-group{
+  display:flex;
+  flex-direction: column;
+  width: 200px;
+}
+
+.space-lol{
+  margin-top: 20px;
+}
+
+.userBIO{
+  text-align: justify;
+}
+
+
 /* --------------- FIN ADMIN --------------- */
 
 

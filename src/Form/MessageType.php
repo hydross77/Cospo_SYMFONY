@@ -18,21 +18,21 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('title_message', TextType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
+                'label' => false,
+                'attr' => [
+                    'placeholder' => 'Titre du message',
+                ],
             ])
             ->add('content_message', TextareaType::class, [
-                "attr" => [
-                    "class" => "form-control"
-                ]
+                'label' => 'Message'
             ])
             ->add('recipient', EntityType::class, [
                 "class" => User::class,
                 "choice_label" => "pseudo",
-                "attr" => [
-                    "class" => "form-control"
-                ]
+                'label' => 'A qui ?',
+                'attr' => [
+                    'placeholder' => 'Titre de l\'évènement',
+                ],
             ])
             ->add('envoyer', SubmitType::class, [
                 "attr" => [

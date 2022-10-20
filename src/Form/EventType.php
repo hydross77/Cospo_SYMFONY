@@ -26,7 +26,7 @@ class EventType extends AbstractType
                 'required' => true,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Titre de l\'évènement..',
+                    'placeholder' => 'Titre de l\'évènement',
                 ],
             ])
             ->add('nb_places', NumberType::class, [
@@ -58,14 +58,15 @@ class EventType extends AbstractType
                 'required' => true,
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Ville de l`\évènement..',
+                    'placeholder' => 'Ville de l\'évènement',
                 ],
             ])
             ->add('adresse', TextType::class, [
                 'required' => false,
-                'label' => false,
+                'label' => 'Adresse',
+                'help' => 'Vous pouvez renseigner l\'adresse dans la description',
                 'attr' => [
-                    'placeholder' => 'Adresse de l\'évènement..',
+                    'placeholder' => 'L\'adresse n\'est pas obligatoire',
                 ],
             ])
             ->add('level', EntityType::class, [

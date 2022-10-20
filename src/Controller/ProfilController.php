@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
+
 class ProfilController extends AbstractController
 {
     /**
@@ -23,11 +24,16 @@ class ProfilController extends AbstractController
      */
     public function index(User $user, EventRepository $ef, EventRepository $ep, EventRepository $en): Response
     {
-        $eventFutur = $ef->FuturEvent();
-        $eventPast = $ep->PastEvent();
-        $eventNow = $en->NowEvent();
-        $event = $user->getParticipate();
-        $follow = $user->getFollow();
+
+        if ($this->getUser() != $user) {
+            return $this->render('profil/error.html.twig');
+        } else {
+            $eventFutur = $ef->FuturEvent();
+            $eventPast = $ep->PastEvent();
+            $eventNow = $en->NowEvent();
+            $event = $user->getParticipate();
+            $follow = $user->getFollow();
+        }
 
         return $this->render('profil/index.html.twig', [
             'user' => $user,
@@ -61,6 +67,7 @@ class ProfilController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($event);
         $entityManager->flush();
+        $this->addFlash("message", "Supprimé.");
 
         return $this->redirectToRoute('create_event', ['id' => $this->getUser()->getId()]);
     }
@@ -89,7 +96,7 @@ class ProfilController extends AbstractController
      */
     public function editProfil(ManagerRegistry $doctrine, User $user, Request $request, SluggerInterface $slugger): Response
     {
-        // $user = new User();
+        $user = $this->getUser();
         $entityManager = $doctrine->getManager();
         $form = $this->createForm(EditProfilType::class, $user);
         $form->handleRequest($request);
@@ -115,6 +122,7 @@ class ProfilController extends AbstractController
             $user = $form->getData();
             $entityManager->persist($user);
             $entityManager->flush();
+            $this->addFlash("message", "Profil modifié avec succès.");
 
             return $this->redirectToRoute('app_profil', ['id' => $this->getUser()->getId()]);
         }
