@@ -23,7 +23,7 @@ class HomeController extends AbstractController
      * barre de recherche multi filtre
      * @Route("/", name="app_home")
      */
-    public function index(EventRepository $repository, Request $request, PaginatorInterface $paginator): Response
+    public function index(EventRepository $repository, Request $request): Response
     {
         $searchEvent = $this->createForm(SearchForm::class, null);
         // crée le formulaire configuré dans le dossier FORM
@@ -37,34 +37,7 @@ class HomeController extends AbstractController
             // on passe le formulaire a la fonction du repository qui est un tableau classic : EventRepository.php
         };
 
-
-        // $events = $doctrine->getRepository(Event::class)->findBy([], ['date_event' => 'DESC']);
-
-        // $entityManager = $doctrine->getManager();
-        // $createEvent = $this->createform(EventType::class, $event);
-        // $createEvent->handleRequest($request);
-
-        // $futurevents = $doctrine->getRepository(Event::class)->FuturEvent();
-        // $pastevents = $doctrine->getRepository(Event::class)->PastEvent();
-        // $presentevents = $doctrine->getRepository(Event::class)->PresentEvent();
-
-        // if ($createEvent->isSubmitted() && $createEvent->isValid()) {
-        //     $event = $createEvent->getData();
-        //     // recupère l'objet user
-        //     $user = $this->getUser();
-        //     // bdd
-        //     $event->setUser($user);
-        //     $entityManager->persist($event);
-        //     $entityManager->flush();
-
-        // return $this->redirectToRoute('app_home');
-        // }
-
         return $this->render('home/index.html.twig', [
-            // 'futurevents' => $futurevents,
-            // 'pastevents' => $pastevents,
-            // 'presentevents' => $presentevents,
-            // 'createEvent' => $createEvent->createView(),
             'events' => isset($events) ? $events : null,
             'searchEvent' => $searchEvent->createView()
         ]);
@@ -94,7 +67,7 @@ class HomeController extends AbstractController
             $this->addFlash("message", "Inscription confirmé.");
         }
 
-        return $this->redirectToRoute('app_home'); // redirection vers la page d'accueil 
+        return $this->redirectToRoute('show_event', ['id' => $event->getId()]);
     }
 
     /**
@@ -109,7 +82,7 @@ class HomeController extends AbstractController
         $event->removeParticipant($this->getUser());
         $entityManager->persist($event);
         $entityManager->flush();
-        $this->addFlash("message", "Tu t'es désinscris à l'évènement.");
+        $this->addFlash("message", "Désinscription réussie");
 
         return $this->redirectToRoute('show_event', ['id' => $event->getId()]);
     }

@@ -63,10 +63,9 @@ class EventRepository extends ServiceEntityRepository
             $result = $qb->andWhere("DATE_FORMAT(E.date_event, '%Y-%m-%d') = :date")
                 ->setParameter('date', $parameters['date']->format('Y-m-d'));
         }
-        dump($parameters['date']);
 
         $result = $qb->getQuery()
-            ->getResult(); // requete bdd
+            ->getResult(); // requete bdd   
 
         return $result; //retourne le tableau des résultats
     }
