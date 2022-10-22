@@ -82,6 +82,7 @@ class MessageController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($message);
         $entityManager->flush();
+        $this->addFlash("message", "Message supprimé.");
 
         return $this->redirectToRoute("received");
     }

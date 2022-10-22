@@ -2,51 +2,73 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Evement{% endblock %}
+{% block title %}Evenement{% endblock %}
 
 {% block body %}
 
-        {{event.titleEvent}}<br>
-        {{ event.dateEvent | date('d/m/Y à h:i') }}<br>
-        {{event.contentEvent}}<br>
-        <p>Nombre de place : {{event.NbPlaces}}</p>
-        <p>Nombre de place disponible : {{event.NbPlacesRestantes}}</p>
+<div class="card text-center lolilol">
+  <div class="card-header">
+    <div class ="cardSport" style="float:left">{{ event.sport.titleSport }}</div>
+    {% if event.nbPlacesRestantes != 0 %}
+        <div class ="cardPlaces" style="float:right">{{ event.nbPlacesRestantes }} Places restantes</div>
+    {% else %}
+        <div class="cardComplete">Événement complet</div>
+    {% endif %}
+  </div>
+  <div class="card-body-show">
+    <div class ="sec1">
+        <h5 class="card-title">{{ event.titleEvent }}</h5>
+        <p class="card-text">{{ event.contentEvent }}</p>
+            {% if app.user in event.participants %}
+                <a class ="btn btn-danger" href="{{ path('unsubscribe', {'idEvent' : event.id })}}">Se désinscrire</a>
+            {% else %}
+                <a class ="btn btn-success" href="{{ path('participate_event', {'idEvent' : event.id })}}">Participer</a>
+            {% endif %}
+    </div>
 
-        PARTICIPANT :
-        {% for participant in event.participants %}
-            {{ participant.pseudo }} <br>
-        {% endfor %}
+    <div class="sec2">
+        <div class="cardDateEvent"><i class="fa-solid fa-calendar"></i> {{ event.dateEvent | date('d/m/Y') }}</div>
+            {{ event.adresse }},  {{ event.cp }}, {{ event.ville }}&nbsp;<span class="red"><i class="fa-solid fa-location-dot"></i></span>
+            <br>
+            <h3>Participant</h3>
+            {% for participant in event.participants %}
+                <a class="cardPseudo" href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ participant.pseudo }}</a>
+            {% endfor %}
+        </div>
+    </div>
+  <div class="card-footer text-muted">
+    <a class="cardPseudo" style="float:right" href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a>
+  </div>
+</div>
 
-        {% if app.user in event.participants %}
-            Vous êtes inscrit à cet événement, désinscrivez vous içi.<br>
-        <a href="{{ path('unsubscribe', {'idEvent' : event.id })}}"><i class="fa-solid fa-user-minus"></i></a>
-        {% else %}
-            Vous pouvez vous inscrire à cet événement içi.<br>
-            <a href="{{ path('participate_event', {'idEvent' : event.id })}}">Inscription</a>
-        {% endif %}
-
+    <div class="comment">
         {{ form_start( formComment ) }}
         {{ form_widget( formComment ) }}
-        <button type="submit" class="btn">Enregistrer</button>
+        <button type="submit" class="btn btn-secondary">Commenter</button>
         {{ form_end( formComment ) }}
+    </div>
 
-        {% if event.comments | length > 0 %}
-            {% for comment in event.comments %}
-                {% if comment.users is null %}
-                    Profil supprimé
+    {% if event.comments | length > 0 %}
+    <div class="card">
+    {% for comment in event.comments %}
+        <div class="card-body" style="border-bottom:1px solid black">
+            <p class="card-title">
+             {% if comment.users is null %}
+                    <div class="red"> Profil supprimé </div>
                 {% else %}
-                    {{ comment.users.pseudo }}<br>
-                {% endif %}
-
-                {% if app.user.id == comment.users.id %}
-                    <a href="{{ path('delete_comment', {'idEvent' : event.id , 'idComment' : comment.id})}}"><div class="red">Supprimer mon commentaire</div></a>
-                {% endif %}
-
-                {{ comment.contentComment }}<br>
-                {{comment.createComment | date('d/m/Y') }}<br>
-            {% endfor %}
-        {% endif %}
-
-</div>
+                    <a class="cardPseudo" href="{{ path('show_profil', {'pseudo' : comment.users.pseudo })}}">{{ comment.users.pseudo }}</a>
+                    <p class="card-subtitle mb-2 text-muted">{{comment.createComment | date('d/m/Y') }}</p>
+            {% endif %}
+            </p>
+            <p class="card-text">{{ comment.contentComment }}</p>
+                {# {% if app.user.id == comment.users.id %}
+                    <a class="btn btn-danger" style="float:right" href="{{ path('delete_comment', {'idEvent' : event.id , 'idComment' : comment.id})}}">Supprimer</a>
+                {% endif %} #}
+        </div>
+     {% endfor %}
+        {% else %}
+            Aucun commentaire
+    {% endif %}
+    </div>
 
 {% endblock %}

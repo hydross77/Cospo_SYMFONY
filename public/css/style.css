@@ -784,6 +784,27 @@ h3{
 }
 /* FIN EVENEMENT PROFIL */
 
+/* --------- SHOW EVENT -------- */
+
+.card-body-show{
+  display:flex;
+  flex-direction: wrap;
+  justify-content: space-around;
+  padding : 20px;
+}
+
+.lolilol{
+  margin-top:20px;
+}
+
+.comment{
+  margin-top:20px;
+  margin-right : 100px;
+  display: block;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
 /* --------- FIN PROFIL SHOW --------- */
 
 /* --- CSS POUR L'INSCRIPTION --- */

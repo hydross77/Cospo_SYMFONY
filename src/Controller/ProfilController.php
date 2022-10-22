@@ -52,6 +52,7 @@ class ProfilController extends AbstractController
     public function createEvent(User $user): Response
     {
         $event = $user->getEvents();
+        // méthode magique get : afficher la collection
 
         return $this->render('profil/user_event.html.twig', [
             'events' => $event,
