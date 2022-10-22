@@ -7,6 +7,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class FollowController extends AbstractController
 {
@@ -25,12 +26,14 @@ class FollowController extends AbstractController
 
     /**
      * se désabonner d'un utilisateur
-     * @Route("/follow/follow/{id}", name="delete_follow")
+     * @Route("/unfollow/{id}", name="delete_follow")
+     * @ParamConverter("user", options={"mapping" = {"idUser" : "id"}})
      */
     public function deleteFollow(ManagerRegistry $doctrine, User $user)
     {
         $entityManager = $doctrine->getManager();
-        $entityManager->remove($user);
+        $user->removeFollow($this->getUser());
+        $entityManager->persist($user);
         $entityManager->flush();
         $this->addFlash("message", "Tu t'es désabonné.");
 

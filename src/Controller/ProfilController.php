@@ -196,6 +196,6 @@ class ProfilController extends AbstractController
         $user->addFollow($this->getUser()); // ajout d'un user
         $doctrine->getManager()->flush(); // bdd
 
-        return $this->redirectToRoute('show_profil', ['id' => $this->getUser()->getPseudo()]);
+        return $this->redirectToRoute('show_profil', ['pseudo' => $this->getUser()->getPseudo()]);
     }
 }

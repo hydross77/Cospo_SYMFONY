@@ -11,10 +11,30 @@
     {{ form_start(editRegisterForm) }}
         {{ form_row(editRegisterForm.email) }}
         {{ form_row(editRegisterForm.password ) }}
-        <button type="submit" class="btn btn-lg btn-dark">Enregistrer</button>
+        <button type="submit" class="btn btn-dark">Enregistrer</button>
     {{ form_end(editRegisterForm) }}
     <br>
-    
-    <button type="submit" class="btn btn-lg btn-danger"><a href="{{ path('delete_profil', {'id' : app.user.id})}}">Supprimer mon profil</a></button>
+
     </div>
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Supprimer mon compte
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-body">
+        Voulez-vous supprimer votre compte ?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-danger"><a href="{{ path('delete_profil', {'id' : app.user.id})}}">Supprimer</a></button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
