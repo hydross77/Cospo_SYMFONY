@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,16 +29,18 @@ class FollowController extends AbstractController
     /**
      * se désabonner d'un utilisateur
      * @Route("/unfollow/{id}", name="delete_follow")
-     * @ParamConverter("user", options={"mapping" = {"idUser" : "id"}})
+     * @ParamConverter("user", options={"mapping" = {"idTarget" : "id"}})
      */
-    public function deleteFollow(ManagerRegistry $doctrine, User $user)
+    public function deleteFollow(ManagerRegistry $doctrine, User $target, Request $request)
     {
         $entityManager = $doctrine->getManager();
-        $user->removeFollow($this->getUser());
-        $entityManager->persist($user);
+        $target->removeFollower($this->getUser());
+        $entityManager->persist($target);
         $entityManager->flush();
         $this->addFlash("message", "Tu t'es désabonné.");
 
-        return $this->redirectToRoute('app_follow', ['id' => $this->getUser()->getId()]);
+        $route = $request->headers->get('referer');
+
+        return $this->redirect($route);
     }
 }

@@ -5,8 +5,8 @@
 {% block body %}
 
      <div class="btnProfil">
-     {% if app.user in user.follow %}
-     <button type="button" class="btn btn-primary"><a href="{{ path('delete_follow', {'idUser' : user.id })}}">Se désabonner</a></button>
+     {% if app.user in user.follower %}
+     <button type="button" class="btn btn-primary"> <a href="{{ path('delete_follow', {'id' : user.id })}}">Se désabonner</a></button>
             {% else %}
             <button type="button" class="btn btn-primary"><a href="{{ path('user_follow', {'idUser' : user.id})}}">S'abonner</a></button>
              {% endif %}

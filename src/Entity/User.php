@@ -2,13 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use ORM\OrderBy;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\UserRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -127,8 +128,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->pictures = new ArrayCollection();
         $this->post = new ArrayCollection();
         $this->events = new ArrayCollection();
-        $this->follow = new ArrayCollection(); //ce que je suis
-        $this->follower = new ArrayCollection(); //ce qui me suive
+        $this->follow = new ArrayCollection(); //ceux que je suis
+        $this->follower = new ArrayCollection(); //ceux qui me suive
         $this->participate = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->sent = new ArrayCollection();

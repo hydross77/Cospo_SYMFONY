@@ -21,7 +21,7 @@
 			<div class="col-3">Sujet</div>
 			<div class="col-3">Date</div>
 			<div class="col-3">Actions</div>
-			{% for message in app.user.sent %}
+			{% for message in sender %}
 				{% set bold = "" %}
 				{% if message.isRead == 0 %}
 					{% set bold = "fw-bold" %}

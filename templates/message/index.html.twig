@@ -14,14 +14,15 @@
 			<div class="col-12">
 				<h2>Boîte de réception</h2>
 				<p style="color:green">Vous avez
-					{{ app.user.received|length }}
+					{{ received|length }}
 					messages</p>
 			</div>
 			<div class="col-3">De</div>
 			<div class="col-3">Sujet</div>
 			<div class="col-3">Date</div>
 			<div class="col-3">Actions</div>
-			{% for message in app.user.received %}
+			{% for message in received %}
+
 				{% set bold = "" %}
 				{% if message.isRead == 0 %}
 					{% set bold = "fw-bold" %}
@@ -31,7 +32,7 @@
 				<div class="col-3 {{bold}}">
 					<a style="color:black" href="{{ path("read", {id: message.id}) }}">{{ message.titleMessage }}</a>
 				</div>
-				<div class="col-3 {{bold}}">{{ message.createdAt|date }}</div>
+				<div class="col-3 {{bold}}">{{ message.createdAt|date('d-m-Y H:i') }}</div>
 				<div class="col-3">
                     <a href="{{ path("delete", {id: message.id}) }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-excel-fill text-danger" viewbox="0 0 16 16">
@@ -44,7 +45,7 @@
 
 <section class="messagerieResponsiv">
 
-	{% for message in app.user.received %}
+	{% for message in received %}
 
 		{% set bold = "" %}
 			{% if message.isRead == 0 %}
@@ -54,7 +55,7 @@
 	<div class ="message">
 		<div class="{{bold}}">De : {{ message.sender.pseudo }}</div>
 		<div class="{{bold}}"><a style="color:black" href="{{ path("read", {id: message.id}) }}">Objet : {{ message.titleMessage }}</a></div>
-		<div class="{{bold}}">{{ message.createdAt|date }}</div>
+		<div class="{{bold}}">{{ message.createdAt|date('d-m-Y H:i') }}</div>
 		<br>
 		<div class="{{bold}}">
 			<a href="{{ path("delete", {id: message.id}) }}" class="btn btn-danger">Supprimer</a>

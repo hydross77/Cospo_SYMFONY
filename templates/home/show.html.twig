@@ -9,11 +9,11 @@
 <div class="card text-center lolilol">
   <div class="card-header">
     <div class ="cardSport" style="float:left">{{ event.sport.titleSport }}</div>
-    {% if event.nbPlacesRestantes != 0 %}
-        <div class ="cardPlaces" style="float:right">{{ event.nbPlacesRestantes }} Places restantes</div>
-    {% else %}
-        <div class="cardComplete">Événement complet</div>
-    {% endif %}
+        {% if event.nbPlacesRestantes != 0 %}
+            <div class ="cardPlaces" style="float:right">{{ event.nbPlacesRestantes }} Places restantes</div>
+        {% else %}
+            <div class="cardComplete">Événement complet</div>
+        {% endif %}
   </div>
   <div class="card-body-show">
     <div class ="sec1">
@@ -29,17 +29,19 @@
     <div class="sec2">
         <div class="cardDateEvent"><i class="fa-solid fa-calendar"></i> {{ event.dateEvent | date('d/m/Y') }}</div>
             {{ event.adresse }},  {{ event.cp }}, {{ event.ville }}&nbsp;<span class="red"><i class="fa-solid fa-location-dot"></i></span>
-            <br>
-            <h3>Participant</h3>
+            <br><br>
+            <h4>Participant</h4>
             {% for participant in event.participants %}
                 <a class="cardPseudo" href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ participant.pseudo }}</a>
             {% endfor %}
         </div>
     </div>
-  <div class="card-footer text-muted">
-    <a class="cardPseudo" style="float:right" href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a>
-  </div>
+    <div class="card-footer text-muted">
+        <a class="cardPseudo" style="float:right" href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ event.user.pseudo }}</a>
+    </div>
 </div>
+
+
 
     <div class="comment">
         {{ form_start( formComment ) }}
@@ -53,7 +55,7 @@
     {% for comment in event.comments %}
         <div class="card-body" style="border-bottom:1px solid black">
             <p class="card-title">
-             {% if comment.users is null %}
+              {% if comment.users is null %}
                     <div class="red"> Profil supprimé </div>
                 {% else %}
                     <a class="cardPseudo" href="{{ path('show_profil', {'pseudo' : comment.users.pseudo })}}">{{ comment.users.pseudo }}</a>
@@ -61,9 +63,9 @@
             {% endif %}
             </p>
             <p class="card-text">{{ comment.contentComment }}</p>
-                {# {% if app.user.id == comment.users.id %}
+                {% if app.user is same as(comment.users) %}
                     <a class="btn btn-danger" style="float:right" href="{{ path('delete_comment', {'idEvent' : event.id , 'idComment' : comment.id})}}">Supprimer</a>
-                {% endif %} #}
+                {% endif %}
         </div>
      {% endfor %}
         {% else %}

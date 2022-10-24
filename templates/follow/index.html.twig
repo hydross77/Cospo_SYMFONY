@@ -8,8 +8,9 @@
 
     <section class="followUser">
         {% for f in follow %}
-        {{ f.pseudo }}
-            <button type="button" class="btn btn-danger">Se désabonner</button>
+        <a class="cardPseudo" href="{{ path('show_profil', {'pseudo' : f.pseudo })}}">{{ f.pseudo }}</a>
+        <a style="color:black" href="{{ path('delete_follow', {'id' : f.id })}}">Se désabonner</a>
+            
         {% endfor %}
     </section>
 

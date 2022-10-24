@@ -30,16 +30,16 @@ class EditProfilType extends AbstractType
                 'label' => 'Change ta photo profil',
                 'mapped' => false,
                 'required' => false,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'application/jpg',
-                            'application/x-jpg',
-                        ],
+                // 'constraints' => [
+                //     new File([
+                //         'maxSize' => '1024k',
+                //         'mimeTypes' => [
+                //             'application/jpg',
+                //             'application/x-jpg',
+                //         ],
 
-                    ])
-                ],
+                //     ])
+                // ],
             ])
 
             ->add('sport', EntityType::class, [

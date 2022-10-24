@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -191,11 +192,12 @@ class ProfilController extends AbstractController
      *
      * @ParamConverter("user", options={"mapping": {"idUser" : "id"}})
      */
-    public function follow(ManagerRegistry $doctrine, User $user)
+    public function follow(ManagerRegistry $doctrine, User $user, Request $request)
     {
-        $user->addFollow($this->getUser()); // ajout d'un user
+        $user->addFollower($this->getUser()); // ajout d'un user
         $doctrine->getManager()->flush(); // bdd
+        $route = $request->headers->get('referer');
 
-        return $this->redirectToRoute('show_profil', ['pseudo' => $this->getUser()->getPseudo()]);
+        return $this->redirect($route);
     }
 }

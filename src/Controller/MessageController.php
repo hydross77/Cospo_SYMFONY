@@ -18,9 +18,9 @@ class MessageController extends AbstractController
      */
     public function index(ManagerRegistry $doctrine): Response
     {
-        // $received = $doctrine->getRepository(Message::class)->findBy(['created_at' => 'ASC']);
+        $received = $doctrine->getRepository(Message::class)->findBy(["recipient" => $this->getUser()], ['created_at' => 'DESC']);
         return $this->render('message/index.html.twig', [
-            // 'received' => $received,
+            'received' => $received,
         ]);
     }
 
@@ -55,7 +55,7 @@ class MessageController extends AbstractController
      */
     public function received(ManagerRegistry $doctrine): Response
     {
-        $received = $doctrine->getRepository(Message::class)->findBy([], ['created_at' => 'ASC']);
+        $received = $doctrine->getRepository(Message::class)->findBy(['created_at' => 'DESC']);
         return $this->render('message/index.html.twig', [
             'received' => $received,
         ]);
@@ -84,14 +84,17 @@ class MessageController extends AbstractController
         $entityManager->flush();
         $this->addFlash("message", "Message supprimé.");
 
-        return $this->redirectToRoute("received");
+        return $this->redirectToRoute("app_message");
     }
 
     /**
      * @Route("/sent", name="sent")
      */
-    public function sent(): Response
+    public function sent(ManagerRegistry $doctrine): Response
     {
-        return $this->render('message/sent.html.twig');
+        $sender = $doctrine->getRepository(Message::class)->findBy(["sender" => $this->getUser()], ['created_at' => 'DESC']);
+        return $this->render('message/sent.html.twig', [
+            'sender' => $sender,
+        ]);
     }
 }
