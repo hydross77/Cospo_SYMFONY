@@ -13,6 +13,7 @@
                 <div class ="userSport"><em>{{ event.sport.titleSport }}</em></div>
                 <div class="userDateEvent"><i class="fa-solid fa-calendar"></i> {{ event.dateEvent | date('d/m/Y à h:i') }}</div>
                 <a href="{{ path('show_event', {'id': event.id}) }}"><button type="button" class="btn btn-warning">Détail</button></a>
+                <a href="{{ path('update_event', {'id': event.id}) }}"><button type="button" class="btn btn-warning">Modifier</button></a>
                 <a href="{{ path('delete_event', {'id': event.id}) }}" class="card-link"><button type="button" class="btn btn-danger">Supprimer</button></a>
         
                 <br><br>

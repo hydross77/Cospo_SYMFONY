@@ -18,11 +18,14 @@ class EventController extends AbstractController
 {
     /**
      * Créer un évènement 
-     * @Route("/eventcreate", name="create")
+     * @Route("/event", name="create")
+     * @Route("/event/update/{id}", name="update_event")
      */
     public function create(ManagerRegistry $doctrine, Request $request, Event $event = null): Response
     {
-        $event = new Event;
+        if (!$event) {
+            $event = new Event;
+        }
         $entityManager = $doctrine->getManager();
         $createEvent = $this->createform(EventType::class, $event);
         $createEvent->handleRequest($request);

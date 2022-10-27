@@ -14,10 +14,7 @@
         {% endif %}
             <div class="cardDateEvent"><i class="fa-solid fa-calendar"></i> {{ event.dateEvent | date('d/m/Y') }}</div>
         </div>
-
-        {% if app.user is null %}
         <p>{{ event.contentEvent }}</p>
-        {% endif %}
 
         <div class="cardVille">
             <div class="red"><i class="fa-solid fa-location-dot"></i>&nbsp;</div> {{ event.ville }}, {{ event.cp }}

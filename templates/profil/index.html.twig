@@ -6,7 +6,7 @@
 
         <div class="btnProfil">
             <button type="button" class="btn btn-secondary"><a href="{{ path('edit_profil', {'id' : app.user.id})}}">Modifier profil</a></button>
-            <button type="button" class="btn btn-warning"><a href="{{ path('create_event', {'id': app.user.id}) }}">Mes évènements créés</a></button>
+            <button type="button" class="btn btn-warning"><a href="{{ path('event_user', {'id': app.user.id}) }}">Mes évènements créés</a></button>
             <button type="button" class="btn btn-primary">
             <a href ="{{ path('app_follow', {'id': app.user.id}) }}">Mes abonnements</a> <span class="badge text-bg-secondary">({{ user.follow | length }})</span>
             </button>

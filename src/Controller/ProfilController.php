@@ -48,12 +48,12 @@ class ProfilController extends AbstractController
 
     /**
      * Les évènements de l'utilisateur connecté
-     * @Route("/profil/event/{id}", name="create_event")
+     * @Route("/profil/event/{id}", name="event_user")
      */
-    public function createEvent(User $user): Response
+    public function EventUser(User $user): Response
     {
         $event = $user->getEvents();
-        // méthode magique get : afficher la collection
+        //afficher les évènements de l'utilisateur
 
         return $this->render('profil/user_event.html.twig', [
             'events' => $event,
