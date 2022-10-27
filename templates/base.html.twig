@@ -38,8 +38,8 @@
 							<li class ="user"><a href="{{ path('edit_register', {'id' : app.user.id})}}" title="Compte" class="white"><i class="fa-solid fa-gear"></i></a></li>
 							<li class ="user"><a href="{{ path('app_logout')}}" title="Deconnexion" class="red"><i class="fa-solid fa-arrow-right-from-bracket"></i></a></li>
 						{% else %}
-							<li><a href="{{ path('app_register')}}" title="Inscription" class="registerHover">Inscription</a></li>
-							<li><a href="{{ path('app_login')}}" title="Connexion" class="loginHover">Connexion</a></li>
+							<li><a href="{{ path('app_register')}}" class="registerHover">Inscription</a></li>
+							<li><a href="{{ path('app_login')}}"  class="loginHover">Connexion</a></li>
 				{% endif %}
 						</ul>
 					</div>

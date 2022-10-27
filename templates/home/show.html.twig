@@ -32,7 +32,7 @@
             <br><br>
             <h4>Participant</h4>
             {% for participant in event.participants %}
-                <a class="cardPseudo" href="{{ path('show_profil', {'pseudo' : event.user.pseudo })}}">{{ participant.pseudo }}</a>
+                <a class="cardPseudo" href="{{ path('show_profil', {'pseudo' : participant.pseudo })}}">{{ participant.pseudo }}</a>
                 <br>
             {% endfor %}
         </div>

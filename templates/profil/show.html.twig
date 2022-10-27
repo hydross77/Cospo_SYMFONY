@@ -41,7 +41,9 @@
                         <div class ="userTitre"><strong>{{ event.titleEvent }}</strong></div>
                         <div class ="userSport"><em>{{ event.sport.titleSport }}</em></div>
                         <div class="userDateEvent"><i class="fa-solid fa-calendar"></i> {{ event.dateEvent | date('d/m/Y à h:i') }}</div>
+                        {% if event.nbPlacesRestantes != 0 %}
                         <a class="userDetail" href="{{ path('show_event', {'id': event.id}) }}">Détail</a>
+                        {% endif %}
                         <br><br>
                     {% endfor %}
             </div>  

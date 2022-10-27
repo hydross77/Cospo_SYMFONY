@@ -64,7 +64,7 @@ class EventType extends AbstractType
             ->add('adresse', TextType::class, [
                 'required' => false,
                 'label' => 'Adresse',
-                'help' => 'Vous pouvez renseigner l\'adresse dans la description',
+                'help' => 'Vous pouvez renseigner l\'adresse via la messagerie',
                 'attr' => [
                     'placeholder' => 'L\'adresse n\'est pas obligatoire',
                 ],

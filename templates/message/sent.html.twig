@@ -27,11 +27,11 @@
 					{% set bold = "fw-bold" %}
 				{% endif %}
 
-				<div class="col-3 {{bold}}">{{ message.recipient.pseudo }}</div>
-				<div class="col-3 {{bold}}">
+				<div class="col-3 ">{{ message.recipient.pseudo }}</div>
+				<div class="col-3 ">
 					<a style="color:black" href="{{ path("read", {id: message.id}) }}">{{ message.titleMessage }}</a>
 				</div>
-				<div class="col-3 {{bold}}">{{ message.createdAt|date }}</div>
+				<div class="col-3 ">{{ message.createdAt|date }}</div>
 				<div class="col-3">
                     <a href="{{ path("delete", {id: message.id}) }}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-excel-fill text-danger" viewbox="0 0 16 16">
